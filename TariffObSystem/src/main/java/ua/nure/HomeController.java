@@ -20,15 +20,18 @@ public class HomeController {
     DBImitator db = EmulateDB.init();
     @RequestMapping(value = "/")
     public ModelAndView index(){
-        //m.addAttribute("value", "fromController");
-        List<Tariff> empty = new ArrayList<>();
         ModelAndView model = new ModelAndView("index");
-        model.addObject("tariffs", empty);
-        model.addObject("count", db.tariffs.size());
         return model;
     }
     @RequestMapping(value = "/mainmenu")
     public String mainmenu(){
         return "mainmenu";
+    }
+
+    @RequestMapping(value = "tariffs")
+    public ModelAndView tariffs(){
+        ModelAndView model = new ModelAndView("tariffs");
+        model.addObject("tariffs", db.tariffs);
+        return model;
     }
 }
