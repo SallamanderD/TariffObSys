@@ -47,9 +47,14 @@ public class HomeController {
         return model;
     }
 
-    @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public ModelAndView signup(@RequestParam("username") String username, @RequestParam("password") String password){
-
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ModelAndView signup(@RequestParam("username") String username, @RequestParam("password") String password,
+                               @RequestParam("name") String name, @RequestParam("surname") String surname){
+        if(username.equals("") || name.equals("") || surname.equals("") || password.equals("")){
+            ModelAndView model = new ModelAndView("register");
+            model.addObject("error", "You must enter all parameters");
+            return model;
+        }
         for(User u : db.users){
             if(u.getUsername().equals(username)){
                 ModelAndView model = new ModelAndView("register");
@@ -58,7 +63,7 @@ public class HomeController {
             }
         }
         ModelAndView model = new ModelAndView("index");
-        User usr = new User(username, password);
+        User usr = new User(username, password, name, surname);
         usr.setId(db.users.size() + 1);
         usr.role = db.roles.get(1);
         db.users.add(usr);
@@ -91,5 +96,69 @@ public class HomeController {
         ModelAndView model = new ModelAndView("signin");
         model.addObject("error", "Wrong username or password");
         return model;
+    }
+    @RequestMapping(value = "/profile")
+    public ModelAndView userExplore(){
+        ModelAndView model = new ModelAndView("user");
+        model.addObject("user", currentUser);
+        return model;
+    }
+
+    @RequestMapping(value = "/changeUser")
+    public ModelAndView changeUser(){
+        ModelAndView model = new ModelAndView("changeUser");
+        model.addObject("user", currentUser);
+        return model;
+    }
+
+    @RequestMapping(value = "/changeUser", method = RequestMethod.POST)
+    public ModelAndView changeUserPOST(@RequestParam("username") String username, @RequestParam("name") String name,
+                                       @RequestParam("surname") String surname){
+        if(username.equals("") || name.equals("") || surname.equals("")){
+            ModelAndView model = new ModelAndView("changeUser");
+            model.addObject("error", "You must enter all parameters");
+            return model;
+        }
+        for(User u : db.users){
+            if(u.getUsername().equals(username)){
+                ModelAndView model = new ModelAndView("changeUser");
+                model.addObject("error", "Username is already exist");
+                return model;
+            }
+        }
+        currentUser.setUsername(username);
+        currentUser.setName(name);
+        currentUser.setSurname(surname);
+        ModelAndView model = new ModelAndView("user");
+        model.addObject("user", currentUser);
+        return model;
+    }
+
+    @RequestMapping(value = "/changePassword")
+    public ModelAndView changePassword(){
+        return new ModelAndView("changePassword");
+    }
+
+    @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+    public ModelAndView changePasswordPOST(@RequestParam("oldpassword") String oldpassword, @RequestParam("password") String password,
+                                           @RequestParam("repassword") String repassword){
+        if(currentUser.getPassword().equals(oldpassword)){
+            if(password.equals(repassword)){
+                currentUser.setPassword(password);
+                ModelAndView model = new ModelAndView("user");
+                model.addObject("user", currentUser);
+                return model;
+            }
+            else{
+                ModelAndView model = new ModelAndView("changePassword");
+                model.addObject("error", "Passwords do not match");
+                return model;
+            }
+        }
+        else{
+            ModelAndView model = new ModelAndView("changePassword");
+            model.addObject("error", "Wrong old password");
+            return model;
+        }
     }
 }

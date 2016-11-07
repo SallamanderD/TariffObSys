@@ -19,7 +19,7 @@ public class EmulateDB {
         /* END */
         /* Инициализация начальных пользователей */
         List<User> tempUsers = new ArrayList<User>();
-        User firstUser = new User("Sallamander", "root");
+        User firstUser = new User("Sallamander", "root", "Aleksandr", "Dorotenko");
         firstUser.role = db.roles.get(0);
         firstUser.setId(1);
         tempUsers.add(firstUser);
