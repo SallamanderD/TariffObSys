@@ -6,9 +6,11 @@
         <script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
         <title>Tariff Observer System</title>
     </head>
+    <div class="container">
     <jsp:include page="/mainmenu"></jsp:include>
+    </div>
     <body>
-    <div style="margin-left: 50px;">
+    <div class="container">
         <h2>Homepage</h2>
         <h4>Empty page, but if designer try to do something here will be really cool :3</h4>
     </div>

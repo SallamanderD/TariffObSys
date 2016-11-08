@@ -4,7 +4,9 @@
     <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
     <script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </head>
-<jsp:include page="/mainmenu"></jsp:include>
+<div class="container">
+    <jsp:include page="/mainmenu"></jsp:include>
+</div>
     <body>
     <div class="container" style="margin-top: 5%">
         <div class="row">

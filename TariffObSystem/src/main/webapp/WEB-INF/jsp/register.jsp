@@ -8,7 +8,9 @@
     <script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <title>TOS: Sign Up</title>
 </head>
-<jsp:include page="/mainmenu"></jsp:include>
+<div class="container">
+    <jsp:include page="/mainmenu"></jsp:include>
+</div>
 <body>
 <div class="container">
     <h2>Register</h2>

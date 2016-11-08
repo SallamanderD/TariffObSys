@@ -7,12 +7,21 @@ public class Tariff {
 
     public Tariff(int id, String name, String description) {
         this.id = id;
-        this.description = description;
         this.name = name;
+        this.description = description;
     }
 
     public Operator operator;
     private int id;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     private String description;
     private String name;
 
