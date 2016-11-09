@@ -4,15 +4,26 @@ package ua.nure.entities;
  * Created by Александр Доротенко on 07.11.2016.
  */
 public class User {
-    public User(String username, String password, String name, String surname){
+    public User(String username, String password, String name, String surname, String mail){
         this.username = username;
         this.password = password;
         this.name = name;
         this.surname = surname;
+        this.mail = mail;
     }
     private int id;
     private String username;
     private String password;
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    private String mail;
 
     public String getName() {
         return name;
