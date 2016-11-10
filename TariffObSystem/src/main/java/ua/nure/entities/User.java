@@ -16,14 +16,14 @@ public class User {
     }
     @Id
     private int id;
-    private int roleId;
+    private Role role;
 
-    public int getRoleId() {
-        return roleId;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     private String username;

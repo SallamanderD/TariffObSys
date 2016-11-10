@@ -30,33 +30,39 @@ public class Emulator {
         Operator op = new Operator("Vodafone", "Vodafone operator");
         op.setId(1);
         operatorDAO.saveOperator(op);
+
         Operator op2 = new Operator("KyivStar", "Kyivstar operator");
-        op.setId(2);
+        op2.setId(2);
         operatorDAO.saveOperator(op2);
+
         Operator op3 = new Operator("Lifecell", "Lifecell operator");
-        op.setId(3);
+        op3.setId(3);
         operatorDAO.saveOperator(op3);
         //-------------------------------------------------
         //Generate tariffs
         Tariff tar1 = new Tariff(1, "Vodafone 3D Red", "Vodafone 3D Red of Vodafone Operator");
-        tar1.setOperatorId(1);
+        tar1.setOperator(operatorDAO.findOperator(1).get(0));
+        operatorDAO.updateTariffList(1, tar1);
         tariffDAO.saveTariff(tar1);
 
         Tariff tar2 = new Tariff(2, "Vodafone Super+", "Vodafone Super+ of Vodafone Operator");
-        tar2.setOperatorId(1);
+        tar2.setOperator(operatorDAO.findOperator(1).get(0));
+        operatorDAO.updateTariffList(1, tar2);
         tariffDAO.saveTariff(tar2);
 
         Tariff tar3 = new Tariff(3, "KyivStar 3g+", "KyivStar 3g+ of KyivStar Operator");
-        tar3.setOperatorId(2);
+        tar3.setOperator(operatorDAO.findOperator(2).get(0));
+        operatorDAO.updateTariffList(2, tar3);
         tariffDAO.saveTariff(tar3);
 
         Tariff tar4 = new Tariff(4, "Lifecell Family", "Lifecell Family of Lifecell Operator");
-        tar4.setOperatorId(3);
+        tar4.setOperator(operatorDAO.findOperator(3).get(0));
+        operatorDAO.updateTariffList(3, tar4);
         tariffDAO.saveTariff(tar4);
         //-------------------------------------------------
         //Generate users
         User usr = new User("Sallamander", "root", "Александр", "Доротенко", "Sallamanderdr@gmail.com");
-        usr.setRoleId(1);
+        usr.setRole(roleDAO.findRole(1).get(0));
         userDAO.saveUser(usr);
     }
 

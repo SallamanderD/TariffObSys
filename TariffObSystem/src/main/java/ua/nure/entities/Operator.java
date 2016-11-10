@@ -3,6 +3,7 @@ package ua.nure.entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "operators")
@@ -15,6 +16,15 @@ public class Operator {
     private int id;
     private String name;
     private String description;
+    private List<Tariff> tariffs = new ArrayList<>();
+
+    public List<Tariff> getTariffs() {
+        return tariffs;
+    }
+
+    public void setTariffs(List<Tariff> tariffs) {
+        this.tariffs = tariffs;
+    }
 
     public int getId() {
         return id;

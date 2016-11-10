@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
+import ua.nure.entities.Role;
 import ua.nure.entities.User;
 
 import java.util.List;
@@ -44,6 +45,13 @@ public class UserDAO {
     public void updateUserPass(int id, User user){
         Update update=new Update();
         update.set("password",user.getPassword());
+        mongoOperation.updateFirst(new Query().
+                addCriteria(Criteria.where("id").is(id)),update,User.class);
+    }
+
+    public void updateUserRole(int id, Role role){
+        Update update=new Update();
+        update.set("role", role);
         mongoOperation.updateFirst(new Query().
                 addCriteria(Criteria.where("id").is(id)),update,User.class);
     }

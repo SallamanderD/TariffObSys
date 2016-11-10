@@ -12,13 +12,22 @@
 <body>
 <div class="container col-lg-5 col-lg-offset-3" style="margin-top: 5%">
     <c:choose>
-        <c:when test="${not empty tariffs}">
+        <c:when test="${not empty operators}">
             <ul class="list-group">
-                <c:forEach var="listValue" items="${tariffs}">
-                    <li class="list-group-item">
-                        <p>Tariff: ${listValue.name}</p>
-                        <p>Description: ${listValue.description}</p>
-                    </li>
+                <c:forEach var="operValue" items="${operators}">
+                    <c:choose>
+                    <c:when test="${not empty operValue.tariffs}">
+                        <ul class="list-group">
+                            <c:forEach var="listValue" items="${operValue.tariffs}">
+                                <li class="list-group-item">
+                                    <p>Name: ${listValue.name}</p>
+                                    <p>Description: ${listValue.description}</p>
+                                    <p>Operator: ${operValue.name}</p>
+                                </li>
+                            </c:forEach>
+                        </ul>
+                    </c:when>
+                    </c:choose>
                 </c:forEach>
             </ul>
         </c:when>

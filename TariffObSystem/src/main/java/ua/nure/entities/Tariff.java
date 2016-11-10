@@ -18,18 +18,17 @@ public class Tariff {
 
     @Id
     private int id;
-
-    public int getOperatorId() {
-        return operatorId;
-    }
-
-    public void setOperatorId(int operatorId) {
-        this.operatorId = operatorId;
-    }
-
-    private int operatorId;
     private String description;
     private String name;
+    private Operator operator;
+
+    public Operator getOperator() {
+        return operator;
+    }
+
+    public void setOperator(Operator operator) {
+        this.operator = operator;
+    }
 
     public int getId() {
         return id;

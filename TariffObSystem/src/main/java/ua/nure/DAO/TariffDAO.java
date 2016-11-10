@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
+import ua.nure.entities.Operator;
 import ua.nure.entities.Tariff;
 import ua.nure.entities.User;
 
@@ -29,6 +30,13 @@ public class TariffDAO {
         Update update=new Update();
         update.set("description",tariff.getDescription());
         update.set("name",tariff.getName());
+        mongoOperation.updateFirst(new Query().
+                addCriteria(Criteria.where("id").is(id)),update,Tariff.class);
+    }
+
+    public void updateOperator(int id, Operator operator){
+        Update update=new Update();
+        update.set("operator", operator);
         mongoOperation.updateFirst(new Query().
                 addCriteria(Criteria.where("id").is(id)),update,Tariff.class);
     }

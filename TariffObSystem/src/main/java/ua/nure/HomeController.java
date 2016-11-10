@@ -18,6 +18,7 @@ import java.util.List;
 @Controller
 public class HomeController {
 
+    //Data access classes
     @Autowired
     private RoleDAO roleDAO;
     @Autowired
@@ -29,6 +30,7 @@ public class HomeController {
     @Autowired
     Emulator emulator;
     User currentUser = null;
+
 
     @RequestMapping(value = "/")
     public ModelAndView index(){
@@ -46,7 +48,7 @@ public class HomeController {
     @RequestMapping(value = "tariffs")
     public ModelAndView tariffs(){
         ModelAndView model = new ModelAndView("tariffs");
-        model.addObject("tariffs", tariffDAO.findAllTariff());
+        model.addObject("operators", operatorDAO.findAllOperators());
         return model;
     }
     @RequestMapping(value = "/register")
@@ -101,7 +103,7 @@ public class HomeController {
             ModelAndView model = new ModelAndView("index");
             User usr = new User(username, password, name, surname, mail);
             usr.setId(userDAO.getSize() + 1);
-            usr.setRoleId(1);
+            usr.setRole(roleDAO.findRole(1).get(0));
             userDAO.saveUser(usr);
             currentUser = usr;
             return model;
