@@ -55,7 +55,7 @@ public class Emulator {
         tariffDAO.saveTariff(tar4);
         //-------------------------------------------------
         //Generate users
-        User usr = new User("Sallamander", "root", "Aleksandr", "Dorotenko", "Sallamanderdr@gmail.com");
+        User usr = new User("Sallamander", "root", "Александр", "Доротенко", "Sallamanderdr@gmail.com");
         usr.setRoleId(1);
         userDAO.saveUser(usr);
     }

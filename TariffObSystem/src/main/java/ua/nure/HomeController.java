@@ -29,6 +29,7 @@ public class HomeController {
     @Autowired
     Emulator emulator;
     User currentUser = null;
+
     @RequestMapping(value = "/")
     public ModelAndView index(){
         emulator.emul();
