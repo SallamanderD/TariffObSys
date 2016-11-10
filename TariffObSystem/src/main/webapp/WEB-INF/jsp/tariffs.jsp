@@ -16,7 +16,6 @@
             <ul class="list-group">
                 <c:forEach var="listValue" items="${tariffs}">
                     <li class="list-group-item">
-                        <p>Operator: ${listValue.operator.name}</p>
                         <p>Tariff: ${listValue.name}</p>
                         <p>Description: ${listValue.description}</p>
                     </li>

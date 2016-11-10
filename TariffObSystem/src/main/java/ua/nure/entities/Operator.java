@@ -1,13 +1,17 @@
 package ua.nure.entities;
 
-/**
- * Created by Александр Доротенко on 07.11.2016.
- */
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
+
+@Document(collection = "operators")
 public class Operator {
     public Operator(String name, String description){
         this.name = name;
         this.description = description;
     }
+    @Id
     private int id;
     private String name;
     private String description;

@@ -1,12 +1,12 @@
 package ua.nure;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import ua.nure.entities.DBImitator;
-import ua.nure.entities.EmulateDB;
+import ua.nure.DAO.*;
 import ua.nure.entities.User;
 
 import java.util.ArrayList;
@@ -18,10 +18,20 @@ import java.util.List;
 @Controller
 public class HomeController {
 
-    DBImitator db = EmulateDB.init();
+    @Autowired
+    private RoleDAO roleDAO;
+    @Autowired
+    private OperatorDAO operatorDAO;
+    @Autowired
+    private TariffDAO tariffDAO;
+    @Autowired
+    private UserDAO userDAO;
+    @Autowired
+    Emulator emulator;
     User currentUser = null;
     @RequestMapping(value = "/")
     public ModelAndView index(){
+        emulator.emul();
         ModelAndView model = new ModelAndView("index");
         return model;
     }
@@ -35,7 +45,7 @@ public class HomeController {
     @RequestMapping(value = "tariffs")
     public ModelAndView tariffs(){
         ModelAndView model = new ModelAndView("tariffs");
-        model.addObject("tariffs", db.tariffs);
+        model.addObject("tariffs", tariffDAO.findAllTariff());
         return model;
     }
     @RequestMapping(value = "/register")
@@ -80,22 +90,18 @@ public class HomeController {
             error.add("Enter correct Name and Surname.\n");
 
         }
-        for(User u : db.users){
-            if(u.getUsername().equals(username)){
-                error.add("Username is already exist.\n");
-
-            }
-            if(u.getMail().equals(mail)){
-                error.add("Email is already exist.\n");
-
-            }
+        if(userDAO.findByUsername(username) != null){
+            error.add("Username is already exist.\n");
+        }
+        if(userDAO.findByEmail(mail) != null){
+            error.add("Email is already exist.\n");
         }
         if(error.size() == 0){
             ModelAndView model = new ModelAndView("index");
             User usr = new User(username, password, name, surname, mail);
-            usr.setId(db.users.size() + 1);
-            usr.role = db.roles.get(1);
-            db.users.add(usr);
+            usr.setId(userDAO.getSize() + 1);
+            usr.setRoleId(1);
+            userDAO.saveUser(usr);
             currentUser = usr;
             return model;
         }
@@ -127,9 +133,9 @@ public class HomeController {
 
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     public ModelAndView signinPOST(@RequestParam("username") String username, @RequestParam("password") String password){
-        for(User u : db.users){
-            if(u.getUsername().equals(username) && u.getPassword().equals(password)){
-                currentUser = u;
+        if(userDAO.findByUsername(username) != null){
+            if(password.equals(userDAO.findByUsername(username).getPassword())){
+                currentUser = userDAO.findByUsername(username);
                 ModelAndView model = new ModelAndView("index");
                 return model;
             }
@@ -138,6 +144,7 @@ public class HomeController {
         model.addObject("error", "Wrong username or password");
         return model;
     }
+
     @RequestMapping(value = "/profile")
     public ModelAndView userExplore(){
         if(currentUser == null){
@@ -165,20 +172,22 @@ public class HomeController {
             model.addObject("user", currentUser);
             return model;
         }
-        for(User u : db.users){
-            if(u.getUsername().equals(username) && !username.equals(currentUser.getUsername())){
-                ModelAndView model = new ModelAndView("changeUser");
-                model.addObject("error", "Username is already exist");
-                model.addObject("user", currentUser);
-                return model;
-            }
+        if(userDAO.findByUsername(username) == null || userDAO.findByUsername(username).getUsername().equals(currentUser.getUsername())){
+            currentUser.setUsername(username);
+            currentUser.setName(name);
+            currentUser.setSurname(surname);
+            userDAO.updateUserData(currentUser.getId(), currentUser);
+            ModelAndView model = new ModelAndView("user");
+            model.addObject("user", currentUser);
+            return model;
         }
-        currentUser.setUsername(username);
-        currentUser.setName(name);
-        currentUser.setSurname(surname);
-        ModelAndView model = new ModelAndView("user");
-        model.addObject("user", currentUser);
-        return model;
+        else{
+            ModelAndView model = new ModelAndView("changeUser");
+            model.addObject("error", "Username is already exist.");
+            model.addObject("user", currentUser);
+            return model;
+        }
+
     }
 
     @RequestMapping(value = "/changePassword")
@@ -192,6 +201,7 @@ public class HomeController {
         if(currentUser.getPassword().equals(oldpassword)){
             if(password.equals(repassword)){
                 currentUser.setPassword(password);
+                userDAO.updateUserPass(currentUser.getId(), currentUser);
                 ModelAndView model = new ModelAndView("user");
                 model.addObject("user", currentUser);
                 return model;

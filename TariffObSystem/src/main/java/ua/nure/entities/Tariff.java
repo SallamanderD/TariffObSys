@@ -1,8 +1,9 @@
 package ua.nure.entities;
 
-/**
- * Created by Александр Доротенко on 07.11.2016.
- */
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "tariffs")
 public class Tariff {
 
     public Tariff(int id, String name, String description) {
@@ -11,19 +12,38 @@ public class Tariff {
         this.description = description;
     }
 
-    public Operator operator;
+    public Tariff(){
+
+    }
+
+    @Id
     private int id;
 
-    public String getDescription() {
-        return description;
+    public int getOperatorId() {
+        return operatorId;
     }
+
+    public void setOperatorId(int operatorId) {
+        this.operatorId = operatorId;
+    }
+
+    private int operatorId;
+    private String description;
+    private String name;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDescription() { return description; }
 
     public void setDescription(String description) {
         this.description = description;
     }
-
-    private String description;
-    private String name;
 
     public String getName() {
         return name;
@@ -33,19 +53,4 @@ public class Tariff {
         this.name = name;
     }
 
-    public Operator getOperator() {
-        return operator;
-    }
-
-    public void setOperator(Operator operator) {
-        this.operator = operator;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 }
