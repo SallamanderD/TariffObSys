@@ -100,7 +100,7 @@ public class HomeController {
             userDAO.saveUser(usr);
             currentUser = usr;
             Sender sender = new Sender("TariffObSys@gmail.com", "#af45Ecsrg67&");
-            sender.send("Register into TOS", "Test", "TOS Commande", mail);
+            sender.send("Register into TOS", "Hello" + username, "TOS Command", mail);
             return model;
         }
         ModelAndView model = new ModelAndView("register");
