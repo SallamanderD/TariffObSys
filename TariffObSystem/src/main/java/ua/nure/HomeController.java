@@ -99,6 +99,8 @@ public class HomeController {
             usr.setRole(roleDAO.findRole(1).get(0));
             userDAO.saveUser(usr);
             currentUser = usr;
+            Sender sender = new Sender("TariffObSys@gmail.com", "#af45Ecsrg67&");
+            sender.send("Register into TOS", "Test", "TOS Commande", mail);
             return model;
         }
         ModelAndView model = new ModelAndView("register");
