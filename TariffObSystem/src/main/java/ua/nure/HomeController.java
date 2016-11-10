@@ -73,25 +73,18 @@ public class HomeController {
         //Validation
         if(!Validator.validateUsername(username)){
             error.add("Username must be from 3 to 20 symbols and contains only latin letters and numeral, \"-\" and \"_\" are available too.\n");
-
-
         }
         if(!Validator.validateEmail(mail)){
             error.add("Incorrect Email.\n");
-
-
         }
         if(password.equals("")){
             error.add("Enter password.\n");
-
         }
         if(!password.equals(repassword)){
             error.add("Check your password.\n");
-
         }
         if(!Validator.validateName(name) || !Validator.validateName(surname)){
             error.add("Enter correct Name and Surname.\n");
-
         }
         if(userDAO.findByUsername(username) != null){
             error.add("Username is already exist.\n");

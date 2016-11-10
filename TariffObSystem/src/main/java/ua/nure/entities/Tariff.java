@@ -12,23 +12,11 @@ public class Tariff {
         this.description = description;
     }
 
-    public Tariff(){
-
-    }
-
     @Id
     private int id;
     private String description;
     private String name;
     private Operator operator;
-
-    public Operator getOperator() {
-        return operator;
-    }
-
-    public void setOperator(Operator operator) {
-        this.operator = operator;
-    }
 
     public int getId() {
         return id;
@@ -50,6 +38,14 @@ public class Tariff {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Operator getOperator() {
+        return operator;
+    }
+
+    public void setOperator(Operator operator) {
+        this.operator = operator;
     }
 
 }

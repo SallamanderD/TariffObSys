@@ -18,14 +18,6 @@ public class Operator {
     private String description;
     private List<Tariff> tariffs = new ArrayList<>();
 
-    public List<Tariff> getTariffs() {
-        return tariffs;
-    }
-
-    public void setTariffs(List<Tariff> tariffs) {
-        this.tariffs = tariffs;
-    }
-
     public int getId() {
         return id;
     }
@@ -48,5 +40,13 @@ public class Operator {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Tariff> getTariffs() {
+        return tariffs;
+    }
+
+    public void setTariffs(List<Tariff> tariffs) {
+        this.tariffs = tariffs;
     }
 }

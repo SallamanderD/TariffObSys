@@ -10,12 +10,11 @@ import ua.nure.entities.User;
 
 @Component
 public class Emulator {
+
     @Autowired
     private RoleDAO roleDAO;
-
     @Autowired
     private OperatorDAO operatorDAO;
-
     @Autowired
     private TariffDAO tariffDAO;
     @Autowired

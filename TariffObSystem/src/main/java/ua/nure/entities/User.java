@@ -17,15 +17,6 @@ public class User {
     @Id
     private int id;
     private Role role;
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
     private String username;
     private String password;
     private String name;
@@ -78,6 +69,14 @@ public class User {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
 }
