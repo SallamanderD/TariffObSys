@@ -3,6 +3,7 @@ package ua.nure.DAO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.DigestUtils;
 import ua.nure.entities.Operator;
 import ua.nure.entities.Role;
 import ua.nure.entities.Tariff;
@@ -60,7 +61,7 @@ public class Emulator {
         tariffDAO.saveTariff(tar4);
         //-------------------------------------------------
         //Generate users
-        User usr = new User("Sallamander", "root", "Александр", "Доротенко", "Sallamanderdr@gmail.com");
+        User usr = new User("Sallamander", DigestUtils.md5DigestAsHex("root".getBytes()), "Александр", "Доротенко", "Sallamanderdr@gmail.com");
         usr.setRole(roleDAO.findRole(1).get(0));
         userDAO.saveUser(usr);
     }

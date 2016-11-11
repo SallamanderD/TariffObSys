@@ -2,6 +2,7 @@ package ua.nure;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -94,13 +95,13 @@ public class HomeController {
         }
         if(error.size() == 0){
             ModelAndView model = new ModelAndView("index");
-            User usr = new User(username, password, name, surname, mail);
+            User usr = new User(username, DigestUtils.md5DigestAsHex(password.getBytes()), name, surname, mail);
             usr.setId(userDAO.getSize() + 1);
             usr.setRole(roleDAO.findRole(1).get(0));
             userDAO.saveUser(usr);
             currentUser = usr;
-            Sender sender = new Sender("TariffObSys@gmail.com", "#af45Ecsrg67&");
-            sender.send("Register into TOS", "Hello" + username, "TOS Command", mail);
+            //Sender sender = new Sender("TariffObSys@gmail.com", "#af45Ecsrg67&");
+            //sender.send("Register into TOS", "Hello" + username, "TOS Command", mail);
             return model;
         }
         ModelAndView model = new ModelAndView("register");
@@ -132,7 +133,8 @@ public class HomeController {
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     public ModelAndView signinPOST(@RequestParam("username") String username, @RequestParam("password") String password){
         if(userDAO.findByUsername(username) != null){
-            if(password.equals(userDAO.findByUsername(username).getPassword())){
+            if(DigestUtils.md5DigestAsHex(password.getBytes()).
+                    equals(userDAO.findByUsername(username).getPassword())){
                 currentUser = userDAO.findByUsername(username);
                 ModelAndView model = new ModelAndView("index");
                 return model;
