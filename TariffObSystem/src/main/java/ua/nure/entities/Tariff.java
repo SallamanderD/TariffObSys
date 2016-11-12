@@ -3,6 +3,8 @@ package ua.nure.entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document(collection = "tariffs")
 public class Tariff {
 
@@ -17,6 +19,15 @@ public class Tariff {
     private String description;
     private String name;
     private Operator operator;
+    private List<Parameter> parameters;
+
+    public List<Parameter> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(List<Parameter> parameters) {
+        this.parameters = parameters;
+    }
 
     public int getId() {
         return id;

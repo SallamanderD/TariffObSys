@@ -35,7 +35,7 @@ public class HomeController {
 
     @RequestMapping(value = "/")
     public ModelAndView index(){
-        emulator.emul();
+        //emulator.emul();
         ModelAndView model = new ModelAndView("index");
         return model;
     }
@@ -100,8 +100,8 @@ public class HomeController {
             usr.setRole(roleDAO.findRole(1).get(0));
             userDAO.saveUser(usr);
             currentUser = usr;
-            //Sender sender = new Sender("TariffObSys@gmail.com", "#af45Ecsrg67&");
-            //sender.send("Register into TOS", "Hello" + username, "TOS Command", mail);
+            Sender sender = new Sender("TariffObSys@gmail.com", "#af45Ecsrg67&");
+            sender.send("Register into TOS", "Hello " + surname + " " + name + ".\n Your username: " + username + "\n" + "Your password: " + password, "TOS Command", mail);
             return model;
         }
         ModelAndView model = new ModelAndView("register");
@@ -198,9 +198,9 @@ public class HomeController {
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
     public ModelAndView changePasswordPOST(@RequestParam("oldpassword") String oldpassword, @RequestParam("password") String password,
                                            @RequestParam("repassword") String repassword){
-        if(currentUser.getPassword().equals(oldpassword)){
+        if(currentUser.getPassword().equals(DigestUtils.md5DigestAsHex(oldpassword.getBytes()))){
             if(password.equals(repassword)){
-                currentUser.setPassword(password);
+                currentUser.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
                 userDAO.updateUserPass(currentUser.getId(), currentUser);
                 ModelAndView model = new ModelAndView("user");
                 model.addObject("user", currentUser);

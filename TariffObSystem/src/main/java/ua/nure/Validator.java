@@ -28,6 +28,14 @@ public class Validator {
         return m.matches();
     }
 
+    public static String createPass(){
+        String symbols = "ABCDEFGHIJKLMOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890";
+        StringBuilder randString = new StringBuilder();
+        int count = 5;
+        for(int i=0;i<count;i++)
+            randString.append(symbols.charAt((int)(Math.random()*symbols.length())));
 
+        return randString.toString();
+    }
 
 }
