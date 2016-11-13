@@ -3,24 +3,22 @@ package ua.nure.entities;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
+@Document(collection = "parameters")
 public class Parameter {
-    public Parameter() {
-    }
-
-
+    @Id
     private int id;
     private String name;
-    private String value;
 
-    public Parameter(int id, String name, String value) {
+    public Parameter(int id, String name) {
         this.id = id;
         this.name = name;
-        this.value = value;
+    }
+
+    public Parameter() {
+
     }
 
     public int getId() {
-
         return id;
     }
 
@@ -34,13 +32,5 @@ public class Parameter {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
     }
 }

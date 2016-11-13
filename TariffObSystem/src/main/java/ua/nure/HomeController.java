@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ua.nure.DAO.*;
 import ua.nure.entities.User;
+import ua.nure.util.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,7 @@ public class HomeController {
         return model;
     }
 
+    // TODO: Optimize method
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView signup(@RequestParam("username") String username, @RequestParam("password") String password,
                                @RequestParam("name") String name, @RequestParam("surname") String surname,
@@ -94,14 +96,15 @@ public class HomeController {
             error.add("Email is already exist.\n");
         }
         if(error.size() == 0){
-            ModelAndView model = new ModelAndView("index");
+            ModelAndView model = new ModelAndView("activate");
             User usr = new User(username, DigestUtils.md5DigestAsHex(password.getBytes()), name, surname, mail);
             usr.setId(userDAO.getSize() + 1);
             usr.setRole(roleDAO.findRole(1).get(0));
+            usr.setActivated(Validator.createPass());
             userDAO.saveUser(usr);
             currentUser = usr;
             Sender sender = new Sender("TariffObSys@gmail.com", "#af45Ecsrg67&");
-            sender.send("Register into TOS", "Hello " + surname + " " + name + ".\n Your username: " + username + "\n" + "Your password: " + password, "TOS Command", mail);
+            sender.send("Register into TOS", "Hello " + surname + " " + name + ".\nYour code: " + currentUser.getActivated(), "TOS Command", mail);
             return model;
         }
         ModelAndView model = new ModelAndView("register");
@@ -218,4 +221,21 @@ public class HomeController {
             return model;
         }
     }
+
+    @RequestMapping(value = "activate", method = RequestMethod.GET)
+    public ModelAndView activate(){
+        ModelAndView model = new ModelAndView("activate");
+        model.addObject("mail", Validator.createLinkToEmail(currentUser.getMail()));
+        return model;
+    }
+    @RequestMapping(value = "activate", method = RequestMethod.POST)
+    public ModelAndView activate(@RequestParam("code") String code){
+        if(currentUser.getActivated().equals(code)){
+            currentUser.setActivated(null);
+            userDAO.updateActivated(currentUser.getId(), currentUser);
+        }
+        ModelAndView model = new ModelAndView("index");
+        return model;
+    }
+
 }

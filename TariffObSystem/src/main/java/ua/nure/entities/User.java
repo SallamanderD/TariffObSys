@@ -23,6 +23,16 @@ public class User {
     private String surname;
     private String mail;
 
+    public String getActivated() {
+        return activated;
+    }
+
+    public void setActivated(String activated) {
+        this.activated = activated;
+    }
+
+    private  String activated;
+
     public int getId() {
         return id;
     }

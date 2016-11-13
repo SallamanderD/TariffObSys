@@ -1,6 +1,7 @@
 package ua.nure;
 
 import com.mongodb.MongoClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,7 +9,9 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.CharacterEncodingFilter;
+import ua.nure.DAO.Emulator;
 
 @SpringBootApplication
 @EnableAutoConfiguration
@@ -16,6 +19,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 public class TariffObSystemApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(TariffObSystemApplication.class, args);
 	}
 

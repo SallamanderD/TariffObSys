@@ -42,6 +42,13 @@ public class UserDAO {
                 addCriteria(Criteria.where("id").is(id)),update,User.class);
     }
 
+    public void updateActivated(int id, User user){
+        Update update=new Update();
+        update.set("activated",user.getActivated());
+        mongoOperation.updateFirst(new Query().
+                addCriteria(Criteria.where("id").is(id)),update,User.class);
+    }
+
     public void updateUserPass(int id, User user){
         Update update=new Update();
         update.set("password",user.getPassword());

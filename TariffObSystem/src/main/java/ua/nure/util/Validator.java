@@ -1,4 +1,4 @@
-package ua.nure;
+package ua.nure.util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,5 +37,19 @@ public class Validator {
 
         return randString.toString();
     }
+
+    public static String createLinkToEmail(String mail){
+        if(mail.contains("@gmail.com")){
+            return "http://mail.google.com";
+        } else if(mail.contains("@mail.ru")){
+            return "http://mail.ru";
+        } else if (mail.contains("@yandex")){
+            return "http://mail.yandex.ua";
+        } else{
+            return null;
+        }
+    }
+
+
 
 }

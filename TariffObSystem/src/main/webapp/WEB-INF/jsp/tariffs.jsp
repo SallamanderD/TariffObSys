@@ -23,6 +23,22 @@
                                     <p>Name: ${listValue.name}</p>
                                     <p>Description: ${listValue.description}</p>
                                     <p>Operator: ${operValue.name}</p>
+                                    <table class="table table-striped table-inverse">
+                                        <thead>
+                                        <tr>
+                                            <th>Parameter</th>
+                                            <th>Value</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <c:forEach var="param" items="${listValue.parameters}" varStatus="loop">
+                                            <tr>
+                                                <td>${listValue.parameters.get(loop.index).key.name}</td>
+                                                <td>${listValue.parameters.get(loop.index).value}</td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                    </table>
                                 </li>
                             </c:forEach>
                         </ul>

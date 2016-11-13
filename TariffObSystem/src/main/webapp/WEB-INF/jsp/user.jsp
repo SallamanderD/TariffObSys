@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <link href="webjars/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">

@@ -2,7 +2,9 @@ package ua.nure.entities;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import ua.nure.util.Pair;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "tariffs")
@@ -19,13 +21,13 @@ public class Tariff {
     private String description;
     private String name;
     private Operator operator;
-    private List<Parameter> parameters;
+    private List<Pair<Parameter, String>> parameters = new ArrayList<>();
 
-    public List<Parameter> getParameters() {
+    public List<Pair<Parameter, String>> getParameters() {
         return parameters;
     }
 
-    public void setParameters(List<Parameter> parameters) {
+    public void setParameters(List<Pair<Parameter, String>> parameters) {
         this.parameters = parameters;
     }
 
