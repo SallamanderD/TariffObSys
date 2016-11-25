@@ -3,6 +3,7 @@ package ua.nure;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.DigestUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,7 +40,7 @@ public class HomeController {
 
     @RequestMapping(value = "/")
     public ModelAndView index(){
-        emulator.emul();
+        //emulator.emul();
         ModelAndView model = new ModelAndView("index");
         return model;
     }
@@ -55,10 +56,17 @@ public class HomeController {
         return model;
     }
 
+    @RequestMapping(value = "/tariff/{id}")
+    public ModelAndView tariffView(@PathVariable int id){
+        ModelAndView model = new ModelAndView("tariff");
+        model.addObject("tariff", tariffDAO.findTariff(id).get(0));
+        return model;
+    }
+
     @RequestMapping(value = "tariffs")
     public ModelAndView tariffs(){
         ModelAndView model = new ModelAndView("tariffs");
-        model.addObject("operators", operatorDAO.findAllOperators());
+        model.addObject("tariffs", tariffDAO.findAllTariff());
         return model;
     }
     @RequestMapping(value = "/register")

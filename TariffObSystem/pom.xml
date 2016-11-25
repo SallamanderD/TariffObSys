@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>TariffObSystem</name>
-	<description>Demo project for Spring Boot</description>
+	<shortDescription>Demo project for Spring Boot</shortDescription>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

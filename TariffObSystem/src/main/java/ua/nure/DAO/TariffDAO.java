@@ -27,7 +27,7 @@ public class TariffDAO {
 
     public void updateTariff(int id, Tariff tariff){
         Update update=new Update();
-        update.set("description",tariff.getDescription());
+        update.set("description",tariff.getShortDescription());
         update.set("name",tariff.getName());
         mongoOperation.updateFirst(new Query().
                 addCriteria(Criteria.where("id").is(id)),update,Tariff.class);

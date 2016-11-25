@@ -1,10 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <link href="webjars/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
-    <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
-    <script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <link href="css/style.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 </head>
     <body>
     <nav class="navbar navbar-default navbar-custom">
@@ -23,12 +22,12 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="/tariffs">Tariffs <span class="sr-only">(current)</span></a></li>
+                    <li><a href="/tariffs">Tariffs</a></li>
                     <li><a href="#">Telephones</a></li>
 
                     <li>
                         <form class="navbar-form" role="search">
-                            <div class="input-group">
+                            <div class="input-group row">
                                 <input type="text" class="form-control" placeholder="Search" name="q">
                                 <div class="input-group-btn">
                                     <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>

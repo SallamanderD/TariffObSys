@@ -10,19 +10,30 @@ import java.util.List;
 @Document(collection = "tariffs")
 public class Tariff {
 
-    public Tariff(int id, String name, String description) {
+    public Tariff(int id, String name, String shortDescription, String description) {
         this.id = id;
         this.name = name;
+        this.shortDescription = shortDescription;
         this.description = description;
     }
 
     @Id
     private int id;
+    private String shortDescription;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     private String description;
     private String name;
     private Operator operator;
     private List<Pair<Parameter, String>> parameters = new ArrayList<>();
-
+    private List<TariffCommentary> tariffCommentaries = new ArrayList<>();
     public List<Pair<Parameter, String>> getParameters() {
         return parameters;
     }
@@ -39,10 +50,10 @@ public class Tariff {
         this.id = id;
     }
 
-    public String getDescription() { return description; }
+    public String getShortDescription() { return shortDescription; }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
     }
 
     public String getName() {

@@ -47,7 +47,7 @@ public class Emulator {
         operatorDAO.saveOperator(op3);
         //-------------------------------------------------
         //Generate tariffs
-        Tariff tar1 = new Tariff(1, "Vodafone 3D Red", "Vodafone 3D Red of Vodafone Operator");
+        Tariff tar1 = new Tariff(1, "Vodafone 3D Red", "Vodafone 3D Red of Vodafone Operator", "Vodafone 3D Red of Vodafone Operator");
         tar1.setOperator(operatorDAO.findOperator(1).get(0));
         tar1.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(1), "35"));
         tar1.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(2), "1000"));
@@ -58,7 +58,7 @@ public class Emulator {
         operatorDAO.updateTariffList(1, tar1);
         tariffDAO.saveTariff(tar1);
 
-        Tariff tar2 = new Tariff(2, "Vodafone Super+", "Vodafone Super+ of Vodafone Operator");
+        Tariff tar2 = new Tariff(2, "Vodafone Super+", "Vodafone Super+ of Vodafone Operator", "Vodafone Super+ of Vodafone Operator");
         tar2.setOperator(operatorDAO.findOperator(1).get(0));
         tar2.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(1), "45"));
         tar2.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(2), "1500"));
@@ -69,7 +69,7 @@ public class Emulator {
         operatorDAO.updateTariffList(1, tar2);
         tariffDAO.saveTariff(tar2);
 
-        Tariff tar3 = new Tariff(3, "KyivStar 3g+", "KyivStar 3g+ of KyivStar Operator");
+        Tariff tar3 = new Tariff(3, "KyivStar 3g+", "KyivStar 3g+ of KyivStar Operator", "KyivStar 3g+ of KyivStar Operator");
         tar3.setOperator(operatorDAO.findOperator(2).get(0));
         tar3.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(1), "50"));
         tar3.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(2), "Безлимит"));
@@ -80,7 +80,7 @@ public class Emulator {
         operatorDAO.updateTariffList(2, tar3);
         tariffDAO.saveTariff(tar3);
 
-        Tariff tar4 = new Tariff(4, "Lifecell Family", "Lifecell Family of Lifecell Operator");
+        Tariff tar4 = new Tariff(4, "Lifecell Family", "Lifecell Family of Lifecell Operator", "Lifecell Family of Lifecell Operator");
         tar4.setOperator(operatorDAO.findOperator(3).get(0));
         tar4.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(1), "25"));
         tar4.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(2), "500"));

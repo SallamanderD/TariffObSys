@@ -4,10 +4,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="webjars/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-    <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
-    <script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
     <title>TOS: Sign Up</title>
 </head>
 <div class="container">
@@ -43,7 +42,7 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="usr">Email:</label>
-                        <input type="text" value="${mail}" name="mail" class="form-control" id="usr">
+                        <input type="email" value="${mail}" name="mail" class="form-control" id="usr">
                     </div>
                 </div>
                 <div class="row">
