@@ -12,6 +12,7 @@
     <body>
     <div class="container">
         <h2>Homepage</h2>
+<p>abc</p>
         <h4>Empty page, but if designer try to do something here will be really cool :3</h4>
     </div>
     </body>
