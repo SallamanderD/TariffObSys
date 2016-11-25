@@ -11,6 +11,7 @@ import ua.nure.DAO.*;
 import ua.nure.entities.User;
 import ua.nure.util.Validator;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,19 +32,26 @@ public class HomeController {
     private UserDAO userDAO;
     @Autowired
     Emulator emulator;
-    User currentUser = null;
+    @Autowired
+    HttpSession httpSession;
+    private final String CURRENT_ID_PARAM = "currentId";
 
 
     @RequestMapping(value = "/")
     public ModelAndView index(){
-        //emulator.emul();
+        emulator.emul();
         ModelAndView model = new ModelAndView("index");
         return model;
     }
     @RequestMapping(value = "/mainmenu")
     public ModelAndView mainmenu(){
+        if(httpSession.getAttributeNames().hasMoreElements()){
+            ModelAndView model = new ModelAndView("mainmenu");
+            model.addObject("user", userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0));
+            return model;
+        }
         ModelAndView model = new ModelAndView("mainmenu");
-        model.addObject("user", currentUser);
+        model.addObject("user", null);
         return model;
     }
 
@@ -55,7 +63,7 @@ public class HomeController {
     }
     @RequestMapping(value = "/register")
     public ModelAndView register(){
-        if(currentUser != null){
+        if(httpSession.getAttributeNames().hasMoreElements()){
             ModelAndView model = new ModelAndView("index");
             return model;
         }
@@ -68,7 +76,7 @@ public class HomeController {
     public ModelAndView signup(@RequestParam("username") String username, @RequestParam("password") String password,
                                @RequestParam("name") String name, @RequestParam("surname") String surname,
                                @RequestParam("mail") String mail, @RequestParam("repassword") String repassword){
-        if(currentUser != null){
+        if(httpSession.getAttributeNames().hasMoreElements()){
             ModelAndView model = new ModelAndView("index");
             return model;
         }
@@ -102,9 +110,10 @@ public class HomeController {
             usr.setRole(roleDAO.findRole(1).get(0));
             usr.setActivated(Validator.createPass());
             userDAO.saveUser(usr);
-            currentUser = usr;
             Sender sender = new Sender("TariffObSys@gmail.com", "#af45Ecsrg67&");
-            sender.send("Register into TOS", "Hello " + surname + " " + name + ".\nYour code: " + currentUser.getActivated(), "TOS Command", mail);
+            sender.send("Register into TOS", "Hello " + surname + " " + name + ".\nYour code: " + usr.getActivated(), "TOS Command", mail);
+            httpSession.setAttribute(CURRENT_ID_PARAM, usr.getId());
+            model.addObject("mail", Validator.createLinkToEmail(usr.getMail()));
             return model;
         }
         ModelAndView model = new ModelAndView("register");
@@ -118,14 +127,14 @@ public class HomeController {
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public ModelAndView logout(){
-        currentUser = null;
+        httpSession.removeAttribute(CURRENT_ID_PARAM);
         ModelAndView model = new ModelAndView("index");
         return model;
     }
 
     @RequestMapping(value = "/signin", method = RequestMethod.GET)
     public ModelAndView signin(){
-        if(currentUser != null){
+        if(httpSession.getAttributeNames().hasMoreElements()){
             ModelAndView model = new ModelAndView("index");
             return model;
         }
@@ -138,7 +147,7 @@ public class HomeController {
         if(userDAO.findByUsername(username) != null){
             if(DigestUtils.md5DigestAsHex(password.getBytes()).
                     equals(userDAO.findByUsername(username).getPassword())){
-                currentUser = userDAO.findByUsername(username);
+                httpSession.setAttribute(CURRENT_ID_PARAM, userDAO.findByUsername(username).getId());
                 ModelAndView model = new ModelAndView("index");
                 return model;
             }
@@ -150,18 +159,19 @@ public class HomeController {
 
     @RequestMapping(value = "/profile")
     public ModelAndView userExplore(){
-        if(currentUser == null){
+        if(!httpSession.getAttributeNames().hasMoreElements()){
             ModelAndView model = new ModelAndView("index");
             return model;
         }
         ModelAndView model = new ModelAndView("user");
-        model.addObject("user", currentUser);
+        model.addObject("user", userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0));
         return model;
     }
 
     @RequestMapping(value = "/changeUser")
     public ModelAndView changeUser(){
         ModelAndView model = new ModelAndView("changeUser");
+        User currentUser = userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0);
         model.addObject("user", currentUser);
         return model;
     }
@@ -169,17 +179,19 @@ public class HomeController {
     @RequestMapping(value = "/changeUser", method = RequestMethod.POST)
     public ModelAndView changeUserPOST(@RequestParam("username") String username, @RequestParam("name") String name,
                                        @RequestParam("surname") String surname){
+        User currentUser = userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0);
         if(username.equals("") || name.equals("") || surname.equals("")){
             ModelAndView model = new ModelAndView("changeUser");
             model.addObject("error", "You must enter all parameters");
-            model.addObject("user", currentUser);
+            model.addObject("user", userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0));
             return model;
         }
-        if(userDAO.findByUsername(username) == null || userDAO.findByUsername(username).getUsername().equals(currentUser.getUsername())){
+        if(userDAO.findByUsername(username) == null || userDAO.findByUsername(username)
+                .getUsername().equals(currentUser.getUsername())){
             currentUser.setUsername(username);
             currentUser.setName(name);
             currentUser.setSurname(surname);
-            userDAO.updateUserData(currentUser.getId(), currentUser);
+            userDAO.updateUserData(userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0).getId(), currentUser);
             ModelAndView model = new ModelAndView("user");
             model.addObject("user", currentUser);
             return model;
@@ -187,7 +199,7 @@ public class HomeController {
         else{
             ModelAndView model = new ModelAndView("changeUser");
             model.addObject("error", "Username is already exist.");
-            model.addObject("user", currentUser);
+            model.addObject("user", userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0));
             return model;
         }
 
@@ -201,6 +213,7 @@ public class HomeController {
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
     public ModelAndView changePasswordPOST(@RequestParam("oldpassword") String oldpassword, @RequestParam("password") String password,
                                            @RequestParam("repassword") String repassword){
+        User currentUser = userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0);
         if(currentUser.getPassword().equals(DigestUtils.md5DigestAsHex(oldpassword.getBytes()))){
             if(password.equals(repassword)){
                 currentUser.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
@@ -224,12 +237,14 @@ public class HomeController {
 
     @RequestMapping(value = "activate", method = RequestMethod.GET)
     public ModelAndView activate(){
+        User currentUser = userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0);
         ModelAndView model = new ModelAndView("activate");
         model.addObject("mail", Validator.createLinkToEmail(currentUser.getMail()));
         return model;
     }
     @RequestMapping(value = "activate", method = RequestMethod.POST)
     public ModelAndView activate(@RequestParam("code") String code){
+        User currentUser = userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0);
         if(currentUser.getActivated().equals(code)){
             currentUser.setActivated(null);
             userDAO.updateActivated(currentUser.getId(), currentUser);
