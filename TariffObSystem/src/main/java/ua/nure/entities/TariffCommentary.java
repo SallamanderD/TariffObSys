@@ -10,11 +10,21 @@ public class TariffCommentary {
     private int id;
     private User author;
     private String text;
+    private int tariffId;
 
-    public TariffCommentary(int id, User author, String text) {
+    public int getTariffId() {
+        return tariffId;
+    }
+
+    public void setTariffId(int tariffId) {
+        this.tariffId = tariffId;
+    }
+
+    public TariffCommentary(int id, User author, String text, int tariffId) {
         this.id = id;
         this.author = author;
         this.text = text;
+        this.tariffId = tariffId;
     }
 
     public TariffCommentary() {

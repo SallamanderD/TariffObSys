@@ -39,8 +39,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <c:choose>
                         <c:when test="${empty user}">
-                            <li><a href="signin">Sign In</a></li>
-                            <li><a href="register">Sign Up</a></li>
+                            <li><a href="/signin">Sign In</a></li>
+                            <li><a href="/register">Sign Up</a></li>
                         </c:when>
                         <c:otherwise>
                             <c:choose>

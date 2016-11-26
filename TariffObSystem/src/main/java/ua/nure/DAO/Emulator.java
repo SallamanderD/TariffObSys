@@ -20,9 +20,18 @@ public class Emulator {
     private UserDAO userDAO;
     @Autowired
     private ParameterDAO parameterDAO;
+    @Autowired
+    private TariffCommentaryDAO tariffCommentaryDAO;
 
 
     public void emul(){
+        roleDAO.saveRole(new Role(1, "User"));
+        roleDAO.saveRole(new Role(2, "Admin"));
+        User usr = new User("Sallamander", DigestUtils.md5DigestAsHex("root".getBytes()), "Александр", "Доротенко", "Sallamanderdr@gmail.com");
+        usr.setId(1);
+        usr.setRole(roleDAO.findRole(1).get(0));
+        userDAO.saveUser(usr);
+
         parameterDAO.saveParameter(new Parameter(1, "Цена"));
         parameterDAO.saveParameter(new Parameter(2, "3G"));
         parameterDAO.saveParameter(new Parameter(3, "Звонки в сети"));
@@ -30,8 +39,7 @@ public class Emulator {
         parameterDAO.saveParameter(new Parameter(5, "Безлимит соц.сети"));
         parameterDAO.saveParameter(new Parameter(6, "SMS"));
         //Generate roles
-        roleDAO.saveRole(new Role(1, "User"));
-        roleDAO.saveRole(new Role(2, "Admin"));
+
         //------------------------------------------------
         //Generate operators
         Operator op = new Operator("Vodafone", "Vodafone operator");
@@ -55,8 +63,18 @@ public class Emulator {
         tar1.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(4), "100"));
         tar1.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(5), "VK, Facebook"));
         tar1.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(6), "35"));
-        operatorDAO.updateTariffList(1, tar1);
+        TariffCommentary tc1 = new TariffCommentary(1, userDAO.findUser(1).get(0), "Best Tariff", 1);
+        TariffCommentary tc2 = new TariffCommentary(2, userDAO.findUser(1).get(0), "Worst Tariff", 1);
+        TariffCommentary tc3 = new TariffCommentary(3, userDAO.findUser(1).get(0), "I AM A TROLL BLO-BLO-BLO OLOLOOLOLOOLOLOOLOLOOL OLOOLOLOOLOLOOLOLOOLOLOOL OLOOLOLOOL OLOO LOLOO LOLOOLOLOOL OLOOLOLOOLOL OOLOLOO LOLOOLOLOO LOLOOLOLOOL OLOOLOLOOL OLOOLOLOOL OLOOLOLOOLOL OOLOLOOLOLOO LOLOOLOLOOLOL OOLOLOOLOLOOL OLOOLOLOOL OLOOLOLOOLOL OOLOL OOLOLOOLOLOO LOLOOLOL OOLOLOOLOLOO LOLOOLOLOOLOLOOLOLO OLOLOOLOLO OLOLOOLO LOOLOLOOLOLOOL OLOOLOLOOLOLO OLOLOOLOLOOL O LOOLO OOLOLOOLOLO OLOLOOLOLO OLOLOO LOLOOLOL OOLOL OOLOLOOL OLOOLOLOOL OLOOLOL OOLO LOOL OLOOLOLOOLO LOOLOLOOLOL OOLOLOO LOLOO LOLOOLOL OOLOLOOLO LOOLOLO HAHA", 1);
         tariffDAO.saveTariff(tar1);
+        tariffCommentaryDAO.save(tc1);
+        tariffCommentaryDAO.save(tc2);
+        tariffCommentaryDAO.save(tc3);
+        tariffDAO.addCommentaries(1, tariffCommentaryDAO.findById(1));
+        tariffDAO.addCommentaries(1, tariffCommentaryDAO.findById(2));
+        tariffDAO.addCommentaries(1, tariffCommentaryDAO.findById(3));
+        operatorDAO.updateTariffList(1, tar1);
+
 
         Tariff tar2 = new Tariff(2, "Vodafone Super+", "Vodafone Super+ of Vodafone Operator", "Vodafone Super+ of Vodafone Operator");
         tar2.setOperator(operatorDAO.findOperator(1).get(0));
@@ -92,9 +110,7 @@ public class Emulator {
         tariffDAO.saveTariff(tar4);
         //-------------------------------------------------
         //Generate users
-        User usr = new User("Sallamander", DigestUtils.md5DigestAsHex("root".getBytes()), "Александр", "Доротенко", "Sallamanderdr@gmail.com");
-        usr.setRole(roleDAO.findRole(1).get(0));
-        userDAO.saveUser(usr);
+
     }
 
 }

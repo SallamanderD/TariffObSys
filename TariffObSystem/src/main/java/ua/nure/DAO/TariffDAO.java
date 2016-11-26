@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 import ua.nure.entities.Operator;
 import ua.nure.entities.Tariff;
+import ua.nure.entities.TariffCommentary;
 
 import java.util.List;
 
@@ -45,7 +46,12 @@ public class TariffDAO {
                 addCriteria(Criteria.where("id").is(id)), Tariff.class);
     }
 
-
+    public void addCommentaries(int id, TariffCommentary commentary){
+        Update update = new Update();
+        update.addToSet("tariffCommentaries", commentary);
+        mongoOperation.updateFirst(new Query().
+                addCriteria(Criteria.where("id").is(id)), update, Tariff.class);
+    }
 
     public List<Tariff> findAllTariff(){
         return mongoOperation.findAll(Tariff.class);

@@ -33,6 +33,15 @@ public class Tariff {
     private String name;
     private Operator operator;
     private List<Pair<Parameter, String>> parameters = new ArrayList<>();
+
+    public List<TariffCommentary> getTariffCommentaries() {
+        return tariffCommentaries;
+    }
+
+    public void setTariffCommentaries(List<TariffCommentary> tariffCommentaries) {
+        this.tariffCommentaries = tariffCommentaries;
+    }
+
     private List<TariffCommentary> tariffCommentaries = new ArrayList<>();
     public List<Pair<Parameter, String>> getParameters() {
         return parameters;
