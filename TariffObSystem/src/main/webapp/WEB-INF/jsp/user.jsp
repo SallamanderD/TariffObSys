@@ -1,9 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+    <link href="webjars/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
+    <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
+    <script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link href="css/style.css" rel="stylesheet">
     <meta charset="utf-8">
     <title>TOS: ${user.username}</title>
 </head>
@@ -11,8 +12,7 @@
     <jsp:include page="/mainmenu"></jsp:include>
 </div>
     <body>
-
-    <div class="container" style="margin-top: 5%">
+    <div id="profileContainer" class="container ">
         <h2>Profile</h2>
         <hr/>
         <div class="row">
@@ -29,8 +29,8 @@
                 <p class="lead"><mark>${user.mail}</mark></p>
             </div>
         </div>
-        <a href="changeUser"><button type="submit" class="btn btn-default">Change Data</button></a>
-        <a href="changePassword"><button type="submit" class="btn btn-default">Change Password</button></a>
+        <a href="changeUser"><button type="submit" class="btn btn-success">Change Data</button></a>
+        <a href="changePassword"><button type="submit" class="btn btn-success">Change Password</button></a>
         <hr/>
     </div>
     </body>

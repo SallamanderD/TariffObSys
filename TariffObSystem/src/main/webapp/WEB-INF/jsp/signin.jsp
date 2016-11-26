@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+    <link href="webjars/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
+    <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
+    <script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link href="css/style.css" rel="stylesheet">
     <title>TOS: Sign In</title>
 </head>
 <div class="container">
@@ -11,9 +12,9 @@
 </div>
 <body>
 <div class="container">
-    <h3>Sign In</h3>
     <p>${error}</p>
-    <div id="outer">
+    <div id="outer" class="regContainer">
+        <h3>Sign In</h3>
     <form method="POST" action="/signin">
         <div id="inner">
             <div class="row">

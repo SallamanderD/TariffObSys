@@ -1,28 +1,65 @@
 body{
-    background-image: url("mybackground.png");
+    background-image: url(somebckg.png);
+    background-color: #E8EAF6;
+    font-family: 'Oxygen', sans-serif;;
 }
 .navbar-custom{
-    background-color: #013274;
+    background-color: #424242; /* Navbar color*/
 }
 .navbar-default .navbar-nav > li > a {
-    color: white;
+    color: #8BC34A;             /*Navbar buttons color*/
 }
 .navbar-default .navbar-nav > li > a:hover {
-    color: silver;
+    color: silver;               /* Navbar buttons color hover*/
 }
 .navbar-default .navbar-brand{
-    color: #00abe3;
+    color: #cddcdb;
+    text-shadow: black 0.2em 0.2em 0.3em;
 }
+
+.navbar {
+    font-family: 'Francois One', sans-serif; /* fonts in navbar */
+    font-size: 19px;
+    font-weight: 400;
+}
+
+.navbar-brand {
+    font-family: 'Francois One', sans-serif; /*brand font */
+    font-weight: 500; font-size: 25px;
+}
+
 .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus{
-    color: #92e2e9;
+    color: silver;
 }
 #outer{
-    width: 100%;
+    width: 100%;        /*for center align in registr */
 }
 #inner{
-    width: 30%;
+    width: 30%;         /*for center align in registr */
     margin: 0 auto;
 }
 .form-control{
     width: 305px;
+}
+
+.mysearch{
+    height: 34px; /* search-button in navbar*/
+}
+
+.searchform{
+    padding-top: 3px; /* input+button for searching in navbar */
+}
+
+.regContainer{
+    width: 900px;
+    border-style: groove;
+    border-radius: 10px;
+    padding: 5px 15px 15px 15px;
+    background-color: white;
+}
+
+#profileContainer{
+    background-color: white;
+    margin-top: 5%;
+    border-radius: 10px;
 }

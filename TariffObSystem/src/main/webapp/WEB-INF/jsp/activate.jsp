@@ -1,9 +1,11 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-    <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+    <link href="webjars/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
+    <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
+    <script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link href="css/style.css" rel="stylesheet">
+    <meta charset="utf-8">
     <title>TOS: Confirm Mail</title>
 </head>
 <div class="container">
