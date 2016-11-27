@@ -2,11 +2,38 @@ package ua.nure.entities;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 @Document(collection = "telephoneCommentaries")
 public class TelephoneCommentary {
     private int id;
     private User author;
     private String text;
+    private Date createDate;
+    private String date;
+
+    public String getDate() {
+        return DateFormat.getInstance().format(createDate);
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public int getTelephoneId() {
+        return telephoneId;
+    }
+
+    public void setTelephoneId(int telephoneId) {
+        this.telephoneId = telephoneId;
+    }
+
+    private int telephoneId;
 
     public TelephoneCommentary(int id, User author, String text) {
         this.id = id;

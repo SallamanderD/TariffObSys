@@ -21,6 +21,8 @@ public class Emulator {
     @Autowired
     private ParameterDAO parameterDAO;
     @Autowired
+    private TelephoneDAO telephoneDAO;
+    @Autowired
     private TariffCommentaryDAO tariffCommentaryDAO;
 
 
@@ -31,7 +33,10 @@ public class Emulator {
         usr.setId(1);
         usr.setRole(roleDAO.findRole(1).get(0));
         userDAO.saveUser(usr);
-
+        Telephone telephone = new Telephone(1, "0664935720", "Cool man", 1);
+        Telephone telephone1 = new Telephone(2, "0956766110", "Cool man too", 1);
+        telephoneDAO.save(telephone);
+        telephoneDAO.save(telephone1);
         parameterDAO.saveParameter(new Parameter(1, "Цена"));
         parameterDAO.saveParameter(new Parameter(2, "3G"));
         parameterDAO.saveParameter(new Parameter(3, "Звонки в сети"));
