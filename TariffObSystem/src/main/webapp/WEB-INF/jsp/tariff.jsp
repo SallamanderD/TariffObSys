@@ -9,29 +9,30 @@
 <div class="container">
     <jsp:include page="/mainmenu"></jsp:include>
 </div>
-<div class="container col-lg-5 col-lg-offset-3" style="margin-top: 5%">
-    <h2>${tariff.name}</h2>
-    <br>
-    ${tariff.description}
-    <table class="table table-striped table-inverse">
-        <thead>
-        <tr>
-            <th>Parameter</th>
-            <th>Value</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="param" items="${tariff.parameters}" varStatus="loop">
+    <div class="container tariffContainer" style="margin-top: 5%">
+        <h2>${tariff.name}</h2>
+        <br>
+        ${tariff.description}
+        <table class="table table-striped table-inverse">
+            <thead>
             <tr>
-                <td>${tariff.parameters.get(loop.index).key.name}</td>
-                <td>${tariff.parameters.get(loop.index).value}</td>
+                <th>Parameter</th>
+                <th>Value</th>
             </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-    <hr>
-    <jsp:include page="/tariffCommentary">
-        <jsp:param name="tariffId" value="${tariff.id}"/>
-    </jsp:include>
+            </thead>
+            <tbody>
+            <c:forEach var="param" items="${tariff.parameters}" varStatus="loop">
+                <tr>
+                    <td>${tariff.parameters.get(loop.index).key.name}</td>
+                    <td>${tariff.parameters.get(loop.index).value}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+        <hr>
+        <jsp:include page="/tariffCommentary">
+            <jsp:param name="tariffId" value="${tariff.id}"/>
+        </jsp:include>
+    </div>
 </body>
 </html>

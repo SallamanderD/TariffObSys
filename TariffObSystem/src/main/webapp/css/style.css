@@ -59,6 +59,13 @@ body{
     border-radius: 10px;
 }
 
+.tariffContainer{
+    margin: 0 auto;
+    border-style: groove;
+    border-radius: 10px;
+    padding: 5px 15px 15px 15px;
+    background-color: white;
+}
 
 /* Table of tarrifs*/
 /* Table of tarrifs*/
@@ -180,3 +187,94 @@ body{
 }
 /* Table of tarrifs*/
 /* Table of tarrifs*/
+
+
+/*Commentaries*/
+/*Commentaries*/
+.bs-calltoaction{
+    position: relative;
+    width:auto;
+    padding: 15px 25px;
+    border: 1px solid black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.bs-calltoaction > .row{
+    display:table;
+    width: calc(100% + 30px);
+}
+
+.bs-calltoaction > .row > [class^="col-"],
+.bs-calltoaction > .row > [class*=" col-"]{
+    float:none;
+    display:table-cell;
+    vertical-align:middle;
+}
+
+.cta-contents{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.cta-title{
+    margin: 0 auto 15px;
+    padding: 0;
+}
+
+.cta-desc{
+    padding: 0;
+}
+
+.cta-desc p:last-child{
+    margin-bottom: 0;
+}
+
+.cta-button{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+@media (max-width: 991px){
+    .bs-calltoaction > .row{
+        display:block;
+        width: auto;
+    }
+
+    .bs-calltoaction > .row > [class^="col-"],
+    .bs-calltoaction > .row > [class*=" col-"]{
+        float:none;
+        display:block;
+        vertical-align:middle;
+        position: relative;
+    }
+
+    .cta-contents{
+        text-align: center;
+    }
+}
+.bs-calltoaction.bs-calltoaction-success{
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+.bs-calltoaction.bs-calltoaction-success .cta-button .btn{
+    border-color:#fff;
+}
+.commentsText{
+    background-color: white;
+    padding: 8px 8px 8px 8px;
+    border-color: darkgrey;
+    border-radius: 5px;
+}
+
+/*Commentaries*/
+/*Commentaries*/
+
+#lineHr{
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+                          /*Divider*/
+}
