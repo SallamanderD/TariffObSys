@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ua.nure.DAO.*;
 import ua.nure.entities.TariffCommentary;
 import ua.nure.entities.Telephone;
+import ua.nure.entities.TelephoneCommentary;
 import ua.nure.entities.User;
 import ua.nure.util.Validator;
 
@@ -41,12 +42,14 @@ public class HomeController {
     HttpSession httpSession;
     @Autowired
     TelephoneDAO telephoneDAO;
+    @Autowired
+    TelephoneCommentaryDAO telephoneCommentaryDAO;
     private final String CURRENT_ID_PARAM = "currentId";
 
 
     @RequestMapping(value = "/")
     public ModelAndView index(){
-        //emulator.emul();
+        emulator.emul();
         ModelAndView model = new ModelAndView("index");
         return model;
     }
@@ -82,6 +85,26 @@ public class HomeController {
         return model;
     }
 
+    @RequestMapping(value = "/telephoneCommentary")
+    public ModelAndView telephoneCommentary(@RequestParam(value = "telephoneId") int telephoneId){
+        ModelAndView model = new ModelAndView("telephoneCommentary");
+        List<TelephoneCommentary> comment = telephoneCommentaryDAO.findByTelephoneId(telephoneId);
+        Collections.sort(comment, new Comparator<TelephoneCommentary>() {
+            @Override
+            public int compare(TelephoneCommentary o1, TelephoneCommentary o2) {
+                return o1.getCreateDate().compareTo(o2.getCreateDate());
+            }
+        });
+        model.addObject("commentaries", comment);
+        if(httpSession.getAttributeNames().hasMoreElements()){
+            model.addObject("userId", (Integer)httpSession.getAttribute(CURRENT_ID_PARAM));
+            model.addObject("telephoneId", telephoneId);
+        } else{
+            model.addObject("userId", null);
+        }
+        return model;
+    }
+
     @RequestMapping(value = "/addTariffCommentary")
     public ModelAndView addTarCommentary(@RequestParam(value = "text") String text, @RequestParam(value = "tariffId") int tariffId){
         TariffCommentary temp = new TariffCommentary(tariffCommentaryDAO.findAll().size() + 1,
@@ -92,10 +115,27 @@ public class HomeController {
         return model;
     }
 
+    @RequestMapping(value = "/addTelephoneCommentary")
+    public ModelAndView addTelCommentary(@RequestParam(value = "text") String text, @RequestParam(value = "telephoneId") int telephoneId){
+        TelephoneCommentary temp = new TelephoneCommentary(telephoneCommentaryDAO.findAll().size() + 1,
+                userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0), text, telephoneId);
+        telephoneCommentaryDAO.save(temp);
+        telephoneDAO.addCommentaries(telephoneId, telephoneCommentaryDAO.findById(temp.getId()));
+        ModelAndView model = new ModelAndView("redirect:telephone/" + telephoneId);
+        return model;
+    }
+
     @RequestMapping(value = "/tariff/{id}")
     public ModelAndView tariffView(@PathVariable int id){
         ModelAndView model = new ModelAndView("tariff");
         model.addObject("tariff", tariffDAO.findTariff(id).get(0));
+        return model;
+    }
+
+    @RequestMapping(value = "/telephone/{id}")
+    public ModelAndView telephoneView(@PathVariable int id){
+        ModelAndView model = new ModelAndView("telephonePage");
+        model.addObject("telephone", telephoneDAO.findById(id));
         return model;
     }
 
@@ -250,14 +290,17 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public ModelAndView search(String str){
+    public ModelAndView search(@RequestParam(value = "query") String query){
         List<Telephone> telephones = telephoneDAO.findAll();
         List<Telephone> result = new ArrayList<>();
         for(Telephone t : telephones){
-            if(t.getNumber().contains(str)){
+            if(t.getNumber().contains(query)){
                 result.add(t);
             }
         }
+        ModelAndView model = new ModelAndView("telephone");
+        model.addObject("results", result);
+        return model;
 
     }
 

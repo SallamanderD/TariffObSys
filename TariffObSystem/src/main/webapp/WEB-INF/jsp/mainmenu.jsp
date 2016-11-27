@@ -27,9 +27,9 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/tariffs">Tariffs</a></li>
                     <li>
-                        <form class="navbar-form" role="search">
+                        <form class="navbar-form" role="search" method="post" action="/search">
                             <div class="input-group" >
-                                <input type="text" class="form-control" placeholder="Telephone" name="q">
+                                <input type="text" class="form-control" placeholder="Telephone" name="query">
                                 <div class="input-group-btn">
                                     <button class="btn mysearch btn-success" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                                 </div>

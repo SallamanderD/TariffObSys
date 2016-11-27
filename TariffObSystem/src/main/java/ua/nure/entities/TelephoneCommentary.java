@@ -3,6 +3,7 @@ package ua.nure.entities;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 @Document(collection = "telephoneCommentaries")
@@ -35,10 +36,12 @@ public class TelephoneCommentary {
 
     private int telephoneId;
 
-    public TelephoneCommentary(int id, User author, String text) {
+    public TelephoneCommentary(int id, User author, String text, int telephoneId) {
         this.id = id;
         this.author = author;
         this.text = text;
+        this.telephoneId = telephoneId;
+        createDate = Calendar.getInstance().getTime();
     }
 
     public TelephoneCommentary() {
