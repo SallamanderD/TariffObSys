@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 import ua.nure.entities.TariffCommentary;
 
+import java.util.List;
+
 @Component
 public class TariffCommentaryDAO {
     @Autowired
@@ -22,5 +24,13 @@ public class TariffCommentaryDAO {
 
     public TariffCommentary findById(int id){
         return mongoOperations.findOne(new Query().addCriteria(Criteria.where("id").is(id)), TariffCommentary.class);
+    }
+
+    public List<TariffCommentary> findAll(){
+        return mongoOperations.findAll(TariffCommentary.class);
+    }
+
+    public List<TariffCommentary> findByTariffId(int id){
+        return mongoOperations.find(new Query().addCriteria(Criteria.where("tariffId").is(id)), TariffCommentary.class);
     }
 }

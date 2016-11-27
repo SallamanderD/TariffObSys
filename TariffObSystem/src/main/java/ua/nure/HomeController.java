@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ua.nure.DAO.*;
+import ua.nure.entities.TariffCommentary;
 import ua.nure.entities.User;
 import ua.nure.util.Validator;
 
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DateFormat;
+import java.util.*;
 
 /**
  * Created by Александр Доротенко on 06.11.2016.
@@ -32,6 +33,8 @@ public class HomeController {
     @Autowired
     private UserDAO userDAO;
     @Autowired
+    private TariffCommentaryDAO tariffCommentaryDAO;
+    @Autowired
     Emulator emulator;
     @Autowired
     HttpSession httpSession;
@@ -40,7 +43,7 @@ public class HomeController {
 
     @RequestMapping(value = "/")
     public ModelAndView index(){
-        emulator.emul();
+        //emulator.emul();
         ModelAndView model = new ModelAndView("index");
         return model;
     }
@@ -53,6 +56,37 @@ public class HomeController {
         }
         ModelAndView model = new ModelAndView("mainmenu");
         model.addObject("user", null);
+        return model;
+    }
+
+    @RequestMapping(value = "/tariffCommentary")
+    public ModelAndView tariffCommentary(@RequestParam(value = "tariffId") int tariffID){
+        ModelAndView model = new ModelAndView("tariffCommentary");
+        List<TariffCommentary> comment = tariffCommentaryDAO.findByTariffId(tariffID);
+        Collections.sort(comment, new Comparator<TariffCommentary>() {
+            @Override
+            public int compare(TariffCommentary o1, TariffCommentary o2) {
+                return o1.getCreateDate().compareTo(o2.getCreateDate());
+            }
+        });
+        Collections.reverse(comment);
+        model.addObject("commentaries", comment);
+        if(httpSession.getAttributeNames().hasMoreElements()){
+            model.addObject("userId", (Integer)httpSession.getAttribute(CURRENT_ID_PARAM));
+        } else{
+            model.addObject("userId", null);
+        }
+        return model;
+    }
+
+    @RequestMapping(value = "/addTariffCommentary")
+    public ModelAndView addTarCommentary(@RequestParam(value = "text") String text, @RequestParam(value = "tariffId") int tariffId){
+        TariffCommentary temp = new TariffCommentary(tariffCommentaryDAO.findAll().size() + 1,
+                userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0), text, tariffId);
+        tariffCommentaryDAO.save(temp);
+        tariffDAO.addCommentaries(tariffId, tariffCommentaryDAO.findById(temp.getId()));
+        ModelAndView model = new ModelAndView("tariff");
+        model.addObject("tariff", tariffDAO.findTariff(tariffId).get(0));
         return model;
     }
 

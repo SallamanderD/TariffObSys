@@ -73,7 +73,7 @@ public class Emulator {
         tariffDAO.addCommentaries(1, tariffCommentaryDAO.findById(1));
         tariffDAO.addCommentaries(1, tariffCommentaryDAO.findById(2));
         tariffDAO.addCommentaries(1, tariffCommentaryDAO.findById(3));
-        operatorDAO.updateTariffList(1, tar1);
+        operatorDAO.addTariff(1, tar1);
 
 
         Tariff tar2 = new Tariff(2, "Vodafone Super+", "Vodafone Super+ of Vodafone Operator", "Vodafone Super+ of Vodafone Operator");
@@ -84,7 +84,7 @@ public class Emulator {
         tar2.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(4), "50"));
         tar2.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(5), "VK, Facebook, OK"));
         tar2.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(6), "100"));
-        operatorDAO.updateTariffList(1, tar2);
+        operatorDAO.addTariff(1, tar2);
         tariffDAO.saveTariff(tar2);
 
         Tariff tar3 = new Tariff(3, "KyivStar 3g+", "KyivStar 3g+ of KyivStar Operator", "KyivStar 3g+ of KyivStar Operator");
@@ -95,7 +95,7 @@ public class Emulator {
         tar3.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(4), "50"));
         tar3.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(5), "Безлимит"));
         tar3.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(6), "100"));
-        operatorDAO.updateTariffList(2, tar3);
+        operatorDAO.addTariff(2, tar3);
         tariffDAO.saveTariff(tar3);
 
         Tariff tar4 = new Tariff(4, "Lifecell Family", "Lifecell Family of Lifecell Operator", "Lifecell Family of Lifecell Operator");
@@ -106,7 +106,7 @@ public class Emulator {
         tar4.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(4), "20"));
         tar4.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(5), "-"));
         tar4.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(6), "30"));
-        operatorDAO.updateTariffList(3, tar4);
+        operatorDAO.addTariff(3, tar4);
         tariffDAO.saveTariff(tar4);
         //-------------------------------------------------
         //Generate users

@@ -33,7 +33,7 @@ public class OperatorDAO {
                 addCriteria(Criteria.where("id").is(id)), update, Operator.class);
     }
 
-    public void updateTariffList(int id, Tariff tariff){
+    public void addTariff(int id, Tariff tariff){
         Update update = new Update();
         update.addToSet("tariffs", tariff);
         mongoOperations.updateFirst(new Query().

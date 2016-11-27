@@ -1,4 +1,4 @@
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <link href="webjars/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
@@ -13,38 +13,14 @@
 <body>
 <div class="container col-lg-5 col-lg-offset-3" style="margin-top: 5%">
     <c:choose>
-        <c:when test="${not empty operators}">
+        <c:when test="${not empty tariffs}">
             <ul class="list-group">
-                <c:forEach var="operValue" items="${operators}">
-                    <c:choose>
-                    <c:when test="${not empty operValue.tariffs}">
-                        <ul class="list-group">
-                            <c:forEach var="listValue" items="${operValue.tariffs}">
-                                <li class="list-group-item">
-                                    <p>Name: ${listValue.name}</p>
-                                    <p>Description: ${listValue.description}</p>
-                                    <p>Operator: ${operValue.name}</p>
-                                    <table class="table table-striped table-inverse">
-                                        <thead>
-                                        <tr>
-                                            <th>Parameter</th>
-                                            <th>Value</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <c:forEach var="param" items="${listValue.parameters}" varStatus="loop">
-                                            <tr>
-                                                <td>${listValue.parameters.get(loop.index).key.name}</td>
-                                                <td>${listValue.parameters.get(loop.index).value}</td>
-                                            </tr>
-                                        </c:forEach>
-                                        </tbody>
-                                    </table>
-                                </li>
-                            </c:forEach>
-                        </ul>
-                    </c:when>
-                    </c:choose>
+                <c:forEach var="listValue" items="${tariffs}" varStatus="loop">
+                    <li class="list-group-item">
+                        <p>${loop.index + 1}) <a href="/tariff/${listValue.id}">${listValue.name}</a></p>
+                        <p>${listValue.shortDescription}</p>
+                        <p>Operator: <a href="/tariffs/${listValue.operator.name}">${listValue.operator.name}</a></p>
+                    </li>
                 </c:forEach>
             </ul>
         </c:when>

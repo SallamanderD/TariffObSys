@@ -25,11 +25,11 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="/tariffs">Tariffs <span class="sr-only">(current)</span></a></li>
+                    <li><a href="/tariffs">Tariffs</a></li>
                     <li>
                         <form class="navbar-form" role="search">
                             <div class="input-group" >
-                                <input type="text" class="form-control" placeholder="Search" name="q">
+                                <input type="text" class="form-control" placeholder="Telephone" name="q">
                                 <div class="input-group-btn">
                                     <button class="btn mysearch btn-success" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                                 </div>
@@ -40,13 +40,13 @@
                 <ul class="nav navbar-nav navbar-right">
                     <c:choose>
                         <c:when test="${empty user}">
-                            <li><a href="signin">Sign In</a></li>
-                            <li><a href="register">Sign Up</a></li>
+                            <li><a href="/signin">Sign In</a></li>
+                            <li><a href="/register">Sign Up</a></li>
                         </c:when>
                         <c:otherwise>
                             <c:choose>
                                 <c:when test="${not empty user.activated}">
-                                    <a href="/activate" class="btn btn-warning navbar-btn">Confirm Email</a>
+                                    <a href="/activate" class="btn mysearch btn-success navbar-btn">Confirm Email</a>
                                 </c:when>
                             </c:choose>
                             <li><a href="profile">${user.username}</a></li>
