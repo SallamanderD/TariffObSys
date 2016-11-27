@@ -14,7 +14,7 @@
     <jsp:include page="/mainmenu"></jsp:include>
 </div>
 <body>
-    <div class="container centered">
+    <div class="container" style="padding-top: 5%;">
         <c:choose>
         <c:when test="${not empty error}">
             <ul>
@@ -26,18 +26,18 @@
             </ul>
         </c:when>
         </c:choose>
-        <div id="outer" class="regContainer">
-            <h3>Registration</h3>
+        <div class="regContainer">
+            <h4 style="color: #1fa67b; text-align: center;">Registration</h4>
             <form method="POST" action="/register">
-                <div id="inner">
+                <div>
                     <div class="row">
-                        <div class="form-group col-md-5">
+                        <div class="form-group col-md-6">
                             <label for="usr">Name:</label>
-                            <input type="text" style="width: 150px;" value="${name}" name="name" class="form-control" id="usr">
+                            <input type="text" style="width: 105%; " value="${name}" name="name" class="form-control" id="usr">
                         </div>
-                        <div class="form-group col-md-5">
-                            <label for="usr">Surname:</label>
-                            <input type="text" style="width: 150px;" value="${surname}" name="surname" class="form-control" id="usr">
+                        <div class="form-group col-md-6">
+                            <label style="margin-left:-6%;" for="usr">Surname:</label>
+                            <input type="text" style="width: 105%; margin-left: -6%;" value="${surname}" name="surname" class="form-control" id="usr">
                         </div>
                     </div>
                     <div class="row">
