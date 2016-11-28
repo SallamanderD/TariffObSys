@@ -51,7 +51,7 @@ public class Emulator {
         op.setId(1);
         operatorDAO.saveOperator(op);
 
-        Operator op2 = new Operator("KyivStar", "Kyivstar operator");
+        Operator op2 = new Operator("Kyivstar", "Kyivstar operator");
         op2.setId(2);
         operatorDAO.saveOperator(op2);
 
@@ -60,14 +60,19 @@ public class Emulator {
         operatorDAO.saveOperator(op3);
         //-------------------------------------------------
         //Generate tariffs
-        Tariff tar1 = new Tariff(1, "Vodafone 3D Red", "Vodafone 3D Red of Vodafone Operator", "Vodafone 3D Red of Vodafone Operator");
+        Tariff tar1 = new Tariff(1, "Vodafone Red XS", "Отличный тариф от Vodafone, который включает все, что нужно среднестатистическому пользователю, от смс и звонков до быстрого 3g интернета.", "<h3>Как подключить?</h3> <br> Если вы уже клиент операторамобильной сети Vodafone, вы можете перейти на тариф Vodafone Red XS по номеру \"*250*350#\"<br><h3>«Зимова акція» в тарифі Vodafone Red XS</h3> Тільки цієї зими!<br>" +
+                "<br>" +
+                "Більше телефонуйте на інші мережі: Vodafone збільшує кількість хвилин у пакеті та знижує вартість дзвінків на інші мобільні оператори України понад пакет — до 25 копійок!\n" +
+                "<br>" +
+                "Акція діє з 18.11.2016 року до 28.02.2017 року.<br>" +
+                "Протягом всієї усієї акції щомісяця Вам будуть надаватися додаткові обсяги хвилин.");
         tar1.setOperator(operatorDAO.findOperator(1).get(0));
         tar1.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(1), "35"));
-        tar1.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(2), "1000"));
+        tar1.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(2), "12000"));
         tar1.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(3), "Безлимит"));
-        tar1.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(4), "100"));
-        tar1.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(5), "VK, Facebook"));
-        tar1.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(6), "35"));
+        tar1.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(4), "225"));
+        tar1.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(5), "Все"));
+        tar1.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(6), "150"));
         TariffCommentary tc1 = new TariffCommentary(1, userDAO.findUser(1).get(0), "Best Tariff", 1);
         TariffCommentary tc2 = new TariffCommentary(2, userDAO.findUser(1).get(0), "Worst Tariff", 1);
         TariffCommentary tc3 = new TariffCommentary(3, userDAO.findUser(1).get(0), "I AM A TROLL BLO-BLO-BLO OLOLOOLOLOOLOLOOLOLOOL OLOOLOLOOLOLOOLOLOOLOLOOL OLOOLOLOOL OLOO LOLOO LOLOOLOLOOL OLOOLOLOOLOL OOLOLOO LOLOOLOLOO LOLOOLOLOOL OLOOLOLOOL OLOOLOLOOL OLOOLOLOOLOL OOLOLOOLOLOO LOLOOLOLOOLOL OOLOLOOLOLOOL OLOOLOLOOL OLOOLOLOOLOL OOLOL OOLOLOOLOLOO LOLOOLOL OOLOLOOLOLOO LOLOOLOLOOLOLOOLOLO OLOLOOLOLO OLOLOOLO LOOLOLOOLOLOOL OLOOLOLOOLOLO OLOLOOLOLOOL O LOOLO OOLOLOOLOLO OLOLOOLOLO OLOLOO LOLOOLOL OOLOL OOLOLOOL OLOOLOLOOL OLOOLOL OOLO LOOL OLOOLOLOOLO LOOLOLOOLOL OOLOLOO LOLOO LOLOOLOL OOLOLOOLO LOOLOLO HAHA", 1);
@@ -81,9 +86,16 @@ public class Emulator {
         operatorDAO.addTariff(1, tar1);
 
 
-        Tariff tar2 = new Tariff(2, "Vodafone Super+", "Vodafone Super+ of Vodafone Operator", "Vodafone Super+ of Vodafone Operator");
+        Tariff tar2 = new Tariff(2, "Vodafone Red L", "Максимальный тариф от Vodafone, который вы можете оплатить только в день пользования", "<h3>Как подключить?</h3> <br> Если вы уже клиент операторамобильной сети Vodafone, вы можете перейти на тариф Vodafone Red XS по номеру \"*250*350#\" <br> «Зимова акція» в тарифі Vodafone Red S, M, L\n" +
+                "<br>" +
+                "Тільки цієї зими!\n" +
+                "<br>" +
+                "Більше телефонуйте на інші мережі та не обмежуйте себе в Інтернеті: Vodafone збільшує кількість хвилин і Гігабайт у пакеті, а також знижує вартість дзвінків на інші мобільні оператори України понад пакет — до 25 копійок!<br>" +
+                "<br>" +
+                "Акція діє з 18.11.2016 року до 28.02.2017 року.<br>" +
+                "Протягом всієї усієї акції щомісяця Вам будуть надаватися додаткові обсяги хвилин і Гігабайт");
         tar2.setOperator(operatorDAO.findOperator(1).get(0));
-        tar2.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(1), "45"));
+        tar2.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(1), "150"));
         tar2.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(2), "1500"));
         tar2.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(3), "Безлимит"));
         tar2.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(4), "50"));
@@ -92,14 +104,16 @@ public class Emulator {
         operatorDAO.addTariff(1, tar2);
         tariffDAO.saveTariff(tar2);
 
-        Tariff tar3 = new Tariff(3, "KyivStar 3g+", "KyivStar 3g+ of KyivStar Operator", "KyivStar 3g+ of KyivStar Operator");
+        Tariff tar3 = new Tariff(3, "Kyivstar Online+", "<b>Kiyvstar Online+</b> один из лучших тарифов для вашего смартфона. В нем вы найдете все что вам нужно, включая безлимитную игру в PokemonGO", "<b>Как подключить тариф «Киевстар Онлайн+. Регион 2»</b><br>" +
+                "Если вы желаете стать абонентом Киевстар, приобретите стартовый пакет с этим тарифным планом и активируйте его в соответствии с инструкциями на упаковке. Вы также можете активировать стартовый пакет с другим тарифным планом, а потом подать заявку на смену тарифного плана.<br>" +
+                "Если вы уже наш абонент и хотите изменить свой тарифный план на «Киевстар Онлайн+. Регион 2», позвоните <kbd>477*1</kbd> или воспользуйтесь системой Мой Киевстар. <br> Проверяйте счет с помощью запроса <kbd>*111#</kbd><br><h3>Как активировать тариф?</h3>Рекомендуемая сумма пополнения счета для тарифного плана «Киевстар Онлайн+. Регион 2» – от 65 грн одним платежом любым способом, кроме перевода средств. Без этого пополнения тарифный план не считается активированным.");
         tar3.setOperator(operatorDAO.findOperator(2).get(0));
-        tar3.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(1), "50"));
-        tar3.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(2), "Безлимит"));
+        tar3.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(1), "65"));
+        tar3.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(2), "4000"));
         tar3.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(3), "Безлимит"));
-        tar3.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(4), "50"));
-        tar3.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(5), "Безлимит"));
-        tar3.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(6), "100"));
+        tar3.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(4), "100"));
+        tar3.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(5), "VK, Facebook, OK, Twitter, Viber, WatsApp"));
+        tar3.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(6), "50"));
         operatorDAO.addTariff(2, tar3);
         tariffDAO.saveTariff(tar3);
 

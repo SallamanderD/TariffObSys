@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <body>
-<h2><b>Commentaries: </b></h2>
+<h2><b>Commentaries [${commentaries.size()}]: </b></h2>
 <div class="col-md-12">
         <c:if test="${not empty userId}">
         <div>
@@ -23,7 +23,7 @@
                 <div class="cta-desc">
                     <p>${comment.date}</p>
                     <div class="commentsText">
-                    <p style="color: black">${comment.text}</p>
+                    <p style="color:white">${comment.text}</p>
                     </div>
                 </div>
             </div>

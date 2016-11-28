@@ -1,10 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <link href="webjars/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
-    <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
-    <script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <link href="css/style.css" rel="stylesheet">
+
     <title>TOS: Tariffs</title>
 </head>
 <div class="container">
@@ -24,12 +21,13 @@
                                 <c:choose>
                                     <c:when test="${not empty tariffs}">
                                         <c:forEach var="listValue" items="${tariffs}" varStatus="loop">
-                                        <tr data-status="vodafone">
+                                        <tr onclick="post('/tariff/${listValue.id}')">
                                             <td>
                                                 <div class="media">
                                                     <div class="media-body">
+                                                        <span class="media-meta pull-right">February 13, 2016</span>
                                                         <h4 class="title">
-                                                        ${loop.index + 1}) <a href="/tariff/${listValue.id}">${listValue.name}</a>
+                                                            <img src="/ico/${listValue.operator.name}.png" height="18" width="18"/> ${listValue.name}
                                                             <span class="pull-right vodafone"><a href="/tariffs/${listValue.operator.name}">${listValue.operator.name}</a></span>
                                                         </h4>
                                                         <p class="summary">${listValue.shortDescription}</p>

@@ -39,17 +39,14 @@ public class Validator {
     }
 
     public static String createLinkToEmail(String mail){
-        if(mail.contains("@gmail.com")){
+        if(mail.contains("@gmail.com") || mail.contains("@nure.ua")){
             return "http://mail.google.com";
         } else if(mail.contains("@mail.ru")){
             return "http://mail.ru";
         } else if (mail.contains("@yandex")){
             return "http://mail.yandex.ua";
-        } else{
+        } else {
             return null;
         }
     }
-
-
-
 }

@@ -48,16 +48,17 @@ public class HomeController {
 
 
     @RequestMapping(value = "/")
-    public ModelAndView index(){
+    public ModelAndView index() {
         emulator.emul();
         ModelAndView model = new ModelAndView("index");
         return model;
     }
+
     @RequestMapping(value = "/mainmenu")
-    public ModelAndView mainmenu(){
-        if(httpSession.getAttributeNames().hasMoreElements()){
+    public ModelAndView mainmenu() {
+        if (httpSession.getAttributeNames().hasMoreElements()) {
             ModelAndView model = new ModelAndView("mainmenu");
-            model.addObject("user", userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0));
+            model.addObject("user", userDAO.findUser((Integer) httpSession.getAttribute(CURRENT_ID_PARAM)).get(0));
             return model;
         }
         ModelAndView model = new ModelAndView("mainmenu");
@@ -66,7 +67,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/tariffCommentary")
-    public ModelAndView tariffCommentary(@RequestParam(value = "tariffId") int tariffID){
+    public ModelAndView tariffCommentary(@RequestParam(value = "tariffId") int tariffID) {
         ModelAndView model = new ModelAndView("tariffCommentary");
         List<TariffCommentary> comment = tariffCommentaryDAO.findByTariffId(tariffID);
         Collections.sort(comment, new Comparator<TariffCommentary>() {
@@ -77,16 +78,17 @@ public class HomeController {
         });
         Collections.reverse(comment);
         model.addObject("commentaries", comment);
-        if(httpSession.getAttributeNames().hasMoreElements()){
-            model.addObject("userId", (Integer)httpSession.getAttribute(CURRENT_ID_PARAM));
-        } else{
+        if (httpSession.getAttributeNames().hasMoreElements()) {
+            model.addObject("userId", (Integer) httpSession.getAttribute(CURRENT_ID_PARAM));
+            model.addObject("tariffId", tariffID);
+        } else {
             model.addObject("userId", null);
         }
         return model;
     }
 
     @RequestMapping(value = "/telephoneCommentary")
-    public ModelAndView telephoneCommentary(@RequestParam(value = "telephoneId") int telephoneId){
+    public ModelAndView telephoneCommentary(@RequestParam(value = "telephoneId") int telephoneId) {
         ModelAndView model = new ModelAndView("telephoneCommentary");
         List<TelephoneCommentary> comment = telephoneCommentaryDAO.findByTelephoneId(telephoneId);
         Collections.sort(comment, new Comparator<TelephoneCommentary>() {
@@ -96,58 +98,63 @@ public class HomeController {
             }
         });
         model.addObject("commentaries", comment);
-        if(httpSession.getAttributeNames().hasMoreElements()){
-            model.addObject("userId", (Integer)httpSession.getAttribute(CURRENT_ID_PARAM));
+        if (httpSession.getAttributeNames().hasMoreElements()) {
+            model.addObject("userId", (Integer) httpSession.getAttribute(CURRENT_ID_PARAM));
             model.addObject("telephoneId", telephoneId);
-        } else{
+        } else {
             model.addObject("userId", null);
         }
         return model;
     }
 
     @RequestMapping(value = "/addTariffCommentary")
-    public ModelAndView addTarCommentary(@RequestParam(value = "text") String text, @RequestParam(value = "tariffId") int tariffId){
-        TariffCommentary temp = new TariffCommentary(tariffCommentaryDAO.findAll().size() + 1,
-                userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0), text, tariffId);
-        tariffCommentaryDAO.save(temp);
-        tariffDAO.addCommentaries(tariffId, tariffCommentaryDAO.findById(temp.getId()));
+    public ModelAndView addTarCommentary(@RequestParam(value = "text") String text, @RequestParam(value = "tariffId") int tariffId) {
+        if (httpSession.getAttributeNames().hasMoreElements()) {
+            TariffCommentary temp = new TariffCommentary(tariffCommentaryDAO.findAll().size() + 1,
+                    userDAO.findUser((Integer) httpSession.getAttribute(CURRENT_ID_PARAM)).get(0), text, tariffId);
+            tariffCommentaryDAO.save(temp);
+            tariffDAO.addCommentaries(tariffId, tariffCommentaryDAO.findById(temp.getId()));
+        }
         ModelAndView model = new ModelAndView("redirect:tariff/" + tariffId);
         return model;
     }
 
     @RequestMapping(value = "/addTelephoneCommentary")
-    public ModelAndView addTelCommentary(@RequestParam(value = "text") String text, @RequestParam(value = "telephoneId") int telephoneId){
-        TelephoneCommentary temp = new TelephoneCommentary(telephoneCommentaryDAO.findAll().size() + 1,
-                userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0), text, telephoneId);
-        telephoneCommentaryDAO.save(temp);
-        telephoneDAO.addCommentaries(telephoneId, telephoneCommentaryDAO.findById(temp.getId()));
+    public ModelAndView addTelCommentary(@RequestParam(value = "text") String text, @RequestParam(value = "telephoneId") int telephoneId) {
+        if (httpSession.getAttributeNames().hasMoreElements()) {
+            TelephoneCommentary temp = new TelephoneCommentary(telephoneCommentaryDAO.findAll().size() + 1,
+                    userDAO.findUser((Integer) httpSession.getAttribute(CURRENT_ID_PARAM)).get(0), text, telephoneId);
+            telephoneCommentaryDAO.save(temp);
+            telephoneDAO.addCommentaries(telephoneId, telephoneCommentaryDAO.findById(temp.getId()));
+        }
         ModelAndView model = new ModelAndView("redirect:telephone/" + telephoneId);
         return model;
     }
 
     @RequestMapping(value = "/tariff/{id}")
-    public ModelAndView tariffView(@PathVariable int id){
+    public ModelAndView tariffView(@PathVariable int id) {
         ModelAndView model = new ModelAndView("tariff");
         model.addObject("tariff", tariffDAO.findTariff(id).get(0));
         return model;
     }
 
     @RequestMapping(value = "/telephone/{id}")
-    public ModelAndView telephoneView(@PathVariable int id){
+    public ModelAndView telephoneView(@PathVariable int id) {
         ModelAndView model = new ModelAndView("telephonePage");
         model.addObject("telephone", telephoneDAO.findById(id));
         return model;
     }
 
     @RequestMapping(value = "tariffs")
-    public ModelAndView tariffs(){
+    public ModelAndView tariffs() {
         ModelAndView model = new ModelAndView("tariffs");
         model.addObject("tariffs", tariffDAO.findAllTariff());
         return model;
     }
+
     @RequestMapping(value = "/register")
-    public ModelAndView register(){
-        if(httpSession.getAttributeNames().hasMoreElements()){
+    public ModelAndView register() {
+        if (httpSession.getAttributeNames().hasMoreElements()) {
             ModelAndView model = new ModelAndView("index");
             return model;
         }
@@ -159,35 +166,35 @@ public class HomeController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView signup(@RequestParam("username") String username, @RequestParam("password") String password,
                                @RequestParam("name") String name, @RequestParam("surname") String surname,
-                               @RequestParam("mail") String mail, @RequestParam("repassword") String repassword){
-        if(httpSession.getAttributeNames().hasMoreElements()){
+                               @RequestParam("mail") String mail, @RequestParam("repassword") String repassword) {
+        if (httpSession.getAttributeNames().hasMoreElements()) {
             ModelAndView model = new ModelAndView("redirect:/");
             return model;
         }
         List<String> error = new ArrayList<>();
         //Validation
-        if(!Validator.validateUsername(username)){
+        if (!Validator.validateUsername(username)) {
             error.add("Username must be from 3 to 20 symbols and contains only latin letters and numeral, \"-\" and \"_\" are available too.\n");
         }
-        if(!Validator.validateEmail(mail)){
+        if (!Validator.validateEmail(mail)) {
             error.add("Incorrect Email.\n");
         }
-        if(password.equals("")){
+        if (password.equals("")) {
             error.add("Enter password.\n");
         }
-        if(!password.equals(repassword)){
+        if (!password.equals(repassword)) {
             error.add("Check your password.\n");
         }
-        if(!Validator.validateName(name) || !Validator.validateName(surname)){
+        if (!Validator.validateName(name) || !Validator.validateName(surname)) {
             error.add("Enter correct Name and Surname.\n");
         }
-        if(userDAO.findByUsername(username) != null){
+        if (userDAO.findByUsername(username) != null) {
             error.add("Username is already exist.\n");
         }
-        if(userDAO.findByEmail(mail) != null){
+        if (userDAO.findByEmail(mail) != null) {
             error.add("Email is already exist.\n");
         }
-        if(error.size() == 0){
+        if (error.size() == 0) {
             ModelAndView model = new ModelAndView("activate");
             User usr = new User(username, DigestUtils.md5DigestAsHex(password.getBytes()), name, surname, mail);
             usr.setId(userDAO.getSize() + 1);
@@ -210,15 +217,15 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public ModelAndView logout(){
+    public ModelAndView logout() {
         httpSession.removeAttribute(CURRENT_ID_PARAM);
         ModelAndView model = new ModelAndView("redirect:/");
         return model;
     }
 
     @RequestMapping(value = "/signin", method = RequestMethod.GET)
-    public ModelAndView signin(){
-        if(httpSession.getAttributeNames().hasMoreElements()){
+    public ModelAndView signin() {
+        if (httpSession.getAttributeNames().hasMoreElements()) {
             ModelAndView model = new ModelAndView("redirect:/");
             return model;
         }
@@ -227,10 +234,14 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
-    public ModelAndView signinPOST(@RequestParam("username") String username, @RequestParam("password") String password){
-        if(userDAO.findByUsername(username) != null){
-            if(DigestUtils.md5DigestAsHex(password.getBytes()).
-                    equals(userDAO.findByUsername(username).getPassword())){
+    public ModelAndView signinPOST(@RequestParam("username") String username, @RequestParam("password") String password) {
+        if(httpSession.getAttributeNames().hasMoreElements()){
+            ModelAndView model = new ModelAndView("redirect:/");
+            return model;
+        }
+        if (userDAO.findByUsername(username) != null) {
+            if (DigestUtils.md5DigestAsHex(password.getBytes()).
+                    equals(userDAO.findByUsername(username).getPassword())) {
                 httpSession.setAttribute(CURRENT_ID_PARAM, userDAO.findByUsername(username).getId());
                 ModelAndView model = new ModelAndView("redirect:/");
                 return model;
@@ -242,59 +253,66 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/profile")
-    public ModelAndView userExplore(){
-        if(!httpSession.getAttributeNames().hasMoreElements()){
+    public ModelAndView userExplore() {
+        if (!httpSession.getAttributeNames().hasMoreElements()) {
             ModelAndView model = new ModelAndView("redirect:/");
             return model;
         }
         ModelAndView model = new ModelAndView("user");
-        model.addObject("user", userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0));
+        model.addObject("user", userDAO.findUser((Integer) httpSession.getAttribute(CURRENT_ID_PARAM)).get(0));
         return model;
     }
 
     @RequestMapping(value = "/changeUser")
-    public ModelAndView changeUser(){
+    public ModelAndView changeUser() {
+        if(!httpSession.getAttributeNames().hasMoreElements()){
+            ModelAndView model = new ModelAndView("redirect:/");
+            return model;
+        }
         ModelAndView model = new ModelAndView("changeUser");
-        User currentUser = userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0);
+        User currentUser = userDAO.findUser((Integer) httpSession.getAttribute(CURRENT_ID_PARAM)).get(0);
         model.addObject("user", currentUser);
         return model;
     }
 
     @RequestMapping(value = "/changeUser", method = RequestMethod.POST)
     public ModelAndView changeUserPOST(@RequestParam("username") String username, @RequestParam("name") String name,
-                                       @RequestParam("surname") String surname){
-        User currentUser = userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0);
-        if(username.equals("") || name.equals("") || surname.equals("")){
-            ModelAndView model = new ModelAndView("changeUser");
-            model.addObject("error", "You must enter all parameters");
-            model.addObject("user", userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0));
+                                       @RequestParam("surname") String surname) {
+        if(!httpSession.getAttributeNames().hasMoreElements()){
+            ModelAndView model = new ModelAndView("redirect:/");
             return model;
         }
-        if(userDAO.findByUsername(username) == null || userDAO.findByUsername(username)
-                .getUsername().equals(currentUser.getUsername())){
+        User currentUser = userDAO.findUser((Integer) httpSession.getAttribute(CURRENT_ID_PARAM)).get(0);
+        if (username.equals("") || name.equals("") || surname.equals("")) {
+            ModelAndView model = new ModelAndView("changeUser");
+            model.addObject("error", "You must enter all parameters");
+            model.addObject("user", userDAO.findUser((Integer) httpSession.getAttribute(CURRENT_ID_PARAM)).get(0));
+            return model;
+        }
+        if (userDAO.findByUsername(username) == null || userDAO.findByUsername(username)
+                .getUsername().equals(currentUser.getUsername())) {
             currentUser.setUsername(username);
             currentUser.setName(name);
             currentUser.setSurname(surname);
-            userDAO.updateUserData(userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0).getId(), currentUser);
+            userDAO.updateUserData(userDAO.findUser((Integer) httpSession.getAttribute(CURRENT_ID_PARAM)).get(0).getId(), currentUser);
             ModelAndView model = new ModelAndView("redirect:user");
             model.addObject("user", currentUser);
             return model;
-        }
-        else{
+        } else {
             ModelAndView model = new ModelAndView("changeUser");
             model.addObject("error", "Username is already exist.");
-            model.addObject("user", userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0));
+            model.addObject("user", userDAO.findUser((Integer) httpSession.getAttribute(CURRENT_ID_PARAM)).get(0));
             return model;
         }
 
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public ModelAndView search(@RequestParam(value = "query") String query){
+    public ModelAndView search(@RequestParam(value = "query") String query) {
         List<Telephone> telephones = telephoneDAO.findAll();
         List<Telephone> result = new ArrayList<>();
-        for(Telephone t : telephones){
-            if(t.getNumber().contains(query)){
+        for (Telephone t : telephones) {
+            if (t.getNumber().contains(query)) {
                 result.add(t);
             }
         }
@@ -305,29 +323,35 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/changePassword")
-    public ModelAndView changePassword(){
+    public ModelAndView changePassword() {
+        if(!httpSession.getAttributeNames().hasMoreElements()){
+            ModelAndView model = new ModelAndView("redirect:/");
+            return model;
+        }
         return new ModelAndView("changePassword");
     }
 
     @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
     public ModelAndView changePasswordPOST(@RequestParam("oldpassword") String oldpassword, @RequestParam("password") String password,
-                                           @RequestParam("repassword") String repassword){
-        User currentUser = userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0);
-        if(currentUser.getPassword().equals(DigestUtils.md5DigestAsHex(oldpassword.getBytes()))){
-            if(password.equals(repassword)){
+                                           @RequestParam("repassword") String repassword) {
+        if(!httpSession.getAttributeNames().hasMoreElements()){
+            ModelAndView model = new ModelAndView("redirect:/");
+            return model;
+        }
+        User currentUser = userDAO.findUser((Integer) httpSession.getAttribute(CURRENT_ID_PARAM)).get(0);
+        if (currentUser.getPassword().equals(DigestUtils.md5DigestAsHex(oldpassword.getBytes()))) {
+            if (password.equals(repassword)) {
                 currentUser.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
                 userDAO.updateUserPass(currentUser.getId(), currentUser);
                 ModelAndView model = new ModelAndView("redirect:user");
                 model.addObject("user", currentUser);
                 return model;
-            }
-            else{
+            } else {
                 ModelAndView model = new ModelAndView("changePassword");
                 model.addObject("error", "Passwords do not match");
                 return model;
             }
-        }
-        else{
+        } else {
             ModelAndView model = new ModelAndView("changePassword");
             model.addObject("error", "Wrong old password");
             return model;
@@ -335,16 +359,25 @@ public class HomeController {
     }
 
     @RequestMapping(value = "activate", method = RequestMethod.GET)
-    public ModelAndView activate(){
-        User currentUser = userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0);
+    public ModelAndView activate() {
+        if(!httpSession.getAttributeNames().hasMoreElements()){
+            ModelAndView model = new ModelAndView("redirect:/");
+            return model;
+        }
+        User currentUser = userDAO.findUser((Integer) httpSession.getAttribute(CURRENT_ID_PARAM)).get(0);
         ModelAndView model = new ModelAndView("activate");
         model.addObject("mail", Validator.createLinkToEmail(currentUser.getMail()));
         return model;
     }
+
     @RequestMapping(value = "activate", method = RequestMethod.POST)
-    public ModelAndView activate(@RequestParam("code") String code){
-        User currentUser = userDAO.findUser((Integer)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0);
-        if(currentUser.getActivated().equals(code)){
+    public ModelAndView activate(@RequestParam("code") String code) {
+        if(!httpSession.getAttributeNames().hasMoreElements()){
+            ModelAndView model = new ModelAndView("redirect:/");
+            return model;
+        }
+        User currentUser = userDAO.findUser((Integer) httpSession.getAttribute(CURRENT_ID_PARAM)).get(0);
+        if (currentUser.getActivated().equals(code)) {
             currentUser.setActivated(null);
             userDAO.updateActivated(currentUser.getId(), currentUser);
         }

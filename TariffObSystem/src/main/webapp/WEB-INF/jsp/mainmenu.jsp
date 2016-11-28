@@ -1,12 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+
     <link href="webjars/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
     <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
     <script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet"> <!--Fonts for navbar-->
-    <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">       <!--Fonts for navbar-->
+    <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
+    <script src="/js/myscript.js"></script><!--Fonts for navbar-->
     <link href="css/style.css" rel="stylesheet">
+
 </head>
     <body>
     <nav class="navbar navbar-default navbar-custom">
@@ -27,9 +30,9 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/tariffs">Tariffs</a></li>
                     <li>
-                        <form class="navbar-form" role="search">
+                        <form class="navbar-form" role="search" method="post" action="/search">
                             <div class="input-group" >
-                                <input type="text" class="form-control" placeholder="Telephone" name="q">
+                                <input type="text" class="form-control" placeholder="Telephone" name="query">
                                 <div class="input-group-btn">
                                     <button class="btn mysearch btn-success" type="submit"><i class="glyphicon glyphicon-search"></i></button>
                                 </div>

@@ -53,6 +53,10 @@ body{
     background-color: white;
 }
 
+.regInput{
+    width: 100%;  /*Inputs in registration and authorization*/
+}
+
 #profileContainer{
     background-color: white;
     margin-top: 5%;
@@ -278,3 +282,21 @@ body{
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
                           /*Divider*/
 }
+
+/*Warnings with icons*/
+/*Warnings with icons*/
+.inportant {
+    background-position: 2% 7px;
+    background-repeat: no-repeat;
+    background-size: auto 35px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    min-width: auto !important;
+    text-align: left;
+    padding-left: 68px;
+}
+.important.important-danger {
+    border-top: 1px solid rgba(140, 0, 0, 0.4);
+    border-bottom: 1px solid rgba(140, 0, 0, 0.4);
+}
+/*Warnings with icons*/

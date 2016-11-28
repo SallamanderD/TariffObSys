@@ -12,7 +12,7 @@
     <div class="container tariffContainer" style="margin-top: 5%">
         <h2>${tariff.name}</h2>
         <br>
-        ${tariff.description}
+        ${tariff.shortDescription}
         <table class="table table-striped table-inverse">
             <thead>
             <tr>
@@ -29,6 +29,7 @@
             </c:forEach>
             </tbody>
         </table>
+        ${tariff.description}
         <hr>
         <jsp:include page="/tariffCommentary">
             <jsp:param name="tariffId" value="${tariff.id}"/>
