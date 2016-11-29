@@ -6,8 +6,8 @@
     <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
     <script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet"> <!--Fonts for navbar-->
-    <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
-    <script src="/js/myscript.js"></script><!--Fonts for navbar-->
+    <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">       <!--Fonts for navbar-->
+    <script src="/js/myscript.js"></script>
     <link href="css/style.css" rel="stylesheet">
 
 </head>

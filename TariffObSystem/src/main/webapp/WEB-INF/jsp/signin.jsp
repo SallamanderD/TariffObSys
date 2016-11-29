@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <link href="webjars/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
     <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
     <script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -13,7 +14,8 @@
 <body>
 <div class="container " style="padding-top: 5%;">
     <br>
-    <div class="important important-danger">${error}</div>
+    <div class="important important-warning important-danger-text">
+        <span class="glyphicon glyphicon-exclamation-sign"></span>${error}</div>
     <br>
     <div class="regContainer">
         <h4 style="text-align: center; color: #1fa67b; padding-bottom: 15px;">Log in with your email account</h4>

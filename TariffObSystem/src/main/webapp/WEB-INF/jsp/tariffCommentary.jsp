@@ -23,7 +23,7 @@
                 <div class="cta-desc">
                     <p>${comment.date}</p>
                     <div class="commentsText">
-                    <p style="color:white">${comment.text}</p>
+                    <p style="color:black">${comment.text}</p>
                     </div>
                 </div>
             </div>

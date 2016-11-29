@@ -285,18 +285,24 @@ body{
 
 /*Warnings with icons*/
 /*Warnings with icons*/
-.inportant {
-    background-position: 2% 7px;
-    background-repeat: no-repeat;
-    background-size: auto 35px;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0;
-    min-width: auto !important;
-    text-align: left;
-    padding-left: 68px;
+.important {
+    background: #fefefe;
+    color: #666666;
+    font-weight: bold;
+    font-size: small;
+    padding: 12px;
+    padding-left: 16px;
+    border-top: solid 3px #CCCCCC;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0 10px 10px -5px rgba(0,0,0,.08);
+    -moz-box-shadow: 0 10px 10px -5px rgba(0,0,0,.08);
+    box-shadow: 0 10px 10px -5px rgba(0,0,0,.08);
 }
-.important.important-danger {
-    border-top: 1px solid rgba(140, 0, 0, 0.4);
-    border-bottom: 1px solid rgba(140, 0, 0, 0.4);
+.important-warning {
+    border-color: rgba(255,165,0,.5);
+}
+.important-danger-text {
+    color: #c9302c;
 }
 /*Warnings with icons*/
