@@ -39,7 +39,7 @@ public class Emulator {
         telephoneDAO.save(telephone1);
         parameterDAO.saveParameter(new Parameter(1, "Цена"));
         parameterDAO.saveParameter(new Parameter(2, "3G"));
-        parameterDAO.saveParameter(new Parameter(3, "Звонки в сети"));
+        parameterDAO.saveParameter(new Parameter(3, "Звонки в сети, минут"));
         parameterDAO.saveParameter(new Parameter(4, "Звонки на других операторов, минут"));
         parameterDAO.saveParameter(new Parameter(5, "Безлимит соц.сети"));
         parameterDAO.saveParameter(new Parameter(6, "SMS"));

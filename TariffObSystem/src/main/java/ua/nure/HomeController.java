@@ -48,7 +48,7 @@ public class HomeController {
 
     @RequestMapping(value = "/")
     public ModelAndView index() {
-        emulator.emul();
+        //emulator.emul();
         ModelAndView model = new ModelAndView("index");
         return model;
     }
@@ -279,6 +279,117 @@ public class HomeController {
         return model;
     }
 
+    @RequestMapping(value = "/filter", method = RequestMethod.POST)
+    public ModelAndView filter(@RequestParam(value = "GLow") String GLow,
+                               @RequestParam(value = "GHigh") String GHigh,
+                               @RequestParam(value = "incallsLow") String incallsLow,
+                               @RequestParam(value = "incallsHigh") String incallsHigh,
+                               @RequestParam(value = "outcallsLow") String outcallsLow,
+                               @RequestParam(value = "outcallsHigh") String outcallsHigh,
+                               @RequestParam(value = "vk", required = false) String vk,
+                               @RequestParam(value = "fb", required = false) String fb,
+                               @RequestParam(value = "ok", required = false) String ok,
+                               @RequestParam(value = "tw", required = false) String tw,
+                               @RequestParam(value = "smsLow") String smsLow,
+                               @RequestParam(value = "smsHigh") String smsHigh){
+        ArrayList<Tariff> result = new ArrayList<>();
+        for(Tariff t : tariffDAO.findAllTariff()){
+            //---------------------------------------------------------------------------------------
+            if(!GLow.equals("") && !GHigh.equals("")){
+                if(Integer.valueOf(t.getParameters().get(1).getValue()) < Integer.valueOf(GLow)
+                        || Integer.valueOf(t.getParameters().get(1).getValue()) > Integer.valueOf(GHigh)){
+                    continue;
+                }
+            }
+            if(!GLow.equals("") && GHigh.equals("")){
+                if(Integer.valueOf(t.getParameters().get(1).getValue()) < Integer.valueOf(GLow)){
+                    continue;
+                }
+            }
+            if(GLow.equals("") && !GHigh.equals("")){
+                if(Integer.valueOf(t.getParameters().get(1).getValue()) > Integer.valueOf(GHigh)){
+                    continue;
+                }
+            }
+            //---------------------------------------------------------------------------------------
+            if(!incallsLow.equals("") && !incallsHigh.equals("")){
+                if(Integer.valueOf(t.getParameters().get(2).getValue()) < Integer.valueOf(incallsLow)
+                        || Integer.valueOf(t.getParameters().get(2).getValue()) > Integer.valueOf(incallsHigh)){
+                    continue;
+                }
+            }
+            if(!incallsLow.equals("") && incallsHigh.equals("")){
+                if(Integer.valueOf(t.getParameters().get(2).getValue()) < Integer.valueOf(incallsLow)){
+                    continue;
+                }
+            }
+            if(incallsLow.equals("") && !incallsHigh.equals("")){
+                if(Integer.valueOf(t.getParameters().get(2).getValue()) > Integer.valueOf(incallsHigh)){
+                    continue;
+                }
+            }
+            //---------------------------------------------------------------------------------------
+            if(!outcallsHigh.equals("") && !outcallsLow.equals("")){
+                if(Integer.valueOf(t.getParameters().get(3).getValue()) < Integer.valueOf(outcallsLow)
+                        || Integer.valueOf(t.getParameters().get(3).getValue()) > Integer.valueOf(outcallsHigh)){
+                    continue;
+                }
+            }
+            if(!outcallsLow.equals("") && outcallsHigh.equals("")){
+                if(Integer.valueOf(t.getParameters().get(3).getValue()) < Integer.valueOf(outcallsLow)){
+                    continue;
+                }
+            }
+            if(outcallsLow.equals("") && !outcallsHigh.equals("")){
+                if(Integer.valueOf(t.getParameters().get(3).getValue()) > Integer.valueOf(outcallsHigh)){
+                    continue;
+                }
+            }
+            //---------------------------------------------------------------------------------------
+            if(Boolean.valueOf(vk)){
+                if(!t.getParameters().get(4).getValue().contains("VK") && !t.getParameters().get(4).getValue().equals("Все")){
+                    continue;
+                }
+            }
+            if(Boolean.valueOf(fb)){
+                if(!t.getParameters().get(4).getValue().contains("Facebook") && !t.getParameters().get(4).getValue().equals("Все")){
+                    continue;
+                }
+            }
+            if(Boolean.valueOf(ok)){
+                if(!t.getParameters().get(4).getValue().contains("OK") && !t.getParameters().get(4).getValue().equals("Все")){
+                    continue;
+                }
+            }
+            if(Boolean.valueOf(tw)){
+                if(!t.getParameters().get(4).getValue().contains("Twitter") && !t.getParameters().get(4).getValue().equals("Все")){
+                    continue;
+                }
+            }
+            //---------------------------------------------------------------------------------------
+            if(!smsLow.equals("") && !smsHigh.equals("")){
+                if(Integer.valueOf(t.getParameters().get(5).getValue()) < Integer.valueOf(smsLow)
+                        || Integer.valueOf(t.getParameters().get(5).getValue()) > Integer.valueOf(smsHigh)){
+                    continue;
+                }
+            }
+            if(!smsLow.equals("") && smsHigh.equals("")){
+                if(Integer.valueOf(t.getParameters().get(5).getValue()) < Integer.valueOf(smsLow)){
+                    continue;
+                }
+            }
+            if(smsLow.equals("") && !smsHigh.equals("")){
+                if(Integer.valueOf(t.getParameters().get(5).getValue()) > Integer.valueOf(smsHigh)){
+                    continue;
+                }
+            }
+            result.add(t);
+        }
+        ModelAndView model = new ModelAndView("tariffs");
+        model.addObject("tariffs", result);
+        return model;
+    }
+
     @RequestMapping(value = "/signin", method = RequestMethod.GET)
     public ModelAndView signin() {
         if (httpSession.getAttributeNames().hasMoreElements()) {
@@ -351,7 +462,7 @@ public class HomeController {
             currentUser.setName(name);
             currentUser.setSurname(surname);
             userDAO.updateUserData(userDAO.findUser((Integer) httpSession.getAttribute(CURRENT_ID_PARAM)).get(0).getId(), currentUser);
-            ModelAndView model = new ModelAndView("redirect:user");
+            ModelAndView model = new ModelAndView("redirect:profile");
             model.addObject("user", currentUser);
             return model;
         } else {
@@ -399,7 +510,7 @@ public class HomeController {
             if (password.equals(repassword)) {
                 currentUser.setPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
                 userDAO.updateUserPass(currentUser.getId(), currentUser);
-                ModelAndView model = new ModelAndView("redirect:user");
+                ModelAndView model = new ModelAndView("redirect:profile");
                 model.addObject("user", currentUser);
                 return model;
             } else {

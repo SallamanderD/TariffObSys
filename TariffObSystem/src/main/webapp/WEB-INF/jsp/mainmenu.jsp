@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet"> <!--Fonts for navbar-->
     <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
     <script src="/js/myscript.js"></script><!--Fonts for navbar-->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 
 </head>
 <body>

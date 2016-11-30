@@ -6,6 +6,28 @@
     <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
     <title>TOS: Tariffs</title>
 </head>
+<script>
+    $(document).on('click', '.panel div.clickable', function (e) {
+        var $this = $(this); //Heading
+        var $panel = $this.parent('.panel');
+        var $panel_body = $panel.children('.panel-body');
+        var $display = $panel_body.css('display');
+
+        if ($display == 'block') {
+            $panel_body.slideUp();
+        } else if($display == 'none') {
+            $panel_body.slideDown();
+        }
+    });
+
+    $(document).ready(function(e){
+        var $classy = '.panel.autocollapse';
+
+        var $found = $($classy);
+        $found.find('.panel-body').hide();
+        $found.removeClass($classy);
+    });
+</script>
 <div class="container">
     <jsp:include page="/mainmenu"></jsp:include>
 </div>
@@ -14,55 +36,64 @@
     <div class="row">
         <section class="content">
             <div class="col-md-8 col-md-offset-2">
-                <h3><b>Фильтр: </b></h3>
-                <form action="filter" , method="post">
-                    <div class="panel panel-default">
-                        <div>
-                            <h4>3G</h4>
-                            <div class="form-inline">
-                                <p>От: <input type="number" class="form-control" style="max-width: 10%"/>
-                                    До: <input type="number" class="form-control" style="max-width: 10%"/></p>                                                                                              class="form-control"/>
-                            </div>
-                        </div>
-                        <div>
-                            <h4>Звонки в сети, минут</h4>
-                            <div class="form-inline">
-                                <p>От: <input type="number" class="form-control" style="max-width: 10%"/>
-                                    До: <input type="number" class="form-control" style="max-width: 10%"/></p>                                                                                              class="form-control"/>
-                            </div>
-                        </div>
-                        <div>
-                            <h4>Звонки на других операторов, минут</h4>
-                            <div class="form-inline">
-                                От: <input type="number" class="form-control" style="max-width: 10%"/>
-                                    До: <input type="number" class="form-control" style="max-width: 10%"/>                                                                                             class="form-control"/>
-                            </div>
-                        </div>
-                        <div>
-                            <h4>Соц. сети</h4>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="">VK</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="">Facebook</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="">OK</label>
-                            </div>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="">Twitter</label>
-                            </div>
-                        </div>
-                        <div>
-                            <h4>СМС</h4>
-                            <div class="form-inline">
-                                <p>От: <input type="number" class="form-control" style="max-width: 10%"/>
-                                    До: <input type="number" class="form-control" style="max-width: 10%"/></p>                                                                                              class="form-control"/>
-                            </div>
-                        </div>
-                        <input type="submit" class="btn btn-success">
+                <div class="panel panel-info autocollapse">
+                    <div class="panel-heading clickable">
+                        <h3 class="panel-title">Фильтр</h3>
                     </div>
-                </form>
+                    <div class="panel-body">
+                        <form action="filter", method="post">
+                            <div>
+                                <div>
+                                    <h4>3G</h4>
+                                    <div class="form-inline">
+                                        От: <input type="number" name="GLow" class="form-control" style="max-width: 10%">
+                                        До: <input type="number" name="GHigh" class="form-control" style="max-width: 10%">
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4>Звонки в сети, минут</h4>
+                                    <div class="form-inline">
+                                        От: <input type="number" name = "incallsLow" class="form-control" style="max-width: 10%"/>
+                                        До: <input type="number" name = "incallsHigh" class="form-control" style="max-width: 10%"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4>Звонки на других операторов, минут</h4>
+                                    <div class="form-inline">
+                                        От: <input type="number" name = "outcallsLow" class="form-control" style="max-width: 10%"/>
+                                        До: <input type="number" name = "outcallsHigh" class="form-control" style="max-width: 10%"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4>Соц. сети</h4>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" name="vk" value="true">VK</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" name="fb" value="true">Facebook</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" name="ok" value="true">OK</label>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label><input type="checkbox" name="tw" value="true">Twitter</label>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4>СМС</h4>
+                                    <div class="form-inline">
+                                        От: <input type="number" name = "smsLow" class="form-control" style="max-width: 10%"/>
+                                        До: <input type="number" name = "smsHigh" class="form-control" style="max-width: 10%"/>
+                                    </div>
+                                </div>
+                                <div>
+                                    <input type="submit" class="btn btn-success">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
                 <h3><b>Доступные тарифы:</b></h3>
                 <div class="panel panel-default">
                     <div class="panel-body">
