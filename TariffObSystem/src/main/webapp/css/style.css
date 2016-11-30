@@ -192,6 +192,23 @@ body{
 /* Table of tarrifs*/
 /* Table of tarrifs*/
 
+.viewTarContainer{ /*Container for Tariffs view*/
+    background-color: white;
+        border-radius: 5px;
+    border-style: groove;
+}
+.mypanel{
+    color: #31708f;
+    background-color: #d9edf7; /*Filtration panel*/
+    border-color: #bce8f1;
+}
+
+
+/*CheckBox*/
+/*CheckBox*/
+
+/*CheckBox*/
+/*CheckBox*/
 
 /*Commentaries*/
 /*Commentaries*/
@@ -199,10 +216,9 @@ body{
     position: relative;
     width:auto;
     padding: 15px 25px;
-    border: 1px solid black;
     margin-top: 10px;
     margin-bottom: 10px;
-    border-radius: 5px;
+    border-style: groove;
 }
 
 .bs-calltoaction > .row{
@@ -260,17 +276,12 @@ body{
 }
 .bs-calltoaction.bs-calltoaction-success{
     color: #fff;
-    background-color: #5cb85c;
-    border-color: #4cae4c;
-}
-.bs-calltoaction.bs-calltoaction-success .cta-button .btn{
-    border-color:#fff;
+    background-color: #7CB342;
 }
 .commentsText{
-    background-color: white;
+    background-color: #F5F5F5;
     padding: 8px 8px 8px 8px;
-    border-color: darkgrey;
-    border-radius: 5px;
+    border-style: groove;
 }
 
 /*Commentaries*/
@@ -285,19 +296,25 @@ body{
 
 /*Warnings with icons*/
 /*Warnings with icons*/
-.inportant {
-    background-position: 2% 7px;
-    background-repeat: no-repeat;
-    background-size: auto 35px;
-    background-color: rgba(0, 0, 0, 0);
-    border: 0;
-    min-width: auto !important;
-    text-align: left;
-    padding-left: 68px;
+.msg {
+    background: #fefefe;
+    color: #666666;
+    font-weight: bold;
+    font-size: small;
+    padding: 12px;
+    padding-left: 16px;
+    border-top: solid 3px #CCCCCC;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 0 10px 10px -5px rgba(0,0,0,.08);
+    -moz-box-shadow: 0 10px 10px -5px rgba(0,0,0,.08);
+    box-shadow: 0 10px 10px -5px rgba(0,0,0,.08);
 }
-.important.important-danger {
-    border-top: 1px solid rgba(140, 0, 0, 0.4);
-    border-bottom: 1px solid rgba(140, 0, 0, 0.4);
+.msg-warning {
+    border-color: rgba(255,165,0,.5);
+}
+.msg-danger-text {
+    color: #c9302c;
 }
 
 .clickable

@@ -8,7 +8,8 @@
     <script src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet"> <!--Fonts for navbar-->
     <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
-    <script src="/js/myscript.js"></script><!--Fonts for navbar-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <script src="/js/myscript.js"></script>
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
 
 </head>

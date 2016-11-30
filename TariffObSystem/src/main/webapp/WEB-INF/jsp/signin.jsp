@@ -16,8 +16,8 @@
 <div class="container " style="padding-top: 5%;">
     <br>
     <c:if test="${not empty error}">
-        <div class="important important-warning important-danger-text">
-            <span class="glyphicon glyphicon-exclamation-sign"></span>${error}</div>
+        <div class="msg msg-warning msg-danger-text">
+            <span class="glyphicon glyphicon-exclamation-sign" style="padding-right: 5px;"></span>${error}</div>
     </c:if>
     <br>
     <div class="regContainer">

@@ -35,9 +35,12 @@
 <div class="container" style="margin-top: 4%">
     <div class="row">
         <section class="content">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-info autocollapse">
-                    <div class="panel-heading clickable">
+            <div class="col-sm-12 viewTarContainer">
+                <div class="col-sm-8 col-sm-offset-4">
+                    <h3><b>Доступные тарифы:</b></h3>
+                </div>
+                <div class="panel col-sm-4 autocollapse mypanel">
+                    <div class="panel-heading clickable ">
                         <h3 class="panel-title">Фильтр</h3>
                     </div>
                     <div class="panel-body">
@@ -87,14 +90,13 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <input type="submit" class="btn btn-success">
+                                    <input type="submit" class="btn btn-success" value="Применить" style="margin-top: 15px;">
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-
-                <h3><b>Доступные тарифы:</b></h3>
+                <div class="col-sm-8">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="table-container">
@@ -129,6 +131,7 @@
                             </table>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </section>

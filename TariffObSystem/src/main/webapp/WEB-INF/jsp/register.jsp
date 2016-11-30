@@ -21,7 +21,7 @@
             <ul>
                 <c:forEach var="listValue" items="${error}">
                     <li>
-                        <p class="alert-danger">${listValue}</p>
+                        <p class="msg msg-warning msg-danger-text">${listValue}</p>
                     </li>
                 </c:forEach>
             </ul>
