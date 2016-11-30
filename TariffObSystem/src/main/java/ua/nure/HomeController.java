@@ -1,7 +1,9 @@
 package ua.nure;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ua.nure.DAO.*;
-import ua.nure.entities.TariffCommentary;
-import ua.nure.entities.Telephone;
-import ua.nure.entities.TelephoneCommentary;
-import ua.nure.entities.User;
+import ua.nure.entities.*;
 import ua.nure.util.Validator;
 
 import javax.servlet.http.HttpSession;
@@ -87,6 +86,19 @@ public class HomeController {
         return model;
     }
 
+    @RequestMapping(value = "operator/{name}")
+    public ModelAndView operators(@PathVariable(value = "name") String name){
+        ModelAndView model = new ModelAndView("operator");
+        List<Tariff> result = new ArrayList<>();
+        for(Tariff t : tariffDAO.findAllTariff()){
+            if(t.getOperator().getName().equals(name)){
+                result.add(t);
+            }
+        }
+        model.addObject("tariffs",result);
+        return model;
+    }
+
     @RequestMapping(value = "/telephoneCommentary")
     public ModelAndView telephoneCommentary(@RequestParam(value = "telephoneId") int telephoneId) {
         ModelAndView model = new ModelAndView("telephoneCommentary");
@@ -152,6 +164,47 @@ public class HomeController {
         return model;
     }
 
+    @RequestMapping(value = "createTelephone")
+    public ModelAndView createTelephone(){
+        if (!httpSession.getAttributeNames().hasMoreElements()){
+            ModelAndView model = new ModelAndView("redirect:index");
+            return model;
+        }
+        ModelAndView model = new ModelAndView("createTelephone");
+        return model;
+    }
+
+    @RequestMapping(value = "createTelephone", method = RequestMethod.POST)
+    public ModelAndView createTelephone(@RequestParam(value = "telephone") String telephone,
+                                        @RequestParam(value = "description") String description){
+        if (!httpSession.getAttributeNames().hasMoreElements()){
+            ModelAndView model = new ModelAndView("redirect:index");
+            return model;
+        }
+        List<String> error = new ArrayList<>();
+        for(Telephone t : telephoneDAO.findAll()){
+            if(telephone.equals(t.getNumber())){
+                error.add("Такой номер уже существует, перейдите к нему через поиск.");
+            }
+        }
+        if(telephone.equals("")){
+            error.add("Телефон не должен быть пустым.");
+        }
+        if(description.equals("")){
+            error.add("Описание не должно быть пустым.");
+        }
+        if(error.size() == 0){
+            telephoneDAO.save(new Telephone(telephoneDAO.findAll().size() + 1, telephone, description, (Integer)httpSession.getAttribute(CURRENT_ID_PARAM)));
+            ModelAndView model = new ModelAndView("redirect:telephone/" + telephoneDAO.findAll().size());
+            return model;
+        } else{
+            ModelAndView model = new ModelAndView("createTelephone");
+            model.addObject("error", error);
+            return model;
+        }
+
+    }
+
     @RequestMapping(value = "/register")
     public ModelAndView register() {
         if (httpSession.getAttributeNames().hasMoreElements()) {
@@ -174,25 +227,28 @@ public class HomeController {
         List<String> error = new ArrayList<>();
         //Validation
         if (!Validator.validateUsername(username)) {
-            error.add("Username must be from 3 to 20 symbols and contains only latin letters and numeral, \"-\" and \"_\" are available too.\n");
+            error.add("Логин должен быть от 7 до 20 символов и содержать только латиницу и цифру, \"-\" и \"_\" доступны также.\n");
+        }
+        if(!Validator.validatePass(password)){
+            error.add("Пароль должен быть 8 и больше символов.");
         }
         if (!Validator.validateEmail(mail)) {
-            error.add("Incorrect Email.\n");
+            error.add("Проверьте правильность ввода эл. почты.\n");
         }
         if (password.equals("")) {
-            error.add("Enter password.\n");
+            error.add("Введите пароль.\n");
         }
         if (!password.equals(repassword)) {
-            error.add("Check your password.\n");
+            error.add("Пароли не совпадают.\n");
         }
         if (!Validator.validateName(name) || !Validator.validateName(surname)) {
-            error.add("Enter correct Name and Surname.\n");
+            error.add("Введите правильное имя или фамилию.\n");
         }
         if (userDAO.findByUsername(username) != null) {
-            error.add("Username is already exist.\n");
+            error.add("Логин уже исользуется.\n");
         }
         if (userDAO.findByEmail(mail) != null) {
-            error.add("Email is already exist.\n");
+            error.add("Эл. почта уже используется.\n");
         }
         if (error.size() == 0) {
             ModelAndView model = new ModelAndView("activate");
@@ -202,7 +258,7 @@ public class HomeController {
             usr.setActivated(Validator.createPass());
             userDAO.saveUser(usr);
             Sender sender = new Sender("TariffObSys@gmail.com", "#af45Ecsrg67&");
-            sender.send("Register into TOS", "Hello " + surname + " " + name + ".\nYour code: " + usr.getActivated(), "TOS Command", mail);
+            sender.send("Регистрация в TOS", "Здравствуйте " + surname + " " + name + ".\nВаш код: " + usr.getActivated(), "TOS Command", mail);
             httpSession.setAttribute(CURRENT_ID_PARAM, usr.getId());
             model.addObject("mail", Validator.createLinkToEmail(usr.getMail()));
             return model;

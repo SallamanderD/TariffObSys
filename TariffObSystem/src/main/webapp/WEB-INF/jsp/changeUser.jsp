@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html; charset=UTF-8" %>
+<html>
 <head>
     <title>TOS: Change Profile</title>
 </head>

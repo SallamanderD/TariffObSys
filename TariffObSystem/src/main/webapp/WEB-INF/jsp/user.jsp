@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <html>
 <head>
     <link href="webjars/bootstrap/3.2.0/css/bootstrap.css" rel="stylesheet">
@@ -13,14 +14,14 @@
 </div>
     <body>
     <div id="profileContainer" class="container ">
-        <h2>Profile</h2>
+        <h2>Профиль</h2>
         <hr/>
         <div class="row">
             <div class="form-group col-md-3">
-                <p class="lead">Your Username: </p>
-                <p class="lead">Your Name: </p>
-                <p class="lead">Your Surname: </p>
-                <p class="lead">Your Email: </p>
+                <p class="lead">Логин: </p>
+                <p class="lead">Имя: </p>
+                <p class="lead">Фамилия: </p>
+                <p class="lead">Эл. почта: </p>
             </div>
             <div class="form-group">
                 <p class="lead"><mark>${user.username}</mark></p>

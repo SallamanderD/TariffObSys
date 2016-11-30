@@ -8,12 +8,26 @@ import java.util.regex.Pattern;
  */
 public class Validator {
     private static final String MAIL_REGEXP = "^[-a-z0-9!#$%&'*+/=?^_`{|}~]+(\\.[-a-z0-9!#$%&'*+/=?^_`{|}~]+)*@([a-z0-9]([-a-z0-9]{0,61}[a-z0-9])?\\.)*(aero|arpa|asia|biz|cat|com|coop|edu|gov|info|int|jobs|mil|mobi|museum|name|net|org|pro|tel|travel|[a-z][a-z])$";
-    private static final String USERNAME_REGEXP = "^[a-zA-Z0-9_-]{3,20}$";
-    private static final String NAME_REGEXP = "^[a-zA-Z]+";
+    private static final String USERNAME_REGEXP = "^[a-zA-Z0-9_-]{7,20}$";
+    private static final String NAME_REGEXP = "^[a-zA-Z]{2,20}$|[а-яА-Я]{2,20}$";
+    private static final String TEL_REGEXP = "(066|099|095|067|098)[0-9]{7}";
     public static boolean validateEmail(String email){
         Pattern pattern = Pattern.compile(MAIL_REGEXP);
         Matcher m = pattern.matcher(email.toLowerCase());
         return m.matches();
+    }
+
+    public static boolean validateTelephone(String telephone){
+        Pattern pattern = Pattern.compile(TEL_REGEXP);
+        Matcher m = pattern.matcher(telephone.toLowerCase());
+        return m.matches();
+    }
+
+    public static  boolean validatePass(String pass){
+        if(pass.length() <= 7){
+            return false;
+        }
+        return true;
     }
 
     public static boolean validateUsername(String username){

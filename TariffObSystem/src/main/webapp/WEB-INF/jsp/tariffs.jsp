@@ -1,7 +1,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <html>
 <head>
-
+    <link href="css/style.css" rel="stylesheet">
+    <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
     <title>TOS: Tariffs</title>
 </head>
 <div class="container">
@@ -28,7 +30,7 @@
                                                         <span class="media-meta pull-right">February 13, 2016</span>
                                                         <h4 class="title">
                                                             <img src="/ico/${listValue.operator.name}.png" height="18" width="18"/> ${listValue.name}
-                                                            <span class="pull-right vodafone"><a href="/tariffs/${listValue.operator.name}">${listValue.operator.name}</a></span>
+                                                            <span class="pull-right vodafone"><a href="/operator/${listValue.operator.name}">${listValue.operator.name}</a></span>
                                                         </h4>
                                                         <p class="summary">${listValue.shortDescription}</p>
                                                     </div>

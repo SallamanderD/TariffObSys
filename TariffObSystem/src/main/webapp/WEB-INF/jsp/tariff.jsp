@@ -1,5 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
+<%@ page contentType="text/html; charset=UTF-8" %>
+<html lang="ru">
 <head>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
@@ -9,15 +10,15 @@
 <div class="container">
     <jsp:include page="/mainmenu"></jsp:include>
 </div>
-    <div class="container tariffContainer" style="margin-top: 5%">
+    <div class="container tariffContainer   " style="margin-top: 5%">
         <h2>${tariff.name}</h2>
         <br>
         ${tariff.shortDescription}
         <table class="table table-striped table-inverse">
             <thead>
             <tr>
-                <th>Parameter</th>
-                <th>Value</th>
+                <th>Параметр</th>
+                <th>Значение</th>
             </tr>
             </thead>
             <tbody>
