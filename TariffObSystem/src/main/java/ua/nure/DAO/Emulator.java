@@ -7,6 +7,9 @@ import org.springframework.util.DigestUtils;
 import ua.nure.entities.*;
 import ua.nure.util.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Component
 public class Emulator {
 
@@ -65,7 +68,7 @@ public class Emulator {
                 "Більше телефонуйте на інші мережі: Vodafone збільшує кількість хвилин у пакеті та знижує вартість дзвінків на інші мобільні оператори України понад пакет — до 25 копійок!\n" +
                 "<br>" +
                 "Акція діє з 18.11.2016 року до 28.02.2017 року.<br>" +
-                "Протягом всієї усієї акції щомісяця Вам будуть надаватися додаткові обсяги хвилин.");
+                "Протягом всієї усієї акції щомісяця Вам будуть надаватися додаткові обсяги хвилин.", new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
         tar1.setOperator(operatorDAO.findOperator(1).get(0));
         tar1.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(1), "35"));
         tar1.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(2), "12000"));
@@ -93,7 +96,7 @@ public class Emulator {
                 "Більше телефонуйте на інші мережі та не обмежуйте себе в Інтернеті: Vodafone збільшує кількість хвилин і Гігабайт у пакеті, а також знижує вартість дзвінків на інші мобільні оператори України понад пакет — до 25 копійок!<br>" +
                 "<br>" +
                 "Акція діє з 18.11.2016 року до 28.02.2017 року.<br>" +
-                "Протягом всієї усієї акції щомісяця Вам будуть надаватися додаткові обсяги хвилин і Гігабайт");
+                "Протягом всієї усієї акції щомісяця Вам будуть надаватися додаткові обсяги хвилин і Гігабайт", new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
         tar2.setOperator(operatorDAO.findOperator(1).get(0));
         tar2.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(1), "150"));
         tar2.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(2), "1500"));
@@ -106,7 +109,7 @@ public class Emulator {
 
         Tariff tar3 = new Tariff(3, "Kyivstar Online+", "<b>Kiyvstar Online+</b> один из лучших тарифов для вашего смартфона. В нем вы найдете все что вам нужно, включая безлимитную игру в PokemonGO", "<b>Как подключить тариф «Киевстар Онлайн+. Регион 2»</b><br>" +
                 "Если вы желаете стать абонентом Киевстар, приобретите стартовый пакет с этим тарифным планом и активируйте его в соответствии с инструкциями на упаковке. Вы также можете активировать стартовый пакет с другим тарифным планом, а потом подать заявку на смену тарифного плана.<br>" +
-                "Если вы уже наш абонент и хотите изменить свой тарифный план на «Киевстар Онлайн+. Регион 2», позвоните <kbd>477*1</kbd> или воспользуйтесь системой Мой Киевстар. <br> Проверяйте счет с помощью запроса <kbd>*111#</kbd><br><h3>Как активировать тариф?</h3>Рекомендуемая сумма пополнения счета для тарифного плана «Киевстар Онлайн+. Регион 2» – от 65 грн одним платежом любым способом, кроме перевода средств. Без этого пополнения тарифный план не считается активированным.");
+                "Если вы уже наш абонент и хотите изменить свой тарифный план на «Киевстар Онлайн+. Регион 2», позвоните <kbd>477*1</kbd> или воспользуйтесь системой Мой Киевстар. <br> Проверяйте счет с помощью запроса <kbd>*111#</kbd><br><h3>Как активировать тариф?</h3>Рекомендуемая сумма пополнения счета для тарифного плана «Киевстар Онлайн+. Регион 2» – от 65 грн одним платежом любым способом, кроме перевода средств. Без этого пополнения тарифный план не считается активированным.", new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
         tar3.setOperator(operatorDAO.findOperator(2).get(0));
         tar3.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(1), "65"));
         tar3.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(2), "4000"));
@@ -117,7 +120,7 @@ public class Emulator {
         operatorDAO.addTariff(2, tar3);
         tariffDAO.saveTariff(tar3);
 
-        Tariff tar4 = new Tariff(4, "Lifecell Family", "Lifecell Family of Lifecell Operator", "Lifecell Family of Lifecell Operator");
+        Tariff tar4 = new Tariff(4, "Lifecell Family", "Lifecell Family of Lifecell Operator", "Lifecell Family of Lifecell Operator", new SimpleDateFormat("dd-MM-yyyy").format(new Date()));
         tar4.setOperator(operatorDAO.findOperator(3).get(0));
         tar4.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(1), "25"));
         tar4.getParameters().add(new Pair<Parameter, String>(parameterDAO.findFirst(2), "500"));

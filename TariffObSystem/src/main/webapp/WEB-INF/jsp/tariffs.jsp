@@ -28,11 +28,12 @@
         $found.removeClass($classy);
     });
 </script>
+
 <div class="container">
     <jsp:include page="/mainmenu"></jsp:include>
 </div>
 <body>
-<div class="container" style="margin-top: 4%">
+<div class="container" style="margin-top: 4%; max-width: 74%">
     <div class="row">
         <section class="content">
             <div class="col-sm-12 viewTarContainer">
@@ -49,22 +50,22 @@
                                 <div>
                                     <h4>3G</h4>
                                     <div class="form-inline">
-                                        От: <input type="number" name="GLow" class="form-control" style="max-width: 10%">
-                                        До: <input type="number" name="GHigh" class="form-control" style="max-width: 10%">
+                                        От: <input type="number" name="GLow" class="form-control withoutSpinners" style="max-width: 30%">
+                                        До: <input type="number" name="GHigh" class="form-control" style="max-width: 30%">
                                     </div>
                                 </div>
                                 <div>
                                     <h4>Звонки в сети, минут</h4>
                                     <div class="form-inline">
-                                        От: <input type="number" name = "incallsLow" class="form-control" style="max-width: 10%"/>
-                                        До: <input type="number" name = "incallsHigh" class="form-control" style="max-width: 10%"/>
+                                        От: <input type="number" name = "incallsLow" class="form-control" style="max-width: 30%"/>
+                                        До: <input type="number" name = "incallsHigh" class="form-control" style="max-width: 30%"/>
                                     </div>
                                 </div>
                                 <div>
                                     <h4>Звонки на других операторов, минут</h4>
                                     <div class="form-inline">
-                                        От: <input type="number" name = "outcallsLow" class="form-control" style="max-width: 10%"/>
-                                        До: <input type="number" name = "outcallsHigh" class="form-control" style="max-width: 10%"/>
+                                        От: <input type="number" name = "outcallsLow" class="form-control" style="max-width: 30%"/>
+                                        До: <input type="number" name = "outcallsHigh" class="form-control" style="max-width: 30%"/>
                                     </div>
                                 </div>
                                 <div>
@@ -85,8 +86,8 @@
                                 <div>
                                     <h4>СМС</h4>
                                     <div class="form-inline">
-                                        От: <input type="number" name = "smsLow" class="form-control" style="max-width: 10%"/>
-                                        До: <input type="number" name = "smsHigh" class="form-control" style="max-width: 10%"/>
+                                        От: <input type="number" name = "smsLow" class="form-control" style="max-width: 30%"/>
+                                        До: <input type="number" name = "smsHigh" class="form-control" style="max-width: 30%"/>
                                     </div>
                                 </div>
                                 <div>
@@ -109,7 +110,7 @@
                                                 <td>
                                                     <div class="media">
                                                         <div class="media-body">
-                                                            <span class="media-meta pull-right">February 13, 2016</span>
+                                                            <span class="media-meta pull-right">${listValue.time}</span>
                                                             <h4 class="title">
                                                                 <img src="/ico/${listValue.operator.name}.png"
                                                                      height="18" width="18"/> ${listValue.name}

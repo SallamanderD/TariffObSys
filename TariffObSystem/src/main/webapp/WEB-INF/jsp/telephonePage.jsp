@@ -1,6 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
-<html>
+<html lang="ru">
 <head>
     <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     <link href="${pageContext.request.contextPath}/css/bootstrap.css" rel="stylesheet">
@@ -10,13 +10,14 @@
 <div class="container">
     <jsp:include page="/mainmenu"></jsp:include>
 </div>
-<div class="container col-lg-5 col-lg-offset-3" style="margin-top: 5%">
-    <h2>${telephone.number}</h2>
+<div class="container tariffContainer" style="margin-top: 5%; max-width: 74%">
+    <h2><b>${telephone.number}</b></h2>
     <br>
     ${telephone.text}
     <hr>
     <jsp:include page="/telephoneCommentary">
         <jsp:param name="telephoneId" value="${telephone.id}"/>
     </jsp:include>
+</div>
 </body>
 </html>

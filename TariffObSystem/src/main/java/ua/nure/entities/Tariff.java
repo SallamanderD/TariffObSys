@@ -10,16 +10,36 @@ import java.util.List;
 @Document(collection = "tariffs")
 public class Tariff {
 
-    public Tariff(int id, String name, String shortDescription, String description) {
+    public Tariff(int id, String name, String shortDescription, String description, String time) {
         this.id = id;
         this.name = name;
         this.shortDescription = shortDescription;
         this.description = description;
+        this.time = time;
+        this.rating = 0;
     }
 
     @Id
     private int id;
     private String shortDescription;
+    private String time;
+    private int rating;
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
     public String getDescription() {
         return description;

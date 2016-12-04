@@ -14,6 +14,23 @@
 
 </head>
 <body>
+<script>
+    function search() {
+        var a = document.forms["searchForm"]["query"].value;
+        if(a.trim() == null || a.trim() == ""){
+            return false;
+        } else{
+            post('/search', {query: a});
+        }
+    }
+</script>
+<style>
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+</style>
 <nav class="navbar navbar-default navbar-custom">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -36,9 +53,9 @@
                     <li><a href="/createTelephone">Create Telephone</a></li>
                 </c:if>
                 <li>
-                    <form class="navbar-form" role="search" method="post" action="/search">
+                    <form class="navbar-form" name="searchForm" role="search" method="post" action="javascript: search()">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Telephone" name="query">
+                            <input type="number" class="form-control" placeholder="Telephone" name="query">
                             <div class="input-group-btn">
                                 <button class="btn mysearch btn-success" type="submit"><i
                                         class="glyphicon glyphicon-search"></i></button>

@@ -5,10 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import ua.nure.DAO.*;
 import ua.nure.entities.*;
@@ -77,6 +74,7 @@ public class HomeController {
         });
         Collections.reverse(comment);
         model.addObject("commentaries", comment);
+        model.addObject("count", comment.size());
         if (httpSession.getAttributeNames().hasMoreElements()) {
             model.addObject("userId", (Integer) httpSession.getAttribute(CURRENT_ID_PARAM));
             model.addObject("tariffId", tariffID);
@@ -86,16 +84,16 @@ public class HomeController {
         return model;
     }
 
-    @RequestMapping(value = "operator/{name}")
+    @RequestMapping(value = "operator/{name}", method = RequestMethod.GET)
     public ModelAndView operators(@PathVariable(value = "name") String name){
-        ModelAndView model = new ModelAndView("operator");
+        ModelAndView model = new ModelAndView("tariffs");
         List<Tariff> result = new ArrayList<>();
         for(Tariff t : tariffDAO.findAllTariff()){
             if(t.getOperator().getName().equals(name)){
                 result.add(t);
             }
         }
-        model.addObject("tariffs",result);
+        model.addObject("tariffs", result);
         return model;
     }
 
@@ -110,9 +108,11 @@ public class HomeController {
             }
         });
         model.addObject("commentaries", comment);
+        model.addObject("count", comment.size());
         if (httpSession.getAttributeNames().hasMoreElements()) {
             model.addObject("userId", (Integer) httpSession.getAttribute(CURRENT_ID_PARAM));
             model.addObject("telephoneId", telephoneId);
+
         } else {
             model.addObject("userId", null);
         }
@@ -475,7 +475,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public ModelAndView search(@RequestParam(value = "query") String query) {
+    public ModelAndView search(@ModelAttribute(value = "query") String query) {
         List<Telephone> telephones = telephoneDAO.findAll();
         List<Telephone> result = new ArrayList<>();
         for (Telephone t : telephones) {
@@ -547,9 +547,14 @@ public class HomeController {
         if (currentUser.getActivated().equals(code)) {
             currentUser.setActivated(null);
             userDAO.updateActivated(currentUser.getId(), currentUser);
+            ModelAndView model = new ModelAndView("redirect:/");
+            return model;
+        } else{
+            ModelAndView model = new ModelAndView("redirect:activate");
+            model.addObject("error", "Неверный код активации.");
+            return model;
         }
-        ModelAndView model = new ModelAndView("redirect:/");
-        return model;
+
     }
 
 }

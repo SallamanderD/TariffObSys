@@ -10,7 +10,7 @@
 <div class="container">
     <jsp:include page="/mainmenu"></jsp:include>
 </div>
-    <div class="container tariffContainer   " style="margin-top: 5%">
+    <div class="container tariffContainer" style="margin-top: 5%; max-width: 75%">
         <h2>${tariff.name}</h2>
         <br>
         ${tariff.shortDescription}

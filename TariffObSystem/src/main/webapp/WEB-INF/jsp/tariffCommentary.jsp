@@ -2,7 +2,7 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <html>
 <body>
-<h2><b>Комментарии [${commentaries.size()}]: </b></h2>
+<h2><b>Комментарии [${count}]: </b></h2>
 <div class="col-md-12">
     <c:if test="${not empty userId}">
         <div>
@@ -10,7 +10,7 @@
                 <label for="comment">Комментарий:</label>
                 <textarea class="form-control" name="text" style="min-width: 100%" placeholder="Ваш комментарий" id="comment"
                           rows="5" cols="77"></textarea>
-                <input type="hidden" value="${commentaries.get(0).tariffId}" name="tariffId"/>
+                <input type="hidden" value="${tariffId}" name="tariffId"/>
                 <button class="btn mysearch btn-success" style="margin-top: 1%" type="submit">Отправить</button>
             </form>
             <hr id="lineHr">

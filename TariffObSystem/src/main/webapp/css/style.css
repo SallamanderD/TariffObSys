@@ -80,6 +80,8 @@ body{
 .panel .btn-group {
     margin: 15px 0 30px;
 }
+
+
 .panel .btn-group .btn {
     transition: background-color .3s ease;
 }
