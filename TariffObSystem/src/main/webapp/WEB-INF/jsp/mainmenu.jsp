@@ -49,8 +49,11 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="/tariffs">Tariffs</a></li>
-                <c:if test="${not empty user}">
+                <c:if test="${(not empty user) && (empty user.activated)}">
                     <li><a href="/createTelephone">Create Telephone</a></li>
+                </c:if>
+                <c:if test="${not empty user}">
+                    <li><a href="/feedback">Feedback</a></li>
                 </c:if>
                 <li>
                     <form class="navbar-form" name="searchForm" role="search" method="post" action="javascript: search()">

@@ -400,6 +400,28 @@ public class HomeController {
         return model;
     }
 
+    @RequestMapping(value = "/feedback", method = RequestMethod.GET)
+    public ModelAndView feedback(){
+        if (!httpSession.getAttributeNames().hasMoreElements()) {
+            ModelAndView model = new ModelAndView("redirect:/");
+            return model;
+        }
+        ModelAndView model = new ModelAndView("feedback");
+        return model;
+    }
+
+    @RequestMapping(value = "/feedback", method = RequestMethod.POST)
+    public ModelAndView postFeedback(@RequestParam(value = "text") String text){
+        if (!httpSession.getAttributeNames().hasMoreElements()) {
+            ModelAndView model = new ModelAndView("redirect:/");
+            return model;
+        }
+        Sender sender = new Sender("TariffObSys@gmail.com", "#af45Ecsrg67&");
+        sender.send("Отзыв", text, "TOS Command", "TariffObSys@gmail.com");
+        ModelAndView model = new ModelAndView("redirect:/");
+        return model;
+    }
+
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
     public ModelAndView signinPOST(@RequestParam("username") String username, @RequestParam("password") String password) {
         if(httpSession.getAttributeNames().hasMoreElements()){
