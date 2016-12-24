@@ -62,6 +62,19 @@ public class HomeController {
         return model;
     }
 
+    @RequestMapping(value = "/deleteTariffCommentary", method = RequestMethod.POST)
+    public ModelAndView deleteTariffCommentary(@RequestParam(value = "id") int tariffCommentaryId, @RequestParam(value = "authorId") int authorId, @RequestParam(value = "tariffId") int tariffId){
+        if(!httpSession.getAttributeNames().hasMoreElements()){
+            return new ModelAndView("redirect:/");
+        } else{
+            if((int)httpSession.getAttribute(CURRENT_ID_PARAM) == authorId){
+                tariffCommentaryDAO.remove(tariffCommentaryId);
+                return new ModelAndView("redirect:/tariff/" + tariffId);
+            }
+            return new ModelAndView("redirect:/tariff/" + tariffId);
+        }
+    }
+
     @RequestMapping(value = "/tariffCommentary")
     public ModelAndView tariffCommentary(@RequestParam(value = "tariffId") int tariffID) {
         ModelAndView model = new ModelAndView("tariffCommentary");
