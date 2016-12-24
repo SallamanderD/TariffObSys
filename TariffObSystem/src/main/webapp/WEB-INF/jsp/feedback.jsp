@@ -15,13 +15,21 @@
     <jsp:include page="/mainmenu"></jsp:include>
 </div>
 <body>
-<div>
-    <form action="/feedback" method="post">
-        <label for="comment">Отзыв:</label>
-        <textarea class="form-control" name="text" style="min-width: 100%" placeholder="Ваш отзыв" id="comment"
-                  rows="5" cols="77"></textarea>
-        <button class="btn mysearch btn-success" style="margin-top: 1%" type="submit">Отправить</button>
-    </form>
+<div class="container content">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="testimonials">
+                <div class="active item">
+                    <blockquote>
+                        <label for="comment">Оставьте здесь ваш отзыв:</label>
+                        <textarea class="form-control" name="text" style="width: 95%" id="comment"
+                                  rows="5" cols="77"></textarea>
+                        <button class="btn mysearch btn-success" style="margin-top: 1%" type="submit">Отправить</button>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

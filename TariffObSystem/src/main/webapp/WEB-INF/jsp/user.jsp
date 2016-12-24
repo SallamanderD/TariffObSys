@@ -30,8 +30,8 @@
                 <p class="lead"><mark>${user.mail}</mark></p>
             </div>
         </div>
-        <a href="changeUser"><button type="submit" class="btn btn-success">Change Data</button></a>
-        <a href="changePassword"><button type="submit" class="btn btn-success">Change Password</button></a>
+        <a href="changeUser"><button type="submit" class="btn buttonSnipp">Change Data</button></a>
+        <a href="changePassword"><button type="submit" class="btn buttonSnipp">Change Password</button></a>
         <hr/>
     </div>
     </body>

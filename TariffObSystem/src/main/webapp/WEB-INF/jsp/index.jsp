@@ -13,9 +13,19 @@
     </div>
     <body>
     <div class="container">
-        <h2>Homepage</h2>
-<p>abc</p>
-        <h4>Empty page, but if designer try to do something here will be really cool :3</h4>
+        <div class="col-md-4 text-center">
+            <div class="box">
+                <div class="box-content">
+                    <h1 class="tag-title">Домашняя страница</h1>
+                    <hr />
+                    <p> С помощью нашего сайта, вы сможете найти информацию об интересующем вас мобильном тарифе,
+                        найти подходящий вам тариф или просмотреть список телефонных номеров пользователей.
+                        Для того, чтобы вам был доступен вес функционал сайта, необходимо зарегистрироваться в системе. </p>
+                    <br />
+                    <a href="ppc.html" class="btn btn-block btn-success">Learn more</a>
+                </div>
+            </div>
+        </div>
     </div>
     </body>
 </html>

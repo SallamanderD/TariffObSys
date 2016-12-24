@@ -7,26 +7,26 @@
     <jsp:include page="/mainmenu"></jsp:include>
 </div>
 <body>
-<div class="container">
+<div class="regContainer" style="margin-top: 50px">
     <h3>Sign In</h3>
     <p>${error}</p>
     <form method="POST" action="/changePassword">
         <div class="row">
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-12">
                 <label for="pwd">Old Password:</label>
-                <input type="password" name="oldpassword" class="form-control" id="pwd">
+                <input type="password" name="oldpassword" class="form-control regInput" id="pwd">
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-12">
                 <label for="pwd">Password:</label>
-                <input type="password" name="password" class="form-control" id="pwd">
+                <input type="password" name="password" class="form-control regInput" id="pwd">
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-12">
                 <label for="pwd">Retype Password:</label>
-                <input type="password" name="repassword" class="form-control" id="pwd">
+                <input type="password" name="repassword" class="form-control regInput" id="pwd">
             </div>
         </div>
         <button type="submit" class="btn btn-default">Change</button>

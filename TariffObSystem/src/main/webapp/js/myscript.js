@@ -20,3 +20,8 @@ function post(path, params, method) {
     document.body.appendChild(form);
     form.submit();
 }
+$(".hover").mouseleave(
+    function() {
+        $(this).removeClass("hover");
+    }
+);
