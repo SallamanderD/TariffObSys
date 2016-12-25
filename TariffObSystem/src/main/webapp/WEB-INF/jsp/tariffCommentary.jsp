@@ -33,7 +33,19 @@
                         <div class="commentsText">
                             <p style="color:black">${comment.text}</p>
                         </div>
-                        <input class="btn btn-default" onclick="post('/deleteTariffCommentary', {id: ${comment.id}, authorId: ${userId}, tariffId: ${tariffId}})" type="submit" id="delete${loop.index}" style="display: none" value="Удалить">
+                        <div class="col-md-8">
+                            <div class="con" onclick="post('/deleteTariffCommentary', {id: ${comment.id}, authorId: ${userId}, tariffId: ${tariffId}})"
+                                 id="delete${loop.index}" style="display: none">
+                                <div class="col-md-1">
+                                    <div class="bar top"></div>
+                                    <div class="bar middle"></div>
+                                    <div class="bar bottom"></div>
+                                </div>
+                                <div class="col-md-1">
+                                    <h4>Удалить?</h4>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
