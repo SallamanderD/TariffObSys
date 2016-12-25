@@ -20,8 +20,12 @@ function post(path, params, method) {
     document.body.appendChild(form);
     form.submit();
 }
+
+/*Button*/
 $(".hover").mouseleave(
     function() {
         $(this).removeClass("hover");
     }
 );
+/*Button*/
+

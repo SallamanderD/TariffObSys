@@ -15,21 +15,11 @@
     <jsp:include page="/mainmenu"></jsp:include>
 </div>
 <body>
-<div class="container content">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-            <div class="testimonials">
-                <div class="active item">
-                    <blockquote>
-                        <label for="comment">Оставьте здесь ваш отзыв:</label>
-                        <textarea class="form-control" name="text" style="width: 95%" id="comment"
-                                  rows="5" cols="77"></textarea>
-                        <button class="btn mysearch btn-success" style="margin-top: 1%" type="submit">Отправить</button>
-                    </blockquote>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="mailbg">
+    <label class="label2" for="comment">Оставьте здесь ваш отзыв:</label>
+    <textarea class="messtxt" name="text" style="width: 95%" id="comment"
+              rows="5" cols="77"></textarea>
+    <button class="btn sendmess  "  type="submit">Отправить</button>
 </div>
 </body>
 </html>

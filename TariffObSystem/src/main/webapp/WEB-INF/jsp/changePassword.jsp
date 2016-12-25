@@ -29,7 +29,8 @@
                 <input type="password" name="repassword" class="form-control regInput" id="pwd">
             </div>
         </div>
-        <button type="submit" class="btn btn-default">Change</button>
+        <button type="submit" style="display: block; margin-left: auto; margin-right: auto" class="btn buttonSnipp">
+            Change</button>
     </form>
 </div>
 </body>

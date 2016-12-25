@@ -29,7 +29,7 @@
                 <input type="text" name="surname" class="form-control regInput" value="${user.surname}" id="usr">
             </div>
         </div>
-        <button type="submit" class="btn btn-default">Change</button>
+        <button type="submit" style="display: block; margin-left: auto; margin-right: auto" class="btn buttonSnipp">Change</button>
     </form>
 </div>
 </body>

@@ -320,7 +320,7 @@ body{
 /*Warnings with icons*/
 
 /*Start page block*/
-.box {
+.titleBox {
     background:#fff;
     transition:all 0.2s ease;
     border:2px dashed #dadada;
@@ -332,24 +332,24 @@ body{
     min-height:340px;
 }
 
-.box:hover {
+.titleBox:hover {
     border:2px solid #525C7A;
 }
 
-.box span.box-title {
+.titleBox span.box-title {
     color: #fff;
     font-size: 24px;
     font-weight: 300;
     text-transform: uppercase;
 }
 
-.box .box-content {
+.titleBox .box-content {
     padding: 16px;
     border-radius: 0 0 2px 2px;
     background-clip: padding-box;
     box-sizing: border-box;
 }
-.box .box-content p {
+.titleBox .box-content p {
     color:#515c66;
     text-transform:none;
 }
@@ -468,8 +468,129 @@ body{
 /* Button in profile*/
 /* Button in profile*/
 
+/*Feedback form*/
+/*Feedback form*/
+.mailbg {
+    position: absolute;
+    left: 50%;
+    top: 370px;
+    width: 100%;
+    max-width: 400px;
+    height: 450px;
+    background: #424242;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
 
+.mailbg:before {
+    content: "";
+    position: absolute;
+    right: 50%;
+    top: 99%;
+    width: 0;
+    height: 0;
+    border-top: 50px solid #424242;
+    border-right: 30px solid transparent;
+    border-left: 5px solid transparent;
+    -webkit-transform: translate(0%, -0%);
+    -ms-transform: translate(0%, -0%);
+    transform: translate(0%, -0%);
+    transform: rotate(0deg);
+}
+.label2 {
+    color: #8BC34A;
+    position: absolute;
+    font-size: 150%;
+    top: 5%;
+    left: 5%;
+}
+.messtxt {
+    position: absolute;
+    top: 15%;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: none;
+    padding: 5px;
+    left: 50%;
+    width: 90%;
+    height: 250px;
+    resize: none;
+    font-size: 1.2em;
+    font-family: 'Roboto Condensed', sans-serif;
+    -webkit-transform: translate(-50%, -0%);
+    -ms-transform: translate(-50%, -0%);
+    transform: translate(-50%, -0%);
+}
 
+.messtxt:focus {
+    outline: none;
+}
 
-
-
+.sendmess {
+    top: 80%;
+    left: 5%;
+    width: 90%;
+    height: 50px;
+    font-family: 'Raleway', Arial, sans-serif;
+    border: none;
+    background-color: #5cb85c;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 0px 30px;
+    display: inline-block;
+    text-transform: uppercase;
+    line-height: 46px;
+    font-weight: 400;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+    font-size: 16px;
+    border-radius: 23px;
+    letter-spacing: 2px;
+    -webkit-transform: translateZ(0);
+    -webkit-transition: all 0.35s ease;
+    transition: all 0.35s ease;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.sendmess:before {
+    opacity: 0;
+    content: "";
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    border-radius: inherit;
+    background-color: #ffffff;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    -webkit-transform: translateY(-100%);
+    transform: translateY(-100%);
+}
+.sendmess:after {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    content: '';
+    border-radius: inherit;
+}
+.sendmess:hover,
+.sendmess.hover {
+    background-color: #8BC34A;
+    color: #ffffff;
+}
+.sendmess:hover:before,
+.sendmess.hover:before {
+    -webkit-transform: translateY(0%);
+    transform: translateY(0%);
+    opacity: 0.25;
+}
+/*Feedback form*/
+/*Feedback form*/

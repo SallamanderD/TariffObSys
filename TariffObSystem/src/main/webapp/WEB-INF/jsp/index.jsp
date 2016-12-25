@@ -14,7 +14,7 @@
     <body>
     <div class="container">
         <div class="col-md-4 text-center">
-            <div class="box">
+            <div class="titleBox">
                 <div class="box-content">
                     <h1 class="tag-title">Домашняя страница</h1>
                     <hr />
