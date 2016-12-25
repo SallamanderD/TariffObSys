@@ -49,6 +49,54 @@ public class UserDAO {
                 addCriteria(Criteria.where("id").is(id)),update,User.class);
     }
 
+    public void incrementTelephoneCreated(int id){
+        Update update=new Update();
+        int nv = this.findUser(id).get(0).getTelephonePageCreated() + 1;
+        update.set("telephonePageCreated" , nv);
+        mongoOperation.updateFirst(new Query().
+                addCriteria(Criteria.where("id").is(id)),update,User.class);
+    }
+
+    public void incrementTelephoneCommentary(int id){
+        Update update=new Update();
+        int nv = this.findUser(id).get(0).getTelephoneCommentarySent() + 1;
+        update.set("telephoneCommentarySent" , nv);
+        mongoOperation.updateFirst(new Query().
+                addCriteria(Criteria.where("id").is(id)),update,User.class);
+    }
+
+    public void decrementTelephoneCommentary(int id){
+        Update update=new Update();
+        int nv = this.findUser(id).get(0).getTelephoneCommentarySent() - 1;
+        update.set("telephoneCommentarySent" , nv);
+        mongoOperation.updateFirst(new Query().
+                addCriteria(Criteria.where("id").is(id)),update,User.class);
+    }
+
+    public void incrementTariffCommentary(int id){
+        Update update=new Update();
+        int nv = this.findUser(id).get(0).getTariffCommentarySent() + 1;
+        update.set("tariffCommentarySent" , nv);
+        mongoOperation.updateFirst(new Query().
+                addCriteria(Criteria.where("id").is(id)),update,User.class);
+    }
+
+    public void decrementTariffCommentary(int id){
+        Update update=new Update();
+        int nv = this.findUser(id).get(0).getTariffCommentarySent() + 1;
+        update.set("tariffCommentarySent" , nv);
+        mongoOperation.updateFirst(new Query().
+                addCriteria(Criteria.where("id").is(id)),update,User.class);
+    }
+
+    public void incrementFeedbackSent(int id){
+        Update update=new Update();
+        int nv = this.findUser(id).get(0).getFeedbackSent() + 1;
+        update.set("feedbackSent" , nv);
+        mongoOperation.updateFirst(new Query().
+                addCriteria(Criteria.where("id").is(id)),update,User.class);
+    }
+
     public void updateUserPass(int id, User user){
         Update update=new Update();
         update.set("password",user.getPassword());

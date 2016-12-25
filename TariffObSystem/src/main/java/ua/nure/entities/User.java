@@ -5,7 +5,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "users")
 public class User {
     public User(){
-
+        this.telephoneCommentarySent = 0;
+        this.tariffCommentarySent = 0;
+        this.feedbackSent = 0;
+        this.telephonePageCreated = 0;
     }
     public User(String username, String password, String name, String surname, String mail){
         this.username = username;
@@ -13,6 +16,10 @@ public class User {
         this.name = name;
         this.surname = surname;
         this.mail = mail;
+        this.telephoneCommentarySent = 0;
+        this.tariffCommentarySent = 0;
+        this.feedbackSent = 0;
+        this.telephonePageCreated = 0;
     }
     @Id
     private int id;
@@ -22,6 +29,43 @@ public class User {
     private String name;
     private String surname;
     private String mail;
+
+    public int getTelephoneCommentarySent() {
+        return telephoneCommentarySent;
+    }
+
+    public void setTelephoneCommentarySent(int telephoneCommentarySent) {
+        this.telephoneCommentarySent = telephoneCommentarySent;
+    }
+
+    public int getTariffCommentarySent() {
+        return tariffCommentarySent;
+    }
+
+    public void setTariffCommentarySent(int tariffCommentarySent) {
+        this.tariffCommentarySent = tariffCommentarySent;
+    }
+
+    public int getTelephonePageCreated() {
+        return telephonePageCreated;
+    }
+
+    public void setTelephonePageCreated(int telephonePageCreated) {
+        this.telephonePageCreated = telephonePageCreated;
+    }
+
+    public int getFeedbackSent() {
+        return feedbackSent;
+    }
+
+    public void setFeedbackSent(int feedbackSent) {
+        this.feedbackSent = feedbackSent;
+    }
+
+    private int telephoneCommentarySent;
+    private int tariffCommentarySent;
+    private int telephonePageCreated;
+    private int feedbackSent;
 
     public String getActivated() {
         return activated;

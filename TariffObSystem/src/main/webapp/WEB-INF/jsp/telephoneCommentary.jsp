@@ -17,7 +17,13 @@
         </div>
     </c:if>
     <c:forEach var="comment" items="${commentaries}">
-        <div class="bs-calltoaction bs-calltoaction-success">
+        <div class="bs-calltoaction bs-calltoaction-success" onmouseleave="document.getElementById('delete${loop.index}').style.display = 'none'" onmouseenter="
+                var a = ${comment.author.id};
+                var b = ${userId};
+                if(a == b){
+                document.getElementById('delete${loop.index}').style.display = 'inline';
+                }
+                ">
             <div class="row">
                 <div class="col-md-12 cta-contents">
                     <h4 class="cta-title">${comment.author.username}</h4>
@@ -26,6 +32,7 @@
                         <div class="commentsText">
                             <p style="color:black">${comment.text}</p>
                         </div>
+                        <input class="btn btn-default" onclick="post('/deleteTelephoneCommentary', {id: ${comment.id}, authorId: ${userId}, telephoneId: ${telephoneId}})" type="submit" id="delete${loop.index}" style="display: none" value="Удалить">
                     </div>
                 </div>
             </div>

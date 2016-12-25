@@ -45,7 +45,7 @@ public class HomeController {
 
     @RequestMapping(value = "/")
     public ModelAndView index() {
-        //emulator.emul();
+        emulator.emul();
         ModelAndView model = new ModelAndView("index");
         return model;
     }
@@ -69,9 +69,24 @@ public class HomeController {
         } else{
             if((int)httpSession.getAttribute(CURRENT_ID_PARAM) == authorId){
                 tariffCommentaryDAO.remove(tariffCommentaryId);
+                userDAO.decrementTariffCommentary(authorId);
                 return new ModelAndView("redirect:/tariff/" + tariffId);
             }
             return new ModelAndView("redirect:/tariff/" + tariffId);
+        }
+    }
+
+    @RequestMapping(value = "/deleteTelephoneCommentary", method = RequestMethod.POST)
+    public ModelAndView deleteTelephoneCommentary(@RequestParam(value = "id") int telephoneCommentaryId, @RequestParam(value = "authorId") int authorId, @RequestParam(value = "telephoneId") int telephoneId){
+        if(!httpSession.getAttributeNames().hasMoreElements()){
+            return new ModelAndView("redirect:/");
+        } else{
+            if((int)httpSession.getAttribute(CURRENT_ID_PARAM) == authorId){
+                telephoneCommentaryDAO.remove(telephoneCommentaryId);
+                userDAO.decrementTelephoneCommentary(authorId);
+                return new ModelAndView("redirect:/telephone/" + telephoneId);
+            }
+            return new ModelAndView("redirect:/telephone/" + telephoneId);
         }
     }
 
@@ -139,6 +154,7 @@ public class HomeController {
                     userDAO.findUser((Integer) httpSession.getAttribute(CURRENT_ID_PARAM)).get(0), text, tariffId);
             tariffCommentaryDAO.save(temp);
             tariffDAO.addCommentaries(tariffId, tariffCommentaryDAO.findById(temp.getId()));
+            userDAO.incrementTariffCommentary((int)httpSession.getAttribute(CURRENT_ID_PARAM));
         }
         ModelAndView model = new ModelAndView("redirect:tariff/" + tariffId);
         return model;
@@ -151,6 +167,7 @@ public class HomeController {
                     userDAO.findUser((Integer) httpSession.getAttribute(CURRENT_ID_PARAM)).get(0), text, telephoneId);
             telephoneCommentaryDAO.save(temp);
             telephoneDAO.addCommentaries(telephoneId, telephoneCommentaryDAO.findById(temp.getId()));
+            userDAO.incrementTelephoneCommentary((int)httpSession.getAttribute(CURRENT_ID_PARAM));
         }
         ModelAndView model = new ModelAndView("redirect:telephone/" + telephoneId);
         return model;
@@ -209,6 +226,7 @@ public class HomeController {
         if(error.size() == 0){
             telephoneDAO.save(new Telephone(telephoneDAO.findAll().size() + 1, telephone, description, (Integer)httpSession.getAttribute(CURRENT_ID_PARAM)));
             ModelAndView model = new ModelAndView("redirect:telephone/" + telephoneDAO.findAll().size());
+            userDAO.incrementTelephoneCreated((int)httpSession.getAttribute(CURRENT_ID_PARAM));
             return model;
         } else{
             ModelAndView model = new ModelAndView("createTelephone");
@@ -430,7 +448,8 @@ public class HomeController {
             return model;
         }
         Sender sender = new Sender("TariffObSys@gmail.com", "#af45Ecsrg67&");
-        sender.send("Отзыв", text, "TOS Command", "TariffObSys@gmail.com");
+        sender.send("Отзыв от " + userDAO.findUser((int)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0).getUsername(), text, "TOS Command", "TariffObSys@gmail.com");
+        userDAO.incrementFeedbackSent((int)httpSession.getAttribute(CURRENT_ID_PARAM));
         ModelAndView model = new ModelAndView("redirect:/");
         return model;
     }

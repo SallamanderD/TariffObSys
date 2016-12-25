@@ -13,11 +13,11 @@
     <jsp:include page="/mainmenu"></jsp:include>
 </div>
     <body>
-    <div id="profileContainer" class="container ">
+    <div id="profileContainer" class="container " style="margin-bottom: 5%">
         <h2>Профиль</h2>
         <hr/>
         <div class="row">
-            <div class="form-group col-md-3">
+            <div class="form-group col-md-4">
                 <p class="lead">Логин: </p>
                 <p class="lead">Имя: </p>
                 <p class="lead">Фамилия: </p>
@@ -32,7 +32,20 @@
         </div>
         <a href="changeUser"><button type="submit" class="btn buttonSnipp">Change Data</button></a>
         <a href="changePassword"><button type="submit" class="btn buttonSnipp">Change Password</button></a>
+        <h2>Статистика</h2>
         <hr/>
+        <div class="form-group col-md-4">
+            <p class="lead">Комментариев к тарифам: </p>
+            <p class="lead">Комментариев к телефонам: </p>
+            <p class="lead">Страниц телефонов создано: </p>
+            <p class="lead">Отзывов отправлено: </p>
+        </div>
+        <div class="form-group">
+            <p class="lead"><mark>${user.tariffCommentarySent}</mark></p>
+            <p class="lead"><mark>${user.telephoneCommentarySent}</mark></p>
+            <p class="lead"><mark>${user.telephonePageCreated}</mark></p>
+            <p class="lead"><mark>${user.feedbackSent}</mark></p>
+        </div>
     </div>
     </body>
 </html>
