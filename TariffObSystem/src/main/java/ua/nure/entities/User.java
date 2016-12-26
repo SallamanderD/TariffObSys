@@ -9,6 +9,7 @@ public class User {
         this.tariffCommentarySent = 0;
         this.feedbackSent = 0;
         this.telephonePageCreated = 0;
+        this.banned = false;
     }
     public User(String username, String password, String name, String surname, String mail){
         this.username = username;
@@ -20,6 +21,7 @@ public class User {
         this.tariffCommentarySent = 0;
         this.feedbackSent = 0;
         this.telephonePageCreated = 0;
+        this.banned = false;
     }
     @Id
     private int id;
@@ -29,6 +31,16 @@ public class User {
     private String name;
     private String surname;
     private String mail;
+
+    public boolean isBanned() {
+        return banned;
+    }
+
+    public void setBanned(boolean banned) {
+        this.banned = banned;
+    }
+
+    private boolean banned;
 
     public int getTelephoneCommentarySent() {
         return telephoneCommentarySent;

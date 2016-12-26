@@ -17,6 +17,7 @@ public class Tariff {
         this.description = description;
         this.time = time;
         this.rating = 0;
+        this.deleted = false;
     }
 
     @Id
@@ -24,6 +25,15 @@ public class Tariff {
     private String shortDescription;
     private String time;
     private int rating;
+    private boolean deleted;
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 
     public int getRating() {
         return rating;

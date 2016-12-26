@@ -36,6 +36,10 @@ public class Emulator {
         usr.setId(1);
         usr.setRole(roleDAO.findRole(1).get(0));
         userDAO.saveUser(usr);
+        usr = new User("root", DigestUtils.md5DigestAsHex("root".getBytes()), "admin", "admin", "TariffObSys@gmail.com");
+        usr.setId(2);
+        usr.setRole(roleDAO.findRole(2).get(0));
+        userDAO.saveUser(usr);
         Telephone telephone = new Telephone(1, "0664935720", "Cool man", 1);
         Telephone telephone1 = new Telephone(2, "0956766110", "Cool man too", 1);
         telephoneDAO.save(telephone);

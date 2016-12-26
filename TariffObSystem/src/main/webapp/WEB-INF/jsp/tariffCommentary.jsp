@@ -41,7 +41,7 @@
                                     <div class="bar middle"></div>
                                     <div class="bar bottom"></div>
                                 </div>
-                                <div class="col-md-1">
+                                <div class="col-xs-1">
                                     <h4>Удалить?</h4>
                                 </div>
                             </div>

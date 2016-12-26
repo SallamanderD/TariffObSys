@@ -10,6 +10,7 @@ import ua.nure.entities.Operator;
 import ua.nure.entities.Tariff;
 import ua.nure.entities.TariffCommentary;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -44,6 +45,15 @@ public class TariffDAO {
     public List<Tariff> findTariff(int id){
         return mongoOperation.find(new Query().
                 addCriteria(Criteria.where("id").is(id)), Tariff.class);
+    }
+
+    public List<Tariff> findUndeleted(){
+        List<Tariff> result = new ArrayList<>();
+        for(Tariff t : findAllTariff()){
+            if(t.isDeleted() == false)
+                result.add(t);
+        }
+        return result;
     }
 
     public void addCommentaries(int id, TariffCommentary commentary){

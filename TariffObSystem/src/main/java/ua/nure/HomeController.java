@@ -53,6 +53,9 @@ public class HomeController {
     @RequestMapping(value = "/mainmenu")
     public ModelAndView mainmenu() {
         if (httpSession.getAttributeNames().hasMoreElements()) {
+            if(userDAO.findUser((int)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0).isBanned()){
+                return new ModelAndView("redirect:/logout");
+            }
             ModelAndView model = new ModelAndView("mainmenu");
             model.addObject("user", userDAO.findUser((Integer) httpSession.getAttribute(CURRENT_ID_PARAM)).get(0));
             return model;
@@ -117,7 +120,7 @@ public class HomeController {
         ModelAndView model = new ModelAndView("tariffs");
         List<Tariff> result = new ArrayList<>();
         for(Tariff t : tariffDAO.findAllTariff()){
-            if(t.getOperator().getName().equals(name)){
+            if(t.getOperator().getName().equals(name) && t.isDeleted() == false){
                 result.add(t);
             }
         }
@@ -190,7 +193,11 @@ public class HomeController {
     @RequestMapping(value = "tariffs")
     public ModelAndView tariffs() {
         ModelAndView model = new ModelAndView("tariffs");
-        model.addObject("tariffs", tariffDAO.findAllTariff());
+        List<Tariff> tariffs = new ArrayList<>();
+        for(Tariff t : tariffDAO.findAllTariff())
+            if(t.isDeleted() == false)
+                tariffs.add(t);
+        model.addObject("tariffs", tariffs);
         return model;
     }
 
@@ -462,9 +469,13 @@ public class HomeController {
         }
         if (userDAO.findByUsername(username) != null) {
             if (DigestUtils.md5DigestAsHex(password.getBytes()).
-                    equals(userDAO.findByUsername(username).getPassword())) {
+                    equals(userDAO.findByUsername(username).getPassword()) && userDAO.findByUsername(username).isBanned() == false) {
                 httpSession.setAttribute(CURRENT_ID_PARAM, userDAO.findByUsername(username).getId());
                 ModelAndView model = new ModelAndView("redirect:/");
+                return model;
+            } else if(userDAO.findByUsername(username).isBanned()){
+                ModelAndView model = new ModelAndView("signin");
+                model.addObject("error", "Ваш аккаунт заблокирован.");
                 return model;
             }
         }
@@ -609,6 +620,16 @@ public class HomeController {
             return model;
         }
 
+    }
+
+    @RequestMapping(value = "/adminPanel")
+    public ModelAndView adminPanel(){
+        if(httpSession.getAttributeNames().hasMoreElements() && userDAO.findUser((int)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0).getRole().getId() == 2){
+            ModelAndView model = new ModelAndView("adminPanel");
+            model.addObject("tariffs", tariffDAO.findUndeleted());
+            return model;
+        }
+        return new ModelAndView("redirect:/");
     }
 
 }

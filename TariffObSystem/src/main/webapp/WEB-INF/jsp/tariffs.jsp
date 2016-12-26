@@ -89,7 +89,7 @@
                                         От: <input type="number" name = "smsLow" class="form-control" style="max-width: 30%"/>
                                         До: <input type="number" name = "smsHigh" class="form-control" style="max-width: 30%"/>
                                     </div>
-                                </div>
+                            </div>
                                 <div>
                                     <input type="submit" class="btn btn-success" value="Применить" style="margin-top: 15px;">
                                 </div>
