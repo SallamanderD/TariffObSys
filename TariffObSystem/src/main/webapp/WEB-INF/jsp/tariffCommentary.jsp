@@ -20,11 +20,11 @@
     <c:forEach var="comment" items="${commentaries}" varStatus="loop">
         <div class="bs-calltoaction bs-calltoaction-success">
             <div class="row">
-                <div class="col-md-12 cta-contents" onmouseleave="document.getElementById('delete${loop.index}').style.display = 'none'" onmouseenter="
+                <div class="col-md-12 cta-contents" onmouseleave="document.getElementById('delete${loop.index}').style.opacity = '0'" onmouseenter="
                         var a = ${comment.author.id};
                         var b = ${userId};
                         if(a == b){
-                        document.getElementById('delete${loop.index}').style.display = 'inline';
+                        document.getElementById('delete${loop.index}').style.opacity = '1';
                         }
                         ">
                     <h4 class="cta-title">${comment.author.username}</h4>
@@ -35,7 +35,7 @@
                         </div>
                         <div>
                             <div class="con" onclick="post('/deleteTariffCommentary', {id: ${comment.id}, authorId: ${userId}, tariffId: ${tariffId}})"
-                                 id="delete${loop.index}" style="display: none">
+                                 id="delete${loop.index}" style="opacity: 0;">
                                 <div>
                                     <div class="col-md-1" style="margin-left: -10px; padding-top: 1%">
                                         <h4>Удалить?</h4>

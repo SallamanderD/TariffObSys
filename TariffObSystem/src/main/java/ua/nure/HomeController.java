@@ -45,7 +45,7 @@ public class HomeController {
 
     @RequestMapping(value = "/")
     public ModelAndView index() {
-        emulator.emul();
+        //emulator.emul();
         ModelAndView model = new ModelAndView("index");
         return model;
     }

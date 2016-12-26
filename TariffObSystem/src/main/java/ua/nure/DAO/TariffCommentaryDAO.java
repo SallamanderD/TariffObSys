@@ -34,11 +34,12 @@ public class TariffCommentaryDAO {
 
     public List<TariffCommentary> findByTariffId(int id){
         List<TariffCommentary> comment = mongoOperations.find(new Query().addCriteria(Criteria.where("tariffId").is(id)), TariffCommentary.class);
+        List<TariffCommentary> result = new ArrayList<>();
         for(TariffCommentary t : comment){
-            if(t.isDeleted() == true)
-                comment.remove(t);
+            if(t.isDeleted() == false)
+                result.add(t);
         }
-        return comment;
+        return result;
     }
 
     public List<TariffCommentary> findUndeleted(){

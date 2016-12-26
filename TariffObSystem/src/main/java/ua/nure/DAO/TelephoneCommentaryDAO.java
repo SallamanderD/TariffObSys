@@ -36,11 +36,12 @@ public class TelephoneCommentaryDAO {
 
     public List<TelephoneCommentary> findByTelephoneId(int id){
         List<TelephoneCommentary> comment = mongoOperations.find(new Query().addCriteria(Criteria.where("telephoneId").is(id)), TelephoneCommentary.class);
+        List<TelephoneCommentary> result = new ArrayList<>();
         for(TelephoneCommentary t : comment){
-            if(t.isDeleted() == true)
-                comment.remove(t);
+            if(t.isDeleted() == false)
+                result.add(t);
         }
-        return comment;
+        return result;
     }
 
     public List<TelephoneCommentary> findUndeleted(){

@@ -17,11 +17,11 @@
         </div>
     </c:if>
     <c:forEach var="comment" items="${commentaries}">
-        <div class="bs-calltoaction bs-calltoaction-success" onmouseleave="document.getElementById('delete${loop.index}').style.display = 'none'" onmouseenter="
+        <div class="bs-calltoaction bs-calltoaction-success" onmouseleave="document.getElementById('delete${loop.index}').style.opacity = '0'" onmouseenter="
                 var a = ${comment.author.id};
                 var b = ${userId};
                 if(a == b){
-                document.getElementById('delete${loop.index}').style.display = 'inline';
+                document.getElementById('delete${loop.index}').style.opacity = '1';
                 }
                 ">
             <div class="row">
@@ -32,7 +32,21 @@
                         <div class="commentsText">
                             <p style="color:black">${comment.text}</p>
                         </div>
-                        <input class="btn btn-default" onclick="post('/deleteTelephoneCommentary', {id: ${comment.id}, authorId: ${userId}, telephoneId: ${telephoneId}})" type="submit" id="delete${loop.index}" style="display: none" value="Удалить">
+                        <div>
+                            <div class="con" onclick="post('/deleteTelephoneCommentary', {id: ${comment.id}, authorId: ${userId}, telephoneId: ${telephoneId}})"
+                                 id="delete${loop.index}" style="opacity: 0;">
+                                <div>
+                                    <div class="col-md-1" style="margin-left: -10px; padding-top: 1%">
+                                        <h4>Удалить?</h4>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <div class="bar top"></div>
+                                        <div class="bar middle"></div>
+                                        <div class="bar bottom"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
