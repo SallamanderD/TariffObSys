@@ -37,14 +37,15 @@
                             <div class="con" onclick="post('/deleteTariffCommentary', {id: ${comment.id}, authorId: ${userId}, tariffId: ${tariffId}})"
                                  id="delete${loop.index}" style="opacity: 0;">
                                 <div>
-                                    <div class="col-md-6" style="margin-left: -10px; padding-top: 5%">
-                                        <h4>Удалить?</h4>
-                                    </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6" style="margin-left: -13%; padding-top: 5%">
                                         <div class="bar top"></div>
                                         <div class="bar middle"></div>
                                         <div class="bar bottom"></div>
                                     </div>
+                                    <div class="col-md-6" style="margin-left: -13%; padding-top: 10%">
+                                        <h4>Удалить?</h4>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

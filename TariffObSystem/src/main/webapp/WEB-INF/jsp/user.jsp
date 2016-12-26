@@ -30,8 +30,9 @@
                 <p class="lead"><mark>${user.mail}</mark></p>
             </div>
         </div>
-        <a href="changeUser"><button type="submit" class="btn buttonSnipp">Change Data</button></a>
-        <a href="changePassword"><button type="submit" class="btn buttonSnipp">Change Password</button></a>
+        <a href="/changeUser"><button type="submit" class="btn buttonSnipp">Изменить данные</button></a>
+        <a href="/changePassword"><button type="submit" class="btn buttonSnipp">Изменить пароль</button></a>
+        <c:if test="${user.role.id == 2}"><a href="/adminPanel"><button type="submit" class="btn buttonSnipp">Адм. панель</button></a></c:if>
         <h2>Статистика</h2>
         <hr/>
         <div class="form-group col-md-4">

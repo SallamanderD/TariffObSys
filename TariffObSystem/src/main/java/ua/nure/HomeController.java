@@ -49,7 +49,7 @@ public class HomeController {
 
     @RequestMapping(value = "/")
     public ModelAndView index() {
-        emulator.emul();
+        //emulator.emul();
         ModelAndView model = new ModelAndView("index");
         return model;
     }
@@ -87,6 +87,8 @@ public class HomeController {
             return new ModelAndView("redirect:/tariff/" + tariffId);
         }
     }
+
+
 
     @RequestMapping(value = "/deleteTelephoneCommentary", method = RequestMethod.POST)
     public ModelAndView deleteTelephoneCommentary(@RequestParam(value = "id") int telephoneCommentaryId, @RequestParam(value = "authorId") int authorId, @RequestParam(value = "telephoneId") int telephoneId) {
@@ -339,10 +341,10 @@ public class HomeController {
         return model;
     }
 
-    @RequestMapping(value = "createTelephone")
+    @RequestMapping(value = "/createTelephone")
     public ModelAndView createTelephone() {
         if (!httpSession.getAttributeNames().hasMoreElements()) {
-            ModelAndView model = new ModelAndView("redirect:index");
+            ModelAndView model = new ModelAndView("redirect:/");
             return model;
         }
         ModelAndView model = new ModelAndView("createTelephone");

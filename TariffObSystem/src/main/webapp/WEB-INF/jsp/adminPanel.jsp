@@ -38,9 +38,47 @@
                 <input type="number" id="telephone" class="form-control" placeholder="Введите номер телефона">
             </div>
             <input type="button" onclick="post('/deleteTelephone', {telephone: document.getElementById('telephone').value})" class="btn btn-default" value="Удалить">
+            <a href="/allTelephones"><button class="btn btn-success">Просмотр телефонов</button></a>
         </div>
     </div>
     <hr/>
+    <h4>Удаление комментариев к тарифам:</h4>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="form-group">
+                <input type="number" id="tariffCommentary" class="form-control" placeholder="Введите id комментария">
+            </div>
+            <input type="button" onclick="post('/deleteTariffCommentary', {id: document.getElementById('tariffCommentary').value, authorId: 0, tariffId: 0})" class="btn btn-default" value="Удалить">
+            <a href="/allTariffCommentaries"><button class="btn btn-success">Просмотр комментариев</button></a>
+        </div>
+    </div>
+    <hr/>
+    <h4>Удаление комментариев к телефонам:</h4>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="form-group">
+                <input type="number" id="telephoneCommentary" class="form-control" placeholder="Введите id комментария">
+            </div>
+            <input type="button" onclick="post('/deleteTelephoneCommentary', {id: document.getElementById('telephoneCommentary').value, authorId: 0, telephoneId: 0})" class="btn btn-default" value="Удалить">
+            <a href="/allTelephoneCommentaries"><button class="btn btn-success">Просмотр комментариев</button></a>
+        </div>
+    </div>
+    <hr/>
+    <h4>Работа с пользователями:</h4>
+    <div class="row">
+        <div class="col-md-9">
+            <div class="form-group">
+                <input type="number" id="userId" class="form-control" placeholder="Введите id пользователя">
+            </div>
+            <input type="button" onclick="post('/banUser', {id: document.getElementById('userId').value})" class="btn btn-default" value="Забанить">
+            <input type="button" onclick="post('/unbanUser', {id: document.getElementById('userId').value})" class="btn btn-default" value="Разбанить">
+            <a href="/allUsers"><button class="btn btn-success">Просмотр пользователей</button></a>
+        </div>
+    </div>
+    <hr>
+    <hr>
+    <button onclick="post('/createTariff', 0, 'get')" class="btn btn-success" style="margin-bottom: 3%">Создать тариф</button>
+
 </div>
 </body>
 </html>
