@@ -5,10 +5,12 @@ import org.springframework.boot.autoconfigure.session.SessionProperties;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 import ua.nure.entities.TariffCommentary;
 import ua.nure.entities.TelephoneCommentary;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -33,6 +35,25 @@ public class TelephoneCommentaryDAO {
     }
 
     public List<TelephoneCommentary> findByTelephoneId(int id){
-        return mongoOperations.find(new Query().addCriteria(Criteria.where("telephoneId").is(id)), TelephoneCommentary.class);
+        List<TelephoneCommentary> comment = mongoOperations.find(new Query().addCriteria(Criteria.where("telephoneId").is(id)), TelephoneCommentary.class);
+        for(TelephoneCommentary t : comment){
+            if(t.isDeleted() == true)
+                comment.remove(t);
+        }
+        return comment;
+    }
+
+    public List<TelephoneCommentary> findUndeleted(){
+        List<TelephoneCommentary> result = new ArrayList<>();
+        for(TelephoneCommentary t : findAll())
+            if(t.isDeleted() == false)
+                result.add(t);
+        return result;
+    }
+
+    public void delete(int id){
+        Update update = new Update();
+        update.set("deleted", true);
+        mongoOperations.updateFirst(new Query().addCriteria(Criteria.where("id").is(id)), update, TelephoneCommentary.class);
     }
 }

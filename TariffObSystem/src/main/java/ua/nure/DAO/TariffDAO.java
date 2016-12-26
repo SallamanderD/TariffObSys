@@ -35,6 +35,13 @@ public class TariffDAO {
                 addCriteria(Criteria.where("id").is(id)),update,Tariff.class);
     }
 
+    public void deleteTariff(int id){
+        Update update=new Update();
+        update.set("deleted", true);
+        mongoOperation.updateFirst(new Query().
+                addCriteria(Criteria.where("id").is(id)),update,Tariff.class);
+    }
+
     public void updateOperator(int id, Operator operator){
         Update update=new Update();
         update.set("operator", operator);
@@ -55,6 +62,8 @@ public class TariffDAO {
         }
         return result;
     }
+
+
 
     public void addCommentaries(int id, TariffCommentary commentary){
         Update update = new Update();

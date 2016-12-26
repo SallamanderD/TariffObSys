@@ -35,7 +35,7 @@
 <body>
 <div class="container" style="margin-top: 4%; max-width: 74%">
     <div class="row">
-        <section class="content">
+            <section class="content">
             <div class="col-sm-12 viewTarContainer">
                 <div class="col-sm-8 col-sm-offset-4">
                     <h3><b>Доступные тарифы:</b></h3>

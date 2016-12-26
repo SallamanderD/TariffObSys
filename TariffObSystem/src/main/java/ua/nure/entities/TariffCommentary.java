@@ -17,6 +17,19 @@ public class TariffCommentary {
     private String text;
     private int tariffId;
     private String date;
+    private boolean deleted;
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 
     public String getDate() {
         return DateFormat.getInstance().format(createDate);
@@ -47,6 +60,7 @@ public class TariffCommentary {
         this.text = text;
         this.tariffId = tariffId;
         createDate = Calendar.getInstance().getTime();
+        this.deleted = false;
 
     }
 

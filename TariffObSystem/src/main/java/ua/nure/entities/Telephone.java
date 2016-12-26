@@ -22,6 +22,16 @@ public class Telephone {
     private int authorId;
     private String number;
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    private boolean deleted;
+
     public List<TelephoneCommentary> getTelephoneCommentaries() {
         return telephoneCommentaries;
     }
@@ -47,10 +57,11 @@ public class Telephone {
         this.number = number;
         this.text = text;
         this.authorId = authorId;
+        this.deleted = false;
     }
 
     public Telephone() {
-
+        this.deleted = false;
     }
 
     public int getId() {

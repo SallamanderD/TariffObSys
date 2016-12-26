@@ -13,6 +13,19 @@ public class TelephoneCommentary {
     private String text;
     private Date createDate;
     private String date;
+    private boolean deleted;
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
 
     public String getDate() {
         return DateFormat.getInstance().format(createDate);
@@ -42,6 +55,7 @@ public class TelephoneCommentary {
         this.text = text;
         this.telephoneId = telephoneId;
         createDate = Calendar.getInstance().getTime();
+        this.deleted = false;
     }
 
     public TelephoneCommentary() {

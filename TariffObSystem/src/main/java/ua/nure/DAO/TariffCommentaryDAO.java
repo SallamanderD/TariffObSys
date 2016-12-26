@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
 import ua.nure.entities.TariffCommentary;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -31,6 +33,25 @@ public class TariffCommentaryDAO {
     }
 
     public List<TariffCommentary> findByTariffId(int id){
-        return mongoOperations.find(new Query().addCriteria(Criteria.where("tariffId").is(id)), TariffCommentary.class);
+        List<TariffCommentary> comment = mongoOperations.find(new Query().addCriteria(Criteria.where("tariffId").is(id)), TariffCommentary.class);
+        for(TariffCommentary t : comment){
+            if(t.isDeleted() == true)
+                comment.remove(t);
+        }
+        return comment;
+    }
+
+    public List<TariffCommentary> findUndeleted(){
+        List<TariffCommentary> result = new ArrayList<>();
+        for(TariffCommentary t : findAll())
+            if(t.isDeleted() == false)
+                result.add(t);
+        return result;
+    }
+
+    public void delete(int id){
+        Update update = new Update();
+        update.set("deleted", true);
+        mongoOperations.updateFirst(new Query().addCriteria(Criteria.where("id").is(id)), update, TariffCommentary.class);
     }
 }

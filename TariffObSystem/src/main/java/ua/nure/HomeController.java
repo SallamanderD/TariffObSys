@@ -71,7 +71,7 @@ public class HomeController {
             return new ModelAndView("redirect:/");
         } else{
             if((int)httpSession.getAttribute(CURRENT_ID_PARAM) == authorId){
-                tariffCommentaryDAO.remove(tariffCommentaryId);
+                tariffCommentaryDAO.delete(tariffCommentaryId);
                 userDAO.decrementTariffCommentary(authorId);
                 return new ModelAndView("redirect:/tariff/" + tariffId);
             }
@@ -85,7 +85,7 @@ public class HomeController {
             return new ModelAndView("redirect:/");
         } else{
             if((int)httpSession.getAttribute(CURRENT_ID_PARAM) == authorId){
-                telephoneCommentaryDAO.remove(telephoneCommentaryId);
+                telephoneCommentaryDAO.delete(telephoneCommentaryId);
                 userDAO.decrementTelephoneCommentary(authorId);
                 return new ModelAndView("redirect:/telephone/" + telephoneId);
             }
@@ -438,6 +438,8 @@ public class HomeController {
         return model;
     }
 
+
+
     @RequestMapping(value = "/feedback", method = RequestMethod.GET)
     public ModelAndView feedback(){
         if (!httpSession.getAttributeNames().hasMoreElements()) {
@@ -541,7 +543,7 @@ public class HomeController {
 
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public ModelAndView search(@ModelAttribute(value = "query") String query) {
-        List<Telephone> telephones = telephoneDAO.findAll();
+        List<Telephone> telephones = telephoneDAO.findUndeleted();
         List<Telephone> result = new ArrayList<>();
         for (Telephone t : telephones) {
             if (t.getNumber().contains(query)) {
@@ -627,6 +629,29 @@ public class HomeController {
         if(httpSession.getAttributeNames().hasMoreElements() && userDAO.findUser((int)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0).getRole().getId() == 2){
             ModelAndView model = new ModelAndView("adminPanel");
             model.addObject("tariffs", tariffDAO.findUndeleted());
+            model.addObject("telephones", telephoneDAO.findUndeleted());
+            return model;
+        }
+        return new ModelAndView("redirect:/");
+    }
+
+    @RequestMapping(value = "/deleteTariff", method = RequestMethod.POST)
+    public ModelAndView deleteTariff(@RequestParam(value = "tariffId") String tariffId){
+        if(httpSession.getAttributeNames().hasMoreElements() && userDAO.findUser((int)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0).getRole().getId() == 2){
+            ModelAndView model = new ModelAndView("redirect:/adminPanel");
+            tariffDAO.deleteTariff(Integer.valueOf(tariffId));
+            return model;
+        }
+        return new ModelAndView("redirect:/");
+    }
+
+    @RequestMapping(value = "/deleteTelephone", method = RequestMethod.POST)
+    public ModelAndView deleteTelephone(@RequestParam(value = "telephone") String telephone){
+        if(httpSession.getAttributeNames().hasMoreElements() && userDAO.findUser((int)httpSession.getAttribute(CURRENT_ID_PARAM)).get(0).getRole().getId() == 2){
+            ModelAndView model = new ModelAndView("redirect:/adminPanel");
+            if(telephoneDAO.findByTelephone(telephone) != null){
+                telephoneDAO.deleteTelephone(telephoneDAO.findByTelephone(telephone).getId());
+            }
             return model;
         }
         return new ModelAndView("redirect:/");

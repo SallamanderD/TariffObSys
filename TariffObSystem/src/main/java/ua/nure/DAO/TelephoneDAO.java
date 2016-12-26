@@ -11,6 +11,7 @@ import ua.nure.entities.TariffCommentary;
 import ua.nure.entities.Telephone;
 import ua.nure.entities.TelephoneCommentary;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -43,5 +44,29 @@ public class TelephoneDAO {
         update.addToSet("telephoneCommentaries", commentary);
         mongoOperations.updateFirst(new Query().
                 addCriteria(Criteria.where("id").is(id)), update, Telephone.class);
+    }
+
+    public List<Telephone> findUndeleted() {
+        List<Telephone> telephones = new ArrayList<>();
+        for(Telephone t : findAll()){
+            if(t.isDeleted() == false)
+                telephones.add(t);
+        }
+        return telephones;
+    }
+
+    public void deleteTelephone(int id){
+        Update update = new Update();
+        update.set("deleted", true);
+        mongoOperations.updateFirst(new Query().
+                addCriteria(Criteria.where("id").is(id)), update, Telephone.class);
+    }
+
+    public Telephone findByTelephone(String telephone){
+        for(Telephone t : findAll()){
+            if(t.getNumber().toLowerCase().equals(telephone.toLowerCase()))
+                return t;
+        }
+        return null;
     }
 }
