@@ -37,8 +37,8 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-block btn-success" style="margin-top: 5px; margin-bottom: 10px;">Sign In</button>
-                <a href= "" class="forget" style="margin-bottom: 10px;" data-toggle="modal" data-target=".forget-modal">
-                    Forgot your password?</a>
+                <a href= "/register" class="forget" style="margin-bottom: 10px;">
+                    Нет аккаунта?</a>
             </div>
         </form>
     </div>

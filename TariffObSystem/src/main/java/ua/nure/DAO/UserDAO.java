@@ -127,4 +127,18 @@ public class UserDAO {
     public List<User> findAllUser(){
         return mongoOperation.findAll(User.class);
     }
+
+    public void ban(int id){
+        Update update=new Update();
+        update.set("banned", true);
+        mongoOperation.updateFirst(new Query().
+                addCriteria(Criteria.where("id").is(id)),update,User.class);
+    }
+
+    public void unban(int id){
+        Update update=new Update();
+        update.set("banned", false);
+        mongoOperation.updateFirst(new Query().
+                addCriteria(Criteria.where("id").is(id)),update,User.class);
+    }
 }
