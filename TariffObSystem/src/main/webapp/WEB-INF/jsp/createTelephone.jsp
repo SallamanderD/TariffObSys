@@ -13,14 +13,23 @@
     <jsp:include page="/mainmenu"></jsp:include>
 </div>
 <body>
-<div id="profileContainer" class="container " style="margin-bottom: 5%">
+<div  class="container crTelContainer" style="margin-bottom: 5%">
+    <h2>Добавьте телефонный номер и комментарии к нему</h2>
+    <hr id="lineHr">
     <form action="/createTelephone" method="post">
-        <label for="telephone">Телефон:</label>
-        <input type="text" class="form-control" name="telephone" id="telephone">
-        <label for="description">Описание:</label>
-        <textarea class="form-control" name="description" style="min-width: 100%" placeholder="Ваш комментарий" id="description"
-                  rows="5" cols="77"></textarea>
-        <button class="btn mysearch btn-success" style="margin-top: 1%" type="submit">Отправить</button>
+        <div class="form-group">
+            <label for="telephone">Телефон:</label>
+            <input type="text" class="form-control" name="telephone" id="telephone">
+            <span class="help-block">разделительные знаки не обязательны</span>
+        </div>
+        <div class="form-group">
+            <label for="description">Описание:</label>
+            <textarea class="form-control" name="description" style="min-width: 100%" placeholder="Ваш комментарий" id="description"
+                      rows="5" cols="77"></textarea>
+        </div>
+        <div class="form-group">
+            <button class="btn buttonSnipp" style="margin-top: 1%" type="submit">Отправить</button>
+        </div>
     </form>
 </div>
 </body>

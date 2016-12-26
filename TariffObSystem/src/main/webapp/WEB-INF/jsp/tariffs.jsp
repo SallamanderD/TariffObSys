@@ -33,7 +33,7 @@
     <jsp:include page="/mainmenu"></jsp:include>
 </div>
 <body>
-<div class="container" style="margin-top: 4%; max-width: 74%">
+<div class="container" style="margin-top: 5%; max-width: 74%">
     <div class="row">
             <section class="content">
             <div class="col-sm-12 viewTarContainer">

@@ -36,10 +36,10 @@
                             <div class="con" onclick="post('/deleteTelephoneCommentary', {id: ${comment.id}, authorId: ${userId}, telephoneId: ${telephoneId}})"
                                  id="delete${loop.index}" style="opacity: 0;">
                                 <div>
-                                    <div class="col-md-1" style="margin-left: -10px; padding-top: 1%">
+                                    <div class="col-md-6" style="margin-left: -10px; padding-top: 5%">
                                         <h4>Удалить?</h4>
                                     </div>
-                                    <div class="col-md-1">
+                                    <div class="col-md-6">
                                         <div class="bar top"></div>
                                         <div class="bar middle"></div>
                                         <div class="bar bottom"></div>
