@@ -1,7 +1,7 @@
 body{
     background-image: url(somebckg.png);
     background-color: #E8EAF6;
-    font-family: 'Oxygen', sans-serif;;
+    font-family: 'Arimo', sans-serif;
 }
 .navbar-custom{
     background-color: #424242; /* Navbar color*/

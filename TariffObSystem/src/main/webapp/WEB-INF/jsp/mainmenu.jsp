@@ -9,8 +9,10 @@
     <link href="https://fonts.googleapis.com/css?family=Francois+One" rel="stylesheet"> <!--Fonts for navbar-->
     <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arimo" rel="stylesheet">
     <script src="/js/myscript.js"></script>
     <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
+
 </head>
 <body>
 <script>
