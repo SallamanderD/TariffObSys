@@ -48,5 +48,8 @@
             <p class="lead"><mark>${user.feedbackSent}</mark></p>
         </div>
     </div>
+    <div class="container">
+        <jsp:include page="/footer"></jsp:include>
+    </div>
     </body>
 </html>

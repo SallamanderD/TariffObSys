@@ -11,7 +11,7 @@
     <jsp:include page="/mainmenu"></jsp:include>
 </div>
     <div class="container tariffContainer" style="margin-top: 5%; max-width: 75%">
-        <h2>${Сравнить}</h2>
+        <h2>${tariff.name}</h2>
         <br>
         <table class="table table-striped table-inverse">
             <thead>
@@ -35,5 +35,11 @@
             <jsp:param name="tariffId" value="${tariff.id}"/>
         </jsp:include>
     </div>
+<div class="container">
+    <jsp:include page="/footer"></jsp:include>
+</div>
+<div class="container">
+    <jsp:include page="/footer"></jsp:include>
+</div>
 </body>
 </html>

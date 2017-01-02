@@ -32,6 +32,9 @@
         <button type="submit" style="display: block; margin-left: auto; margin-right: auto" class="btn buttonSnipp">Change</button>
     </form>
 </div>
+<div class="container">
+    <jsp:include page="/footer"></jsp:include>
+</div>
 </body>
 </html>
 

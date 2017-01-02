@@ -22,5 +22,8 @@ ${error}
         <button type="submit" class="btn btn-default">Активировать</button>
     </form>
 </div>
+<div class="container">
+    <jsp:include page="/footer"></jsp:include>
+</div>
 </body>
 </html>

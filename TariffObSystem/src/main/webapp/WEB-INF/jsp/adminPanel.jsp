@@ -80,5 +80,8 @@
     <button onclick="post('/createTariff', 0, 'get')" class="btn btn-success" style="margin-bottom: 3%">Создать тариф</button>
 
 </div>
+<div class="container">
+    <jsp:include page="/footer"></jsp:include>
+</div>
 </body>
 </html>

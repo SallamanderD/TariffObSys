@@ -22,6 +22,9 @@
               rows="5" cols="77"></textarea>
     <button class="btn sendmess  " onclick="post('/feedback', {text: document.getElementById('feedback').value})" type="submit">Отправить</button>
 </div>
+<div class="container">
+    <jsp:include page="/footer"></jsp:include>
+</div>
 </body>
 </html>
 

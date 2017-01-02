@@ -320,6 +320,11 @@ public class HomeController {
         return new ModelAndView("redirect:/");
     }
 
+    @RequestMapping(value = "/footer")
+    public ModelAndView footer(){
+        return new ModelAndView("footer");
+    }
+
     @RequestMapping(value = "allTelephoneCommentaries")
     public ModelAndView allTelephoneCommentaries(){
         if (httpSession.getAttributeNames().hasMoreElements() && userDAO.findUser((int) httpSession.getAttribute(CURRENT_ID_PARAM)).get(0).getRole().getId() == 2) {
