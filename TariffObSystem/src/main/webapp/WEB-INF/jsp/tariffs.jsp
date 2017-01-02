@@ -107,7 +107,7 @@
                                 <div>
                                     <div class="form-group">
                                         <label for="selectFirst">Выберите первый тариф:</label>
-                                        <select class="form-control" id="selectFirst" name="firstTariffId">
+                                        <select class="form-control" id="selectFirst" name="firstTariffId" style="width: 100%">
                                             <c:forEach var="tar" items="${tariffs}" varStatus="loop">
                                                 <option value="${tar.id}">${tar.name}</option>
                                             </c:forEach>
@@ -115,7 +115,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="selectSecond">Выберите второй тариф:</label>
-                                        <select class="form-control" id="selectSecond" name="secondTariffId">
+                                        <select class="form-control" id="selectSecond" name="secondTariffId" style="width: 100%">
                                             <c:forEach var="tar" items="${tariffs}" varStatus="loop">
                                                 <option value="${tar.id}">${tar.name}</option>
                                             </c:forEach>

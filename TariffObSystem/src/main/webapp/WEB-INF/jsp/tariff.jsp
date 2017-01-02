@@ -38,8 +38,5 @@
 <div class="container">
     <jsp:include page="/footer"></jsp:include>
 </div>
-<div class="container">
-    <jsp:include page="/footer"></jsp:include>
-</div>
 </body>
 </html>
