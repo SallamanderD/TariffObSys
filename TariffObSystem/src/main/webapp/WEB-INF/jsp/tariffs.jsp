@@ -40,93 +40,95 @@
                 <div class="col-sm-8 col-sm-offset-4">
                     <h3><b>Доступные тарифы:</b></h3>
                 </div>
-                <div class="panel col-sm-4 autocollapse mypanel">
-                    <div class="panel-heading clickable ">
-                        <h3 class="panel-title">Фильтр</h3>
+                   <div class="col-md-4">
+                    <div class="panel autocollapse mypanel">
+                        <div class="panel-heading clickable ">
+                            <h3 class="panel-title">Фильтр</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form action="filter", method="post">
+                                <div>
+                                    <div>
+                                        <h4>3G</h4>
+                                        <div class="form-inline">
+                                            От: <input type="number" name="GLow" class="form-control withoutSpinners" style="max-width: 30%">
+                                            До: <input type="number" name="GHigh" class="form-control" style="max-width: 30%">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4>Звонки в сети, минут</h4>
+                                        <div class="form-inline">
+                                            От: <input type="number" name = "incallsLow" class="form-control" style="max-width: 30%"/>
+                                            До: <input type="number" name = "incallsHigh" class="form-control" style="max-width: 30%"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4>Звонки на других операторов, минут</h4>
+                                        <div class="form-inline">
+                                            От: <input type="number" name = "outcallsLow" class="form-control" style="max-width: 30%"/>
+                                            До: <input type="number" name = "outcallsHigh" class="form-control" style="max-width: 30%"/>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4>Соц. сети</h4>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" name="vk" value="true">VK</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" name="fb" value="true">Facebook</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" name="ok" value="true">OK</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" name="tw" value="true">Twitter</label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4>СМС</h4>
+                                        <div class="form-inline">
+                                            От: <input type="number" name = "smsLow" class="form-control" style="max-width: 30%"/>
+                                            До: <input type="number" name = "smsHigh" class="form-control" style="max-width: 30%"/>
+                                        </div>
+                                </div>
+                                    <div>
+                                        <input type="submit" class="btn btn-success" value="Применить" style="margin-top: 15px;">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                    <div class="panel-body">
-                        <form action="filter", method="post">
-                            <div>
+                    <div class="panel autocollapse mypanel">
+                        <div class="panel-heading clickable ">
+                            <h3 class="panel-title">Сравнить</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form action="/compare", method="post">
                                 <div>
-                                    <h4>3G</h4>
-                                    <div class="form-inline">
-                                        От: <input type="number" name="GLow" class="form-control withoutSpinners" style="max-width: 30%">
-                                        До: <input type="number" name="GHigh" class="form-control" style="max-width: 30%">
+                                    <div class="form-group">
+                                        <label for="selectFirst">Выберите первый тариф:</label>
+                                        <select class="form-control" id="selectFirst" name="firstTariffId">
+                                            <c:forEach var="tar" items="${tariffs}" varStatus="loop">
+                                                <option value="${tar.id}">${tar.name}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="selectSecond">Выберите второй тариф:</label>
+                                        <select class="form-control" id="selectSecond" name="secondTariffId">
+                                            <c:forEach var="tar" items="${tariffs}" varStatus="loop">
+                                                <option value="${tar.id}">${tar.name}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <input type="submit" class="btn btn-success" value="Сравнить" style="margin-top: 15px;">
                                     </div>
                                 </div>
-                                <div>
-                                    <h4>Звонки в сети, минут</h4>
-                                    <div class="form-inline">
-                                        От: <input type="number" name = "incallsLow" class="form-control" style="max-width: 30%"/>
-                                        До: <input type="number" name = "incallsHigh" class="form-control" style="max-width: 30%"/>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h4>Звонки на других операторов, минут</h4>
-                                    <div class="form-inline">
-                                        От: <input type="number" name = "outcallsLow" class="form-control" style="max-width: 30%"/>
-                                        До: <input type="number" name = "outcallsHigh" class="form-control" style="max-width: 30%"/>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h4>Соц. сети</h4>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" name="vk" value="true">VK</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" name="fb" value="true">Facebook</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" name="ok" value="true">OK</label>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label><input type="checkbox" name="tw" value="true">Twitter</label>
-                                    </div>
-                                </div>
-                                <div>
-                                    <h4>СМС</h4>
-                                    <div class="form-inline">
-                                        От: <input type="number" name = "smsLow" class="form-control" style="max-width: 30%"/>
-                                        До: <input type="number" name = "smsHigh" class="form-control" style="max-width: 30%"/>
-                                    </div>
-                            </div>
-                                <div>
-                                    <input type="submit" class="btn btn-success" value="Применить" style="margin-top: 15px;">
-                                </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
-                </div>
-                <div class="panel col-sm-4 autocollapse mypanel">
-                    <div class="panel-heading clickable ">
-                        <h3 class="panel-title">Сравнить</h3>
-                    </div>
-                    <div class="panel-body">
-                        <form action="/compare", method="post">
-                            <div>
-                                <div class="form-group">
-                                    <label for="selectFirst">Выберите первый тариф:</label>
-                                    <select class="form-control" id="selectFirst" name="firstTariffId">
-                                        <c:forEach var="tar" items="${tariffs}" varStatus="loop">
-                                            <option value="${tar.id}">${tar.name}</option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="selectSecond">Выберите второй тариф:</label>
-                                    <select class="form-control" id="selectSecond" name="secondTariffId">
-                                        <c:forEach var="tar" items="${tariffs}" varStatus="loop">
-                                            <option value="${tar.id}">${tar.name}</option>
-                                        </c:forEach>
-                                    </select>
-                                </div>
-                                <div>
-                                    <input type="submit" class="btn btn-success" value="Сравнить" style="margin-top: 15px;">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                  </div>
                 <div class="col-sm-8">
                 <div class="panel panel-default">
                     <div class="panel-body">
