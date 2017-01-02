@@ -97,6 +97,36 @@
                         </form>
                     </div>
                 </div>
+                <div class="panel col-sm-4 autocollapse mypanel">
+                    <div class="panel-heading clickable ">
+                        <h3 class="panel-title">Сравнить</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form action="/compare", method="post">
+                            <div>
+                                <div class="form-group">
+                                    <label for="selectFirst">Выберите первый тариф:</label>
+                                    <select class="form-control" id="selectFirst" name="firstTariffId">
+                                        <c:forEach var="tar" items="${tariffs}" varStatus="loop">
+                                            <option value="${tar.id}">${tar.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="selectSecond">Выберите второй тариф:</label>
+                                    <select class="form-control" id="selectSecond" name="secondTariffId">
+                                        <c:forEach var="tar" items="${tariffs}" varStatus="loop">
+                                            <option value="${tar.id}">${tar.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div>
+                                    <input type="submit" class="btn btn-success" value="Сравнить" style="margin-top: 15px;">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
                 <div class="col-sm-8">
                 <div class="panel panel-default">
                     <div class="panel-body">

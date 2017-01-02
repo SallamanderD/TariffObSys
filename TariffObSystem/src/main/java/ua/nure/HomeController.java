@@ -648,6 +648,14 @@ public class HomeController {
         return model;
     }
 
+    @RequestMapping(value = "/compare", method = RequestMethod.POST)
+    public ModelAndView compare(@RequestParam(value = "firstTariffId") int firstTariffId, @RequestParam(value = "secondTariffId") int secondTariffId){
+        ModelAndView model = new ModelAndView("compare");
+        model.addObject("firstTariff", tariffDAO.findTariff(firstTariffId).get(0));
+        model.addObject("secondTariff", tariffDAO.findTariff(secondTariffId).get(0));
+        return model;
+    }
+
     @RequestMapping(value = "/changeUser", method = RequestMethod.POST)
     public ModelAndView changeUserPOST(@RequestParam("username") String username, @RequestParam("name") String name,
                                        @RequestParam("surname") String surname) {

@@ -11,9 +11,8 @@
     <jsp:include page="/mainmenu"></jsp:include>
 </div>
     <div class="container tariffContainer" style="margin-top: 5%; max-width: 75%">
-        <h2>${tariff.name}</h2>
+        <h2>${Сравнить}</h2>
         <br>
-        ${tariff.shortDescription}
         <table class="table table-striped table-inverse">
             <thead>
             <tr>
